@@ -1,0 +1,27 @@
+{{ $questions := .Site.Data.faq | default (slice) }}
+
+{{ if $questions }}
+<div class="faq-section-shortcode">
+  <h3>Frequently Asked Questions</h3>
+  <div class="accordion" id="faqAccordionShortcode">
+    {{ range $index, $faq := $questions }}
+    <div class="accordion-item">
+      <h4 class="accordion-header" id="headingShortcode{{ $index }}">
+        <button class="accordion-button{{ if ne $index 0 }} collapsed{{ end }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShortcode{{ $index }}" aria-expanded="{{ if eq $index 0 }}true{{ else }}false{{ end }}" aria-controls="collapseShortcode{{ $index }}">
+          {{ $faq.question }}
+        </button>
+      </h4>
+      <div id="collapseShortcode{{ $index }}" class="accordion-collapse collapse{{ if eq $index 0 }} show{{ end }}" aria-labelledby="headingShortcode{{ $index }}" data-bs-parent="#faqAccordionShortcode">
+        <div class="accordion-body">
+          {{ $faq.answer | markdownify }}
+        </div>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ else }}
+<div class="alert alert-info">
+  <strong>FAQ Section:</strong> No frequently asked questions found. Please add FAQ data to your site.
+</div>
+{{ end }}

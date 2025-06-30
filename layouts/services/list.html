@@ -1,0 +1,46 @@
+{{ define "main" }}
+<div class="services-listing">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {{ partial "breadcrumb.html" . }}
+        
+        <header class="page-header text-center mb-5">
+          <h1 class="page-title">{{ .Title }}</h1>
+          <p class="lead">{{ .Params.description | default "Comprehensive healthcare services tailored to your needs" }}</p>
+        </header>
+      </div>
+    </div>
+    
+    {{ if .Content }}
+    <div class="row">
+      <div class="col-lg-8 mx-auto mb-5">
+        <div class="page-content">
+          {{ .Content }}
+        </div>
+      </div>
+    </div>
+    {{ end }}
+    
+    {{ if .Pages }}
+    <div class="services-grid">
+      <div class="row">
+        {{ range .Pages }}
+        <div class="col-lg-4 col-md-6 mb-4">
+          {{ partial "components/service-card.html" . }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+    {{ else }}
+    <div class="no-services">
+      <div class="row">
+        <div class="col-12 text-center">
+          <p>No services available at the moment.</p>
+        </div>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

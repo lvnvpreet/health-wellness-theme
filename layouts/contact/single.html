@@ -1,0 +1,79 @@
+{{ define "main" }}
+<div class="contact-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {{ partial "breadcrumb.html" . }}
+        
+        <header class="page-header text-center mb-5">
+          <h1 class="page-title">{{ .Title }}</h1>
+          <p class="lead">{{ .Params.description | default "Get in touch with us for appointments, inquiries, or emergencies" }}</p>
+        </header>
+      </div>
+    </div>
+    
+    {{ if .Content }}
+    <div class="row">
+      <div class="col-lg-8 mx-auto mb-5">
+        <div class="page-content">
+          {{ .Content }}
+        </div>
+      </div>
+    </div>
+    {{ end }}
+    
+    <div class="row">
+      <div class="col-lg-8">
+        <!-- Contact Form -->
+        <div class="contact-form-section">
+          <h2>Send us a Message</h2>
+          {{ partial "forms/contact-form.html" . }}
+        </div>
+        
+        <!-- Map -->
+        {{ if .Params.map_embed }}
+        <div class="location-map mt-5">
+          <h2>Find Us</h2>
+          <div class="map-container">
+            {{ .Params.map_embed | safeHTML }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      
+      <div class="col-lg-4">
+        <aside class="contact-sidebar">
+          <!-- Contact Information -->
+          <div class="contact-info-widget">
+            {{ partial "contact-info.html" . }}
+          </div>
+          
+          <!-- Business Hours -->
+          <div class="business-hours-widget">
+            {{ partial "business-hours.html" . }}
+          </div>
+          
+          <!-- Emergency Contact -->
+          {{ if .Site.Params.emergency_phone }}
+          <div class="emergency-contact card bg-danger text-white">
+            <div class="card-body text-center">
+              <h4>Emergency?</h4>
+              <p>For dental emergencies, call us immediately:</p>
+              <a href="tel:{{ .Site.Params.emergency_phone }}" class="btn btn-light btn-lg">
+                <i class="fas fa-phone"></i> {{ .Site.Params.emergency_phone }}
+              </a>
+            </div>
+          </div>
+          {{ end }}
+          
+          <!-- Appointment Form -->
+          <div class="appointment-widget">
+            <h4>Quick Appointment Request</h4>
+            {{ partial "forms/appointment-form.html" . }}
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

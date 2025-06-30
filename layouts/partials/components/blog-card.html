@@ -1,0 +1,47 @@
+<div class="blog-card">
+  <div class="card h-100">
+    {{ if .Params.image }}
+    <div class="card-img-top">
+      <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="img-fluid">
+    </div>
+    {{ end }}
+    
+    <div class="card-body">
+      <div class="blog-meta mb-2">
+        <small class="text-muted">
+          <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+            {{ .Date.Format "January 2, 2006" }}
+          </time>
+          {{ if .Params.author }}
+          <span class="author ms-2">by {{ .Params.author }}</span>
+          {{ end }}
+        </small>
+      </div>
+      
+      <h5 class="card-title">
+        <a href="{{ .Permalink }}" class="text-decoration-none">{{ .Title }}</a>
+      </h5>
+      
+      <p class="card-text">{{ .Summary | truncate 150 }}</p>
+      
+      {{ if .Params.tags }}
+      <div class="blog-tags mb-2">
+        {{ range first 3 .Params.tags }}
+        <span class="badge bg-light text-dark">{{ . }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+      
+      <div class="reading-time">
+        <small class="text-muted">
+          <i class="fas fa-clock"></i>
+          {{ .ReadingTime }} min read
+        </small>
+      </div>
+    </div>
+    
+    <div class="card-footer bg-transparent">
+      <a href="{{ .Permalink }}" class="btn btn-outline-primary">Read More</a>
+    </div>
+  </div>
+</div>

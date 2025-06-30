@@ -1,0 +1,131 @@
+{{ if .IsHome }}
+<!-- Website Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalOrganization",
+  "name": "{{ .Site.Title }}",
+  "description": "{{ .Site.Params.description }}",
+  "url": "{{ .Site.BaseURL }}",
+  {{ if .Site.Params.logo }}
+  "logo": "{{ .Site.Params.logo | absURL }}",
+  {{ end }}
+  {{ if .Site.Params.address }}
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ .Site.Params.address }}"
+  },
+  {{ end }}
+  {{ if .Site.Params.phone }}
+  "telephone": "{{ .Site.Params.phone }}",
+  {{ end }}
+  {{ if .Site.Params.email }}
+  "email": "{{ .Site.Params.email }}",
+  {{ end }}
+  "sameAs": [
+    {{ if .Site.Params.social.facebook }}"{{ .Site.Params.social.facebook }}"{{ end }}
+    {{ if .Site.Params.social.twitter }}{{ if .Site.Params.social.facebook }},{{ end }}"{{ .Site.Params.social.twitter }}"{{ end }}
+    {{ if .Site.Params.social.instagram }}{{ if or .Site.Params.social.facebook .Site.Params.social.twitter }},{{ end }}"{{ .Site.Params.social.instagram }}"{{ end }}
+    {{ if .Site.Params.social.linkedin }}{{ if or .Site.Params.social.facebook .Site.Params.social.twitter .Site.Params.social.instagram }},{{ end }}"{{ .Site.Params.social.linkedin }}"{{ end }}
+  ]
+}
+</script>
+{{ end }}
+
+{{ if and (eq .Type "blog") (not .IsPage) }}
+<!-- Blog Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "{{ .Title }}",
+  "description": "{{ .Description | default .Site.Params.description }}",
+  "url": "{{ .Permalink }}"
+}
+</script>
+{{ end }}
+
+{{ if eq .Section "blog" }}
+<!-- Article Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ .Title }}",
+  "description": "{{ .Description | default .Summary }}",
+  "url": "{{ .Permalink }}",
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+  {{ if .Lastmod }}
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+  {{ end }}
+  {{ if .Params.author }}
+  "author": {
+    "@type": "Person",
+    "name": "{{ .Params.author }}"
+  },
+  {{ end }}
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}"
+    {{ if .Site.Params.logo }}
+    ,"logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.Params.logo | absURL }}"
+    }
+    {{ end }}
+  }
+  {{ if .Params.image }}
+  ,"image": {
+    "@type": "ImageObject",
+    "url": "{{ .Params.image | absURL }}"
+  }
+  {{ end }}
+}
+</script>
+{{ end }}
+
+{{ if eq .Section "services" }}
+<!-- Medical Service Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalProcedure",
+  "name": "{{ .Title }}",
+  "description": "{{ .Description | default .Summary }}",
+  "url": "{{ .Permalink }}",
+  "provider": {
+    "@type": "MedicalOrganization",
+    "name": "{{ .Site.Title }}"
+  }
+  {{ if .Params.price }}
+  ,"offers": {
+    "@type": "Offer",
+    "price": "{{ .Params.price }}"
+  }
+  {{ end }}
+}
+</script>
+{{ end }}
+
+{{ if eq .Section "team" }}
+<!-- Person Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ .Title }}",
+  "description": "{{ .Description | default .Summary }}",
+  "url": "{{ .Permalink }}",
+  {{ if .Params.position }}
+  "jobTitle": "{{ .Params.position }}",
+  {{ end }}
+  {{ if .Params.image }}
+  "image": "{{ .Params.image | absURL }}",
+  {{ end }}
+  "worksFor": {
+    "@type": "MedicalOrganization",
+    "name": "{{ .Site.Title }}"
+  }
+}
+</script>
+{{ end }}

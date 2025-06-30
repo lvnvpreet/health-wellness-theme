@@ -1,0 +1,50 @@
+{{ $form_action := .Get "action" | default "#" }}
+{{ $form_title := .Get "title" | default "Contact Us" }}
+
+<div class="contact-form-shortcode">
+  <h3>{{ $form_title }}</h3>
+  <form class="contact-form" method="POST" action="{{ $form_action }}" netlify>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="contact-name" class="form-label">Full Name *</label>
+        <input type="text" class="form-control" id="contact-name" name="name" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="contact-email" class="form-label">Email Address *</label>
+        <input type="email" class="form-control" id="contact-email" name="email" required>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="contact-phone" class="form-label">Phone Number</label>
+        <input type="tel" class="form-control" id="contact-phone" name="phone">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="contact-subject" class="form-label">Subject *</label>
+        <select class="form-select" id="contact-subject" name="subject" required>
+          <option value="">Select a subject</option>
+          <option value="General Inquiry">General Inquiry</option>
+          <option value="Appointment Request">Appointment Request</option>
+          <option value="Insurance Question">Insurance Question</option>
+          <option value="Emergency">Emergency</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <label for="contact-message" class="form-label">Message *</label>
+      <textarea class="form-control" id="contact-message" name="message" rows="5" placeholder="How can we help you?" required></textarea>
+    </div>
+    
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="contact-consent" name="consent" required>
+      <label class="form-check-label" for="contact-consent">
+        I consent to being contacted regarding my inquiry *
+      </label>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Send Message</button>
+  </form>
+</div>

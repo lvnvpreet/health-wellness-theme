@@ -1,0 +1,45 @@
+{{ $patient := .Get "patient" }}
+{{ $content := .Get "content" }}
+{{ $rating := .Get "rating" | default 5 }}
+{{ $image := .Get "image" }}
+{{ $service := .Get "service" }}
+
+<div class="testimonial-shortcode">
+  <div class="card h-100">
+    <div class="card-body">
+      {{ if $rating }}
+      <div class="rating mb-3">
+        {{ range seq (int $rating) }}
+        <i class="fas fa-star text-warning"></i>
+        {{ end }}
+        {{ range seq (sub 5 (int $rating)) }}
+        <i class="far fa-star text-warning"></i>
+        {{ end }}
+      </div>
+      {{ end }}
+      
+      <blockquote class="blockquote">
+        <p class="testimonial-content">{{ $content }}</p>
+      </blockquote>
+      
+      <div class="testimonial-author mt-3">
+        <div class="d-flex align-items-center">
+          {{ if $image }}
+          <img src="{{ $image | relURL }}" alt="{{ $patient }}" class="testimonial-avatar rounded-circle me-3">
+          {{ else }}
+          <div class="testimonial-avatar-placeholder rounded-circle me-3">
+            <i class="fas fa-user"></i>
+          </div>
+          {{ end }}
+          
+          <div>
+            <div class="patient-name fw-bold">{{ $patient }}</div>
+            {{ if $service }}
+            <div class="service-name text-muted small">{{ $service }}</div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

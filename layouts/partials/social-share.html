@@ -1,0 +1,38 @@
+<div class="social-share mt-4">
+  <h5>Share this article:</h5>
+  <div class="social-buttons">
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink | absURL }}" 
+       target="_blank" 
+       class="btn btn-outline-primary btn-sm me-2"
+       title="Share on Facebook">
+      <i class="fab fa-facebook-f"></i> Facebook
+    </a>
+    
+    <a href="https://twitter.com/intent/tweet?url={{ .Permalink | absURL }}&text={{ .Title | htmlEscape }}" 
+       target="_blank" 
+       class="btn btn-outline-info btn-sm me-2"
+       title="Share on Twitter">
+      <i class="fab fa-twitter"></i> Twitter
+    </a>
+    
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | absURL }}" 
+       target="_blank" 
+       class="btn btn-outline-primary btn-sm me-2"
+       title="Share on LinkedIn">
+      <i class="fab fa-linkedin-in"></i> LinkedIn
+    </a>
+    
+    <a href="https://api.whatsapp.com/send?text={{ .Title | htmlEscape }}%20{{ .Permalink | absURL }}" 
+       target="_blank" 
+       class="btn btn-outline-success btn-sm me-2"
+       title="Share on WhatsApp">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </a>
+    
+    <button class="btn btn-outline-secondary btn-sm" 
+            onclick="navigator.clipboard.writeText('{{ .Permalink | absURL }}'); alert('Link copied to clipboard!');"
+            title="Copy Link">
+      <i class="fas fa-link"></i> Copy Link
+    </button>
+  </div>
+</div>

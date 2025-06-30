@@ -1,0 +1,20 @@
+<section class="cta-section bg-primary text-white py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <h2 class="cta-title">
+          {{ .Site.Params.cta_title | default "Ready to Take Care of Your Health?" }}
+        </h2>
+        <p class="cta-subtitle mb-0">
+          {{ .Site.Params.cta_subtitle | default "Schedule your appointment today and take the first step towards better health." }}
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a href="{{ "/contact" | relURL }}" class="btn btn-light btn-lg">
+          <i class="fas fa-calendar-alt me-2"></i>
+          Book Appointment
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

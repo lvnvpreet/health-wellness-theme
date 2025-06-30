@@ -1,0 +1,68 @@
+<div class="business-hours">
+  <h4>Business Hours</h4>
+  <div class="hours-list">
+    {{ if .Site.Params.hours }}
+      {{ if .Site.Params.hours.monday }}
+      <div class="hour-item">
+        <span class="day">Monday:</span>
+        <span class="time">{{ .Site.Params.hours.monday }}</span>
+      </div>
+      {{ end }}
+      
+      {{ if .Site.Params.hours.tuesday }}
+      <div class="hour-item">
+        <span class="day">Tuesday:</span>
+        <span class="time">{{ .Site.Params.hours.tuesday }}</span>
+      </div>
+      {{ end }}
+      
+      {{ if .Site.Params.hours.wednesday }}
+      <div class="hour-item">
+        <span class="day">Wednesday:</span>
+        <span class="time">{{ .Site.Params.hours.wednesday }}</span>
+      </div>
+      {{ end }}
+      
+      {{ if .Site.Params.hours.thursday }}
+      <div class="hour-item">
+        <span class="day">Thursday:</span>
+        <span class="time">{{ .Site.Params.hours.thursday }}</span>
+      </div>
+      {{ end }}
+      
+      {{ if .Site.Params.hours.friday }}
+      <div class="hour-item">
+        <span class="day">Friday:</span>
+        <span class="time">{{ .Site.Params.hours.friday }}</span>
+      </div>
+      {{ end }}
+      
+      {{ if .Site.Params.hours.saturday }}
+      <div class="hour-item">
+        <span class="day">Saturday:</span>
+        <span class="time">{{ .Site.Params.hours.saturday }}</span>
+      </div>
+      {{ end }}
+      
+      {{ if .Site.Params.hours.sunday }}
+      <div class="hour-item">
+        <span class="day">Sunday:</span>
+        <span class="time">{{ .Site.Params.hours.sunday }}</span>
+      </div>
+      {{ end }}
+    {{ else }}
+    <div class="hour-item">
+      <span class="day">Monday - Friday:</span>
+      <span class="time">9:00 AM - 6:00 PM</span>
+    </div>
+    <div class="hour-item">
+      <span class="day">Saturday:</span>
+      <span class="time">9:00 AM - 2:00 PM</span>
+    </div>
+    <div class="hour-item">
+      <span class="day">Sunday:</span>
+      <span class="time">Closed</span>
+    </div>
+    {{ end }}
+  </div>
+</div>

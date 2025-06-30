@@ -1,0 +1,19 @@
+# Theme metadata for Health & Wellness Hugo Theme
+
+name = "Health & Wellness Theme"
+license = "MIT"
+licenselink = "https://github.com/username/health-wellness-theme/blob/main/LICENSE"
+description = "A modern, responsive Hugo theme designed for health and wellness websites, dental practices, medical clinics, and healthcare professionals."
+homepage = "https://github.com/username/health-wellness-theme"
+tags = ["health", "wellness", "medical", "dental", "clinic", "healthcare", "responsive", "modern", "bootstrap"]
+features = ["responsive", "seo-optimized", "appointment-booking", "testimonials", "team-profiles", "blog", "contact-forms"]
+min_version = "0.112.0"
+
+[author]
+  name = "Your Name"
+  homepage = "https://yourwebsite.com"
+
+[original]
+  name = "Health & Wellness Theme"
+  homepage = "https://github.com/username/health-wellness-theme"
+  repo = "https://github.com/username/health-wellness-theme"

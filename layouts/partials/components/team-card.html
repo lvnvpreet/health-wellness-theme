@@ -1,0 +1,45 @@
+<div class="team-card">
+  <div class="card h-100">
+    <div class="team-photo">
+      {{ if .Params.image }}
+      <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="card-img-top">
+      {{ else }}
+      <div class="no-photo">
+        <i class="fas fa-user-md"></i>
+      </div>
+      {{ end }}
+    </div>
+    
+    <div class="card-body text-center">
+      <h5 class="card-title">{{ .Title }}</h5>
+      
+      {{ if .Params.position }}
+      <p class="team-position text-primary">{{ .Params.position }}</p>
+      {{ end }}
+      
+      {{ if .Params.credentials }}
+      <p class="team-credentials text-muted">{{ .Params.credentials }}</p>
+      {{ end }}
+      
+      {{ if .Params.specialties }}
+      <div class="team-specialties mb-3">
+        {{ range first 3 .Params.specialties }}
+        <span class="badge bg-light text-dark">{{ . }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+      
+      <p class="card-text">{{ .Summary | truncate 100 }}</p>
+      
+      {{ if .Params.experience_years }}
+      <div class="experience mb-2">
+        <small class="text-muted">{{ .Params.experience_years }} years experience</small>
+      </div>
+      {{ end }}
+    </div>
+    
+    <div class="card-footer bg-transparent text-center">
+      <a href="{{ .Permalink }}" class="btn btn-outline-primary">View Profile</a>
+    </div>
+  </div>
+</div>

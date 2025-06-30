@@ -1,0 +1,29 @@
+{{ $address := .Get "address" }}
+{{ $embed_code := .Get "embed" }}
+{{ $height := .Get "height" | default "400" }}
+
+<div class="location-map-shortcode">
+  <h4>Find Us</h4>
+  {{ if $address }}
+  <p class="map-address">
+    <i class="fas fa-map-marker-alt text-primary"></i>
+    {{ $address }}
+  </p>
+  {{ end }}
+  
+  <div class="map-container" style="height: {{ $height }}px;">
+    {{ if $embed_code }}
+    {{ $embed_code | safeHTML }}
+    {{ else }}
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.123456789!2d-74.006!3d40.7128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQyJzQ2LjEiTiA3NMKwMDAnMjEuNiJX!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+      width="100%" 
+      height="{{ $height }}" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    {{ end }}
+  </div>
+</div>

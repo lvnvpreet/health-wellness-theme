@@ -1,0 +1,41 @@
+<div class="business-hours-shortcode">
+  <h4>Business Hours</h4>
+  <div class="hours-list">
+    {{ $monday := .Get "monday" | default "9:00 AM - 6:00 PM" }}
+    {{ $tuesday := .Get "tuesday" | default "9:00 AM - 6:00 PM" }}
+    {{ $wednesday := .Get "wednesday" | default "9:00 AM - 6:00 PM" }}
+    {{ $thursday := .Get "thursday" | default "9:00 AM - 6:00 PM" }}
+    {{ $friday := .Get "friday" | default "9:00 AM - 5:00 PM" }}
+    {{ $saturday := .Get "saturday" | default "9:00 AM - 2:00 PM" }}
+    {{ $sunday := .Get "sunday" | default "Closed" }}
+    
+    <div class="hour-item">
+      <span class="day">Monday:</span>
+      <span class="time">{{ $monday }}</span>
+    </div>
+    <div class="hour-item">
+      <span class="day">Tuesday:</span>
+      <span class="time">{{ $tuesday }}</span>
+    </div>
+    <div class="hour-item">
+      <span class="day">Wednesday:</span>
+      <span class="time">{{ $wednesday }}</span>
+    </div>
+    <div class="hour-item">
+      <span class="day">Thursday:</span>
+      <span class="time">{{ $thursday }}</span>
+    </div>
+    <div class="hour-item">
+      <span class="day">Friday:</span>
+      <span class="time">{{ $friday }}</span>
+    </div>
+    <div class="hour-item">
+      <span class="day">Saturday:</span>
+      <span class="time">{{ $saturday }}</span>
+    </div>
+    <div class="hour-item">
+      <span class="day">Sunday:</span>
+      <span class="time">{{ $sunday }}</span>
+    </div>
+  </div>
+</div>

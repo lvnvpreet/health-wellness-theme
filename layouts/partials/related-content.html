@@ -1,0 +1,24 @@
+{{ $related := .Site.RegularPages.Related . | first 3 }}
+{{ if $related }}
+<div class="related-content mt-5">
+  <h3>Related Articles</h3>
+  <div class="row">
+    {{ range $related }}
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        {{ if .Params.image }}
+        <img src="{{ .Params.image | relURL }}" class="card-img-top" alt="{{ .Title }}">
+        {{ end }}
+        <div class="card-body">
+          <h5 class="card-title">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h5>
+          <p class="card-text">{{ .Summary | truncate 100 }}</p>
+          <small class="text-muted">{{ .Date.Format "Jan 2, 2006" }}</small>
+        </div>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,28 @@
+{{ $video_id := .Get "id" }}
+{{ $title := .Get "title" }}
+{{ $width := .Get "width" | default "100%" }}
+{{ $height := .Get "height" | default "315" }}
+
+{{ if $video_id }}
+<div class="youtube-embed-shortcode">
+  {{ if $title }}
+  <h4>{{ $title }}</h4>
+  {{ end }}
+  
+  <div class="video-container">
+    <iframe 
+      width="{{ $width }}" 
+      height="{{ $height }}" 
+      src="https://www.youtube.com/embed/{{ $video_id }}" 
+      title="YouTube video player" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>
+{{ else }}
+<div class="alert alert-warning">
+  <strong>YouTube Embed Error:</strong> Video ID is required.
+</div>
+{{ end }}

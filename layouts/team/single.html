@@ -1,0 +1,113 @@
+{{ define "main" }}
+<article class="team-member-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {{ partial "breadcrumb.html" . }}
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="team-member-photo">
+          {{ if .Params.image }}
+          <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="img-fluid rounded">
+          {{ else }}
+          <div class="no-photo">
+            <i class="fas fa-user-md"></i>
+          </div>
+          {{ end }}
+        </div>
+        
+        <div class="team-member-contact mt-4">
+          {{ if .Params.email }}
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:{{ .Params.email }}">{{ .Params.email }}</a>
+          </div>
+          {{ end }}
+          {{ if .Params.phone }}
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <a href="tel:{{ .Params.phone }}">{{ .Params.phone }}</a>
+          </div>
+          {{ end }}
+          {{ if .Params.office }}
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            {{ .Params.office }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      
+      <div class="col-lg-8">
+        <header class="team-member-header">
+          <h1 class="member-name">{{ .Title }}</h1>
+          {{ if .Params.position }}
+          <p class="member-position">{{ .Params.position }}</p>
+          {{ end }}
+          {{ if .Params.credentials }}
+          <p class="member-credentials">{{ .Params.credentials }}</p>
+          {{ end }}
+        </header>
+        
+        <div class="team-member-content">
+          {{ .Content }}
+        </div>
+        
+        {{ if .Params.education }}
+        <div class="member-education mt-4">
+          <h3>Education</h3>
+          <ul class="education-list">
+            {{ range .Params.education }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+        </div>
+        {{ end }}
+        
+        {{ if .Params.specialties }}
+        <div class="member-specialties mt-4">
+          <h3>Specialties</h3>
+          <div class="specialties-tags">
+            {{ range .Params.specialties }}
+            <span class="specialty-tag">{{ . }}</span>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+        
+        {{ if .Params.certifications }}
+        <div class="member-certifications mt-4">
+          <h3>Certifications</h3>
+          <ul class="certifications-list">
+            {{ range .Params.certifications }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+        </div>
+        {{ end }}
+        
+        {{ if .Params.experience_years }}
+        <div class="member-experience mt-4">
+          <h3>Experience</h3>
+          <p>{{ .Params.experience_years }} years in practice</p>
+        </div>
+        {{ end }}
+        
+        {{ if .Params.languages }}
+        <div class="member-languages mt-4">
+          <h3>Languages</h3>
+          <p>{{ delimit .Params.languages ", " }}</p>
+        </div>
+        {{ end }}
+        
+        <div class="member-appointment mt-4">
+          {{ shortcode "appointment-cta" }}
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+{{ end }}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang | default "en" }}">
+  {{ partial "head.html" . }}
+  <body class="{{ if .IsHome }}home{{ else }}{{ .Type }}{{ end }}">
+    {{ partial "header.html" . }}
+    
+    <main id="main-content" role="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+    
+    {{ partial "footer.html" . }}
+    
+    <!-- JavaScript -->
+    <script src="{{ "js/vendor/jquery.min.js" | relURL }}"></script>
+    <script src="{{ "js/main.js" | relURL }}"></script>
+    
+    {{ if .Site.Params.googleAnalytics }}
+      {{ partial "analytics.html" . }}
+    {{ end }}
+  </body>
+</html>

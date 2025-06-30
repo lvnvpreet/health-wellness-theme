@@ -1,0 +1,165 @@
+/* Print Styles for Health & Wellness Theme */
+
+@media print {
+  /* Hide non-essential elements */
+  .top-bar,
+  .navbar,
+  .site-footer,
+  .social-share,
+  .blog-sidebar,
+  .hero-section,
+  .cta-section,
+  #back-to-top,
+  .btn,
+  .pagination,
+  .breadcrumb {
+    display: none !important;
+  }
+  
+  /* Reset page layout */
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Typography for print */
+  h1, h2, h3, h4, h5, h6 {
+    color: black !important;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+  
+  h1 {
+    font-size: 18pt;
+  }
+  
+  h2 {
+    font-size: 16pt;
+  }
+  
+  h3 {
+    font-size: 14pt;
+  }
+  
+  h4, h5, h6 {
+    font-size: 12pt;
+  }
+  
+  /* Content layout */
+  .container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .row {
+    margin: 0 !important;
+  }
+  
+  .col-lg-8,
+  .col-md-8,
+  .col-sm-8,
+  .col-8 {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  
+  /* Images */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+  }
+  
+  /* Links */
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 90%;
+  }
+  
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+  
+  /* Tables */
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+  
+  th, td {
+    border: 1px solid #ccc !important;
+    padding: 8px !important;
+    text-align: left !important;
+  }
+  
+  th {
+    background-color: #f0f0f0 !important;
+    font-weight: bold !important;
+  }
+  
+  /* Page breaks */
+  .page-break {
+    page-break-before: always;
+  }
+  
+  .no-page-break {
+    page-break-inside: avoid;
+  }
+  
+  /* Contact information for print */
+  .print-contact {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #ccc;
+  }
+  
+  .print-contact:before {
+    content: "Contact Information:";
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  /* Blog post specific */
+  .post-meta {
+    font-size: 10pt !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .post-content {
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* Service page specific */
+  .service-info {
+    border: 1px solid #ccc !important;
+    padding: 15px !important;
+    margin: 20px 0 !important;
+  }
+  
+  /* Team member specific */
+  .team-member-photo img {
+    width: 150px !important;
+    height: auto !important;
+    float: left !important;
+    margin: 0 15px 15px 0 !important;
+  }
+}

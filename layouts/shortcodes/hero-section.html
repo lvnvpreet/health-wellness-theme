@@ -1,0 +1,30 @@
+{{ $title := .Get "title" | default "Transform Your Health Today" }}
+{{ $subtitle := .Get "subtitle" | default "Professional healthcare services with compassion and expertise" }}
+{{ $image := .Get "image" | default "/images/hero/dental-office-hero.jpg" }}
+{{ $button1_text := .Get "button1_text" | default "Book Appointment" }}
+{{ $button1_link := .Get "button1_link" | default "/contact" }}
+{{ $button2_text := .Get "button2_text" | default "Our Services" }}
+{{ $button2_link := .Get "button2_link" | default "/services" }}
+
+<section class="hero-section-shortcode">
+  <div class="hero-bg">
+    <img src="{{ $image | relURL }}" alt="Hero Background" class="hero-background">
+    <div class="hero-overlay"></div>
+  </div>
+  
+  <div class="hero-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h1 class="hero-title text-white">{{ $title }}</h1>
+          <p class="hero-subtitle text-white">{{ $subtitle }}</p>
+          
+          <div class="hero-actions">
+            <a href="{{ $button1_link | relURL }}" class="btn btn-primary btn-lg me-3">{{ $button1_text }}</a>
+            <a href="{{ $button2_link | relURL }}" class="btn btn-outline-light btn-lg">{{ $button2_text }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

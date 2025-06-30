@@ -1,0 +1,38 @@
+<!-- Basic Meta Tags -->
+<meta name="description" content="{{ if .Description }}{{ .Description }}{{ else if .Summary }}{{ .Summary }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="keywords" content="{{ if .Params.keywords }}{{ delimit .Params.keywords ", " }}{{ else }}{{ .Site.Params.keywords }}{{ end }}">
+<meta name="author" content="{{ if .Params.author }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}">
+
+<!-- Robots -->
+{{ if .Params.noindex }}
+<meta name="robots" content="noindex, nofollow">
+{{ else }}
+<meta name="robots" content="index, follow">
+{{ end }}
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ .Permalink }}">
+
+<!-- Language -->
+<meta name="language" content="{{ .Site.Language.Lang }}">
+
+<!-- Copyright -->
+<meta name="copyright" content="{{ .Site.Title }}">
+
+<!-- Generator -->
+<meta name="generator" content="Hugo {{ hugo.Version }}">
+
+<!-- Theme Color -->
+<meta name="theme-color" content="{{ .Site.Params.theme_color | default "#007bff" }}">
+
+<!-- Mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+
+<!-- Geo Tags -->
+{{ if .Site.Params.geo }}
+<meta name="geo.region" content="{{ .Site.Params.geo.region }}">
+<meta name="geo.placename" content="{{ .Site.Params.geo.placename }}">
+<meta name="geo.position" content="{{ .Site.Params.geo.position }}">
+<meta name="ICBM" content="{{ .Site.Params.geo.position }}">
+{{ end }}

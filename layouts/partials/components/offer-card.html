@@ -1,0 +1,43 @@
+<div class="offer-card">
+  <div class="card h-100 offer-card-inner">
+    {{ if .Params.image }}
+    <div class="card-img-top position-relative">
+      <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="img-fluid">
+      {{ if .Params.discount }}
+      <div class="offer-badge">
+        {{ .Params.discount }} OFF
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+    
+    <div class="card-body">
+      <h5 class="card-title">{{ .Title }}</h5>
+      <p class="card-text">{{ .Summary | default .Params.description | truncate 120 }}</p>
+      
+      {{ if or .Params.original_price .Params.sale_price }}
+      <div class="offer-pricing mb-3">
+        {{ if .Params.original_price }}
+        <span class="original-price text-muted text-decoration-line-through">{{ .Params.original_price }}</span>
+        {{ end }}
+        {{ if .Params.sale_price }}
+        <span class="sale-price text-success fw-bold">{{ .Params.sale_price }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+      
+      {{ if .Params.valid_until }}
+      <div class="offer-validity">
+        <small class="text-muted">
+          <i class="fas fa-clock"></i>
+          Valid until: {{ .Params.valid_until }}
+        </small>
+      </div>
+      {{ end }}
+    </div>
+    
+    <div class="card-footer bg-transparent">
+      <a href="{{ .Permalink }}" class="btn btn-success w-100">View Offer</a>
+    </div>
+  </div>
+</div>

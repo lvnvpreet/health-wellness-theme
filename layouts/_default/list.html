@@ -1,0 +1,63 @@
+{{ define "main" }}
+<div class="list-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {{ partial "breadcrumb.html" . }}
+        
+        <header class="page-header">
+          <h1 class="page-title">{{ .Title }}</h1>
+          {{ if .Content }}
+          <div class="page-description">
+            {{ .Content }}
+          </div>
+          {{ end }}
+        </header>
+        
+        {{ if .Pages }}
+        <div class="content-grid">
+          <div class="row">
+            {{ range .Pages }}
+            <div class="col-lg-4 col-md-6 mb-4">
+              {{ if eq .Section "services" }}
+                {{ partial "components/service-card.html" . }}
+              {{ else if eq .Section "team" }}
+                {{ partial "components/team-card.html" . }}
+              {{ else if eq .Section "testimonials" }}
+                {{ partial "components/testimonial-card.html" . }}
+              {{ else if eq .Section "offers" }}
+                {{ partial "components/offer-card.html" . }}
+              {{ else if eq .Section "blog" }}
+                {{ partial "components/blog-card.html" . }}
+              {{ else }}
+                <div class="content-card">
+                  {{ if .Params.image }}
+                  <div class="card-image">
+                    <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="img-fluid">
+                  </div>
+                  {{ end }}
+                  <div class="card-content">
+                    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                    {{ if .Summary }}
+                    <p>{{ .Summary }}</p>
+                    {{ end }}
+                    <a href="{{ .Permalink }}" class="btn btn-primary">Learn More</a>
+                  </div>
+                </div>
+              {{ end }}
+            </div>
+            {{ end }}
+          </div>
+        </div>
+        
+        {{ partial "pagination.html" . }}
+        {{ else }}
+        <div class="no-content">
+          <p>No {{ .Type }} found.</p>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

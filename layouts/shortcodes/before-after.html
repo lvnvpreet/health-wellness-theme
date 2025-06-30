@@ -1,0 +1,35 @@
+{{ $before_image := .Get "before" }}
+{{ $after_image := .Get "after" }}
+{{ $title := .Get "title" | default "Before & After" }}
+
+<div class="before-after-shortcode">
+  <h4>{{ $title }}</h4>
+  <div class="before-after-container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="before-image">
+          <h5>Before</h5>
+          {{ if $before_image }}
+          <img src="{{ $before_image | relURL }}" alt="Before" class="img-fluid rounded">
+          {{ else }}
+          <div class="placeholder-image">
+            <p>Before image placeholder</p>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="after-image">
+          <h5>After</h5>
+          {{ if $after_image }}
+          <img src="{{ $after_image | relURL }}" alt="After" class="img-fluid rounded">
+          {{ else }}
+          <div class="placeholder-image">
+            <p>After image placeholder</p>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

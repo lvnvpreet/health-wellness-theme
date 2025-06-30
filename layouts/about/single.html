@@ -1,0 +1,73 @@
+{{ define "main" }}
+<article class="about-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {{ partial "breadcrumb.html" . }}
+        
+        <header class="page-header text-center mb-5">
+          <h1 class="page-title">{{ .Title }}</h1>
+          {{ if .Params.subtitle }}
+          <p class="lead">{{ .Params.subtitle }}</p>
+          {{ end }}
+        </header>
+      </div>
+    </div>
+    
+    {{ if .Params.hero_image }}
+    <div class="row mb-5">
+      <div class="col-12">
+        <div class="about-hero">
+          <img src="{{ .Params.hero_image | relURL }}" alt="{{ .Title }}" class="img-fluid rounded">
+        </div>
+      </div>
+    </div>
+    {{ end }}
+    
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="about-content">
+          {{ .Content }}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mission, Vision, Values -->
+    {{ if .Params.mission }}
+    <div class="row mt-5">
+      <div class="col-lg-4 mb-4">
+        <div class="value-card">
+          <h3>Our Mission</h3>
+          <p>{{ .Params.mission }}</p>
+        </div>
+      </div>
+      {{ if .Params.vision }}
+      <div class="col-lg-4 mb-4">
+        <div class="value-card">
+          <h3>Our Vision</h3>
+          <p>{{ .Params.vision }}</p>
+        </div>
+      </div>
+      {{ end }}
+      {{ if .Params.values }}
+      <div class="col-lg-4 mb-4">
+        <div class="value-card">
+          <h3>Our Values</h3>
+          <p>{{ .Params.values }}</p>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+    
+    <!-- Statistics Section -->
+    {{ if .Params.stats }}
+    <div class="row mt-5">
+      <div class="col-12">
+        {{ partial "components/stats-section.html" . }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</article>
+{{ end }}

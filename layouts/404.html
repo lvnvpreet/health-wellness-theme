@@ -1,0 +1,73 @@
+{{ define "main" }}
+<div class="error-404">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="error-content">
+          <div class="error-code">
+            <h1 class="display-1 text-primary">404</h1>
+          </div>
+          
+          <div class="error-message">
+            <h2>Page Not Found</h2>
+            <p class="lead">Sorry, the page you are looking for doesn't exist or has been moved.</p>
+          </div>
+          
+          <div class="error-actions mt-4">
+            <a href="{{ .Site.BaseURL }}" class="btn btn-primary btn-lg me-3">
+              <i class="fas fa-home"></i> Go Home
+            </a>
+            <a href="{{ "/contact" | relURL }}" class="btn btn-outline-primary btn-lg">
+              <i class="fas fa-envelope"></i> Contact Us
+            </a>
+          </div>
+          
+          <!-- Search -->
+          <div class="error-search mt-5">
+            <h4>Or search for what you need:</h4>
+            <form class="search-form" action="{{ "/search" | relURL }}" method="get">
+              <div class="input-group">
+                <input type="search" class="form-control form-control-lg" placeholder="Search..." name="q">
+                <button class="btn btn-primary" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+          
+          <!-- Quick Links -->
+          <div class="quick-links mt-5">
+            <h4>Quick Links</h4>
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <a href="{{ "/services" | relURL }}" class="btn btn-outline-secondary w-100">
+                  <i class="fas fa-stethoscope"></i><br>
+                  Services
+                </a>
+              </div>
+              <div class="col-md-3 mb-3">
+                <a href="{{ "/team" | relURL }}" class="btn btn-outline-secondary w-100">
+                  <i class="fas fa-user-md"></i><br>
+                  Our Team
+                </a>
+              </div>
+              <div class="col-md-3 mb-3">
+                <a href="{{ "/blog" | relURL }}" class="btn btn-outline-secondary w-100">
+                  <i class="fas fa-newspaper"></i><br>
+                  Blog
+                </a>
+              </div>
+              <div class="col-md-3 mb-3">
+                <a href="{{ "/contact" | relURL }}" class="btn btn-outline-secondary w-100">
+                  <i class="fas fa-calendar-alt"></i><br>
+                  Book Appointment
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

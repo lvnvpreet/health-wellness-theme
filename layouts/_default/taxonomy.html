@@ -1,0 +1,25 @@
+{{ define "main" }}
+<div class="taxonomy-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {{ partial "breadcrumb.html" . }}
+        
+        <header class="page-header">
+          <h1 class="page-title">{{ .Title }}</h1>
+          <p class="page-description">Browse all {{ .Data.Plural | lower }}</p>
+        </header>
+        
+        <div class="taxonomy-list">
+          {{ range .Data.Terms.Alphabetical }}
+          <div class="taxonomy-item">
+            <h3><a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a></h3>
+            <span class="count">({{ .Count }} {{ if eq .Count 1 }}item{{ else }}items{{ end }})</span>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,84 @@
+{{ $title := .Get "title" | default "Pricing Plans" }}
+
+<div class="pricing-table-shortcode">
+  <h3 class="text-center mb-4">{{ $title }}</h3>
+  <div class="row">
+    <!-- Basic Plan -->
+    <div class="col-lg-4 mb-4">
+      <div class="card pricing-card">
+        <div class="card-header text-center bg-light">
+          <h4>Basic Care</h4>
+          <div class="price">
+            <span class="currency">$</span>
+            <span class="amount">150</span>
+            <span class="period">/visit</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <li><i class="fas fa-check text-success"></i> Routine Examination</li>
+            <li><i class="fas fa-check text-success"></i> Basic Cleaning</li>
+            <li><i class="fas fa-check text-success"></i> X-rays (if needed)</li>
+            <li><i class="fas fa-check text-success"></i> Consultation</li>
+          </ul>
+        </div>
+        <div class="card-footer text-center">
+          <a href="/contact" class="btn btn-outline-primary">Get Started</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Standard Plan -->
+    <div class="col-lg-4 mb-4">
+      <div class="card pricing-card featured">
+        <div class="card-header text-center bg-primary text-white">
+          <h4>Standard Care</h4>
+          <div class="price">
+            <span class="currency">$</span>
+            <span class="amount">250</span>
+            <span class="period">/visit</span>
+          </div>
+          <span class="badge bg-warning">Most Popular</span>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <li><i class="fas fa-check text-success"></i> Everything in Basic</li>
+            <li><i class="fas fa-check text-success"></i> Deep Cleaning</li>
+            <li><i class="fas fa-check text-success"></i> Fluoride Treatment</li>
+            <li><i class="fas fa-check text-success"></i> Oral Health Assessment</li>
+            <li><i class="fas fa-check text-success"></i> Treatment Planning</li>
+          </ul>
+        </div>
+        <div class="card-footer text-center">
+          <a href="/contact" class="btn btn-primary">Get Started</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Premium Plan -->
+    <div class="col-lg-4 mb-4">
+      <div class="card pricing-card">
+        <div class="card-header text-center bg-dark text-white">
+          <h4>Premium Care</h4>
+          <div class="price">
+            <span class="currency">$</span>
+            <span class="amount">350</span>
+            <span class="period">/visit</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <li><i class="fas fa-check text-success"></i> Everything in Standard</li>
+            <li><i class="fas fa-check text-success"></i> Cosmetic Consultation</li>
+            <li><i class="fas fa-check text-success"></i> Whitening Treatment</li>
+            <li><i class="fas fa-check text-success"></i> Preventive Sealants</li>
+            <li><i class="fas fa-check text-success"></i> Priority Scheduling</li>
+          </ul>
+        </div>
+        <div class="card-footer text-center">
+          <a href="/contact" class="btn btn-outline-dark">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

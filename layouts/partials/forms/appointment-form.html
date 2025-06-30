@@ -1,0 +1,64 @@
+<form class="appointment-form" method="POST" action="#" netlify>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="appointment-name" class="form-label">Full Name *</label>
+      <input type="text" class="form-control" id="appointment-name" name="name" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="appointment-phone" class="form-label">Phone Number *</label>
+      <input type="tel" class="form-control" id="appointment-phone" name="phone" required>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="appointment-email" class="form-label">Email Address *</label>
+      <input type="email" class="form-control" id="appointment-email" name="email" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="appointment-service" class="form-label">Service Needed</label>
+      <select class="form-select" id="appointment-service" name="service">
+        <option value="">Select a service</option>
+        {{ range where .Site.RegularPages "Section" "services" }}
+        <option value="{{ .Title }}">{{ .Title }}</option>
+        {{ end }}
+      </select>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="appointment-date" class="form-label">Preferred Date</label>
+      <input type="date" class="form-control" id="appointment-date" name="preferred_date">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="appointment-time" class="form-label">Preferred Time</label>
+      <select class="form-select" id="appointment-time" name="preferred_time">
+        <option value="">Select a time</option>
+        <option value="9:00 AM">9:00 AM</option>
+        <option value="10:00 AM">10:00 AM</option>
+        <option value="11:00 AM">11:00 AM</option>
+        <option value="12:00 PM">12:00 PM</option>
+        <option value="1:00 PM">1:00 PM</option>
+        <option value="2:00 PM">2:00 PM</option>
+        <option value="3:00 PM">3:00 PM</option>
+        <option value="4:00 PM">4:00 PM</option>
+        <option value="5:00 PM">5:00 PM</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="mb-3">
+    <label for="appointment-message" class="form-label">Additional Notes</label>
+    <textarea class="form-control" id="appointment-message" name="message" rows="3" placeholder="Please describe your concerns or special requests..."></textarea>
+  </div>
+  
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="appointment-consent" name="consent" required>
+    <label class="form-check-label" for="appointment-consent">
+      I consent to being contacted about my appointment request *
+    </label>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Request Appointment</button>
+</form>

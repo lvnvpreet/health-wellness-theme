@@ -1,0 +1,46 @@
+{{ define "main" }}
+<div class="testimonials-listing">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {{ partial "breadcrumb.html" . }}
+        
+        <header class="page-header text-center mb-5">
+          <h1 class="page-title">{{ .Title }}</h1>
+          <p class="lead">{{ .Params.description | default "What our patients are saying about their experience" }}</p>
+        </header>
+      </div>
+    </div>
+    
+    {{ if .Content }}
+    <div class="row">
+      <div class="col-lg-8 mx-auto mb-5">
+        <div class="page-content">
+          {{ .Content }}
+        </div>
+      </div>
+    </div>
+    {{ end }}
+    
+    {{ if .Pages }}
+    <div class="testimonials-grid">
+      <div class="row">
+        {{ range .Pages }}
+        <div class="col-lg-4 col-md-6 mb-4">
+          {{ partial "components/testimonial-card.html" . }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+    {{ else }}
+    <div class="no-testimonials">
+      <div class="row">
+        <div class="col-12 text-center">
+          <p>No testimonials available at the moment.</p>
+        </div>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

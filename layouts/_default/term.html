@@ -1,0 +1,34 @@
+{{ define "main" }}
+<div class="term-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {{ partial "breadcrumb.html" . }}
+        
+        <header class="page-header">
+          <h1 class="page-title">{{ .Title }}</h1>
+          <p class="page-description">Posts tagged with "{{ .Title }}"</p>
+        </header>
+        
+        {{ if .Pages }}
+        <div class="content-grid">
+          <div class="row">
+            {{ range .Pages }}
+            <div class="col-lg-6 mb-4">
+              {{ partial "components/blog-card.html" . }}
+            </div>
+            {{ end }}
+          </div>
+        </div>
+        
+        {{ partial "pagination.html" . }}
+        {{ else }}
+        <div class="no-content">
+          <p>No posts found with this tag.</p>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

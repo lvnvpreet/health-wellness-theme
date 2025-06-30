@@ -1,0 +1,123 @@
+{{ define "main" }}
+<div class="blog-listing">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {{ partial "breadcrumb.html" . }}
+        
+        <header class="page-header text-center mb-5">
+          <h1 class="page-title">{{ .Title }}</h1>
+          <p class="lead">{{ .Params.description | default "Health tips, news, and insights from our medical experts" }}</p>
+        </header>
+      </div>
+    </div>
+    
+    {{ if .Content }}
+    <div class="row">
+      <div class="col-lg-8 mx-auto mb-5">
+        <div class="page-content">
+          {{ .Content }}
+        </div>
+      </div>
+    </div>
+    {{ end }}
+    
+    <div class="row">
+      <div class="col-lg-8">
+        {{ if .Pages }}
+        <div class="blog-posts">
+          {{ range .Pages }}
+          <article class="blog-post-preview mb-5">
+            <div class="row">
+              {{ if .Params.image }}
+              <div class="col-md-4">
+                <div class="post-image">
+                  <a href="{{ .Permalink }}">
+                    <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="img-fluid rounded">
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-8">
+              {{ else }}
+              <div class="col-12">
+              {{ end }}
+                <div class="post-content">
+                  <div class="post-meta mb-2">
+                    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+                      {{ .Date.Format "January 2, 2006" }}
+                    </time>
+                    {{ if .Params.author }}
+                    <span class="author">by {{ .Params.author }}</span>
+                    {{ end }}
+                    {{ if .Params.category }}
+                    <span class="category">in {{ .Params.category }}</span>
+                    {{ end }}
+                  </div>
+                  <h2 class="post-title">
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                  </h2>
+                  <p class="post-summary">{{ .Summary }}</p>
+                  <a href="{{ .Permalink }}" class="btn btn-outline-primary">Read More</a>
+                </div>
+              </div>
+            </div>
+          </article>
+          {{ end }}
+        </div>
+        
+        {{ partial "pagination.html" . }}
+        {{ else }}
+        <div class="no-posts">
+          <p>No blog posts available at the moment.</p>
+        </div>
+        {{ end }}
+      </div>
+      
+      <div class="col-lg-4">
+        <aside class="blog-sidebar">
+          <!-- Search -->
+          <div class="widget">
+            {{ partial "forms/search-form.html" . }}
+          </div>
+          
+          <!-- Categories -->
+          {{ if .Site.Taxonomies.categories }}
+          <div class="widget">
+            <h4>Categories</h4>
+            <ul class="category-list">
+              {{ range .Site.Taxonomies.categories }}
+              <li>
+                <a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
+                <span class="count">({{ .Count }})</span>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+          {{ end }}
+          
+          <!-- Recent Posts -->
+          {{ $recentPosts := first 5 (where .Site.RegularPages "Section" "blog") }}
+          {{ if $recentPosts }}
+          <div class="widget">
+            <h4>Recent Posts</h4>
+            <ul class="recent-posts">
+              {{ range $recentPosts }}
+              <li>
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+                <small>{{ .Date.Format "Jan 2, 2006" }}</small>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+          {{ end }}
+          
+          <!-- Newsletter -->
+          <div class="widget">
+            {{ partial "forms/newsletter-form.html" . }}
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

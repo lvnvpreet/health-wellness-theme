@@ -1,0 +1,42 @@
+<section class="hero-section">
+  <div class="hero-bg">
+    {{ if .Site.Params.hero_image }}
+    <img src="{{ .Site.Params.hero_image | relURL }}" alt="Hero Background" class="hero-background">
+    {{ else }}
+    <img src="{{ "/images/hero/dental-office-hero.jpg" | relURL }}" alt="Hero Background" class="hero-background">
+    {{ end }}
+    <div class="hero-overlay"></div>
+  </div>
+  
+  <div class="hero-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h1 class="hero-title text-white">
+            {{ .Site.Params.hero_title | default "Your Health is Our Priority" }}
+          </h1>
+          
+          <p class="hero-subtitle text-white">
+            {{ .Site.Params.hero_subtitle | default "Providing exceptional healthcare services with compassion, expertise, and state-of-the-art technology for you and your family." }}
+          </p>
+          
+          <div class="hero-actions">
+            <a href="{{ "/contact" | relURL }}" class="btn btn-primary btn-lg me-3">Book Appointment</a>
+            <a href="{{ "/services" | relURL }}" class="btn btn-outline-light btn-lg">Our Services</a>
+          </div>
+          
+          {{ if .Site.Params.hero_features }}
+          <div class="hero-features mt-4">
+            {{ range .Site.Params.hero_features }}
+            <div class="feature-item">
+              <i class="{{ .icon }} text-primary"></i>
+              <span class="text-white">{{ .text }}</span>
+            </div>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

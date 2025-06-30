@@ -1,0 +1,27 @@
+{{ if .Parent }}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{{ .Site.BaseURL }}">
+        <i class="fas fa-home"></i> Home
+      </a>
+    </li>
+    
+    {{ if .Parent.Parent }}
+    <li class="breadcrumb-item">
+      <a href="{{ .Parent.Parent.Permalink }}">{{ .Parent.Parent.Title }}</a>
+    </li>
+    {{ end }}
+    
+    {{ if ne .Parent.Kind "home" }}
+    <li class="breadcrumb-item">
+      <a href="{{ .Parent.Permalink }}">{{ .Parent.Title }}</a>
+    </li>
+    {{ end }}
+    
+    <li class="breadcrumb-item active" aria-current="page">
+      {{ .Title }}
+    </li>
+  </ol>
+</nav>
+{{ end }}

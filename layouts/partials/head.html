@@ -1,0 +1,50 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  {{ partial "seo/meta-tags.html" . }}
+  {{ partial "seo/open-graph.html" . }}
+  {{ partial "seo/twitter-cards.html" . }}
+  {{ partial "seo/structured-data.html" . }}
+  
+  <title>
+    {{- if .IsHome -}}
+      {{ .Site.Title }}
+    {{- else -}}
+      {{ .Title }} | {{ .Site.Title }}
+    {{- end -}}
+  </title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{{ .Site.Params.favicon | default "/images/favicon.ico" | relURL }}">
+  
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="{{ "css/style.css" | relURL }}" rel="stylesheet">
+  
+  <!-- Critical CSS for above-the-fold content -->
+  <link href="{{ "css/critical.css" | relURL }}" rel="stylesheet">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- RSS Feed -->
+  {{ range .AlternativeOutputFormats -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+  {{ end -}}
+  
+  <!-- Analytics -->
+  {{ if .Site.Params.googleAnalytics }}
+    {{ template "_internal/google_analytics.html" . }}
+  {{ end }}
+  
+  <!-- Custom head content -->
+  {{ if .Site.Params.customHead }}
+    {{ .Site.Params.customHead | safeHTML }}
+  {{ end }}
+</head>

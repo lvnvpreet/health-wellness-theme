@@ -1,0 +1,69 @@
+{{ define "main" }}
+<article class="testimonial-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {{ partial "breadcrumb.html" . }}
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="testimonial-detail">
+          <div class="testimonial-header text-center mb-4">
+            {{ if .Params.image }}
+            <div class="patient-photo">
+              <img src="{{ .Params.image | relURL }}" alt="{{ .Params.patient | default .Title }}" class="rounded-circle">
+            </div>
+            {{ end }}
+            
+            <h1 class="testimonial-title">{{ .Title }}</h1>
+            
+            {{ if .Params.patient }}
+            <p class="patient-name">{{ .Params.patient }}</p>
+            {{ end }}
+            
+            {{ if .Params.rating }}
+            <div class="rating">
+              {{ range seq .Params.rating }}
+              <i class="fas fa-star text-warning"></i>
+              {{ end }}
+              {{ range seq (sub 5 .Params.rating) }}
+              <i class="far fa-star"></i>
+              {{ end }}
+            </div>
+            {{ end }}
+            
+            {{ if .Date }}
+            <p class="testimonial-date text-muted">{{ .Date.Format "January 2, 2006" }}</p>
+            {{ end }}
+          </div>
+          
+          <div class="testimonial-content">
+            <blockquote class="blockquote text-center">
+              {{ .Content }}
+            </blockquote>
+          </div>
+          
+          {{ if .Params.service }}
+          <div class="testimonial-service mt-4 text-center">
+            <p><strong>Service:</strong> {{ .Params.service }}</p>
+          </div>
+          {{ end }}
+          
+          {{ if .Params.treatment_date }}
+          <div class="treatment-date mt-2 text-center">
+            <p><strong>Treatment Date:</strong> {{ .Params.treatment_date }}</p>
+          </div>
+          {{ end }}
+        </div>
+        
+        <div class="text-center mt-5">
+          <a href="{{ "/testimonials" | relURL }}" class="btn btn-outline-primary">Back to All Testimonials</a>
+          {{ shortcode "appointment-cta" }}
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+{{ end }}

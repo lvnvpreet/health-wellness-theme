@@ -1,0 +1,107 @@
+{{ define "main" }}
+<article class="service-page">
+  {{ if .Params.image }}
+  <div class="service-hero">
+    <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="img-fluid">
+    <div class="hero-overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <h1 class="hero-title text-white">{{ .Title }}</h1>
+            {{ if .Params.subtitle }}
+            <p class="hero-subtitle text-white">{{ .Params.subtitle }}</p>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ end }}
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {{ partial "breadcrumb.html" . }}
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-8">
+        {{ if not .Params.image }}
+        <header class="page-header">
+          <h1 class="page-title">{{ .Title }}</h1>
+          {{ if .Params.subtitle }}
+          <p class="lead">{{ .Params.subtitle }}</p>
+          {{ end }}
+        </header>
+        {{ end }}
+        
+        <div class="service-content">
+          {{ .Content }}
+        </div>
+        
+        {{ if .Params.benefits }}
+        <div class="service-benefits mt-4">
+          <h3>Benefits</h3>
+          <ul class="benefits-list">
+            {{ range .Params.benefits }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+        </div>
+        {{ end }}
+        
+        {{ if .Params.procedure }}
+        <div class="service-procedure mt-4">
+          <h3>What to Expect</h3>
+          <div class="procedure-steps">
+            {{ range .Params.procedure }}
+            <div class="step">
+              <h4>{{ .title }}</h4>
+              <p>{{ .description }}</p>
+            </div>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      
+      <div class="col-lg-4">
+        <aside class="service-sidebar">
+          <div class="service-info card">
+            <div class="card-body">
+              <h4>Service Details</h4>
+              {{ if .Params.price }}
+              <div class="info-item">
+                <strong>Price:</strong> {{ .Params.price }}
+              </div>
+              {{ end }}
+              {{ if .Params.duration }}
+              <div class="info-item">
+                <strong>Duration:</strong> {{ .Params.duration }}
+              </div>
+              {{ end }}
+              {{ if .Params.insurance_covered }}
+              <div class="info-item">
+                <strong>Insurance:</strong> {{ .Params.insurance_covered }}
+              </div>
+              {{ end }}
+              {{ if .Params.preparation }}
+              <div class="info-item">
+                <strong>Preparation:</strong> {{ .Params.preparation }}
+              </div>
+              {{ end }}
+              
+              <div class="mt-3">
+                {{ shortcode "appointment-cta" }}
+              </div>
+            </div>
+          </div>
+          
+          {{ partial "contact-info.html" . }}
+        </aside>
+      </div>
+    </div>
+  </div>
+</article>
+{{ end }}

@@ -1,0 +1,51 @@
+<div class="contact-info">
+  <h4>Contact Information</h4>
+  
+  {{ if .Site.Params.address }}
+  <div class="contact-item mb-3">
+    <div class="contact-icon">
+      <i class="fas fa-map-marker-alt text-primary"></i>
+    </div>
+    <div class="contact-details">
+      <strong>Address</strong>
+      <p>{{ .Site.Params.address }}</p>
+    </div>
+  </div>
+  {{ end }}
+  
+  {{ if .Site.Params.phone }}
+  <div class="contact-item mb-3">
+    <div class="contact-icon">
+      <i class="fas fa-phone text-primary"></i>
+    </div>
+    <div class="contact-details">
+      <strong>Phone</strong>
+      <p><a href="tel:{{ .Site.Params.phone }}">{{ .Site.Params.phone }}</a></p>
+    </div>
+  </div>
+  {{ end }}
+  
+  {{ if .Site.Params.email }}
+  <div class="contact-item mb-3">
+    <div class="contact-icon">
+      <i class="fas fa-envelope text-primary"></i>
+    </div>
+    <div class="contact-details">
+      <strong>Email</strong>
+      <p><a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></p>
+    </div>
+  </div>
+  {{ end }}
+  
+  {{ if .Site.Params.emergency_phone }}
+  <div class="contact-item mb-3 emergency">
+    <div class="contact-icon">
+      <i class="fas fa-phone-square-alt text-danger"></i>
+    </div>
+    <div class="contact-details">
+      <strong>Emergency</strong>
+      <p><a href="tel:{{ .Site.Params.emergency_phone }}" class="text-danger fw-bold">{{ .Site.Params.emergency_phone }}</a></p>
+    </div>
+  </div>
+  {{ end }}
+</div>

@@ -1,0 +1,38 @@
+<div class="service-card">
+  <div class="card h-100">
+    {{ if .Params.image }}
+    <div class="card-img-top">
+      <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="img-fluid">
+    </div>
+    {{ end }}
+    
+    <div class="card-body">
+      {{ if .Params.icon }}
+      <div class="service-icon mb-3">
+        <i class="{{ .Params.icon }} text-primary"></i>
+      </div>
+      {{ end }}
+      
+      <h5 class="card-title">{{ .Title }}</h5>
+      <p class="card-text">{{ .Summary | default .Params.description | truncate 120 }}</p>
+      
+      {{ if .Params.price }}
+      <div class="service-price mb-2">
+        <span class="price-label">Starting from:</span>
+        <span class="price">{{ .Params.price }}</span>
+      </div>
+      {{ end }}
+      
+      {{ if .Params.duration }}
+      <div class="service-duration mb-2">
+        <i class="fas fa-clock text-muted"></i>
+        <span>{{ .Params.duration }}</span>
+      </div>
+      {{ end }}
+    </div>
+    
+    <div class="card-footer bg-transparent">
+      <a href="{{ .Permalink }}" class="btn btn-primary w-100">Learn More</a>
+    </div>
+  </div>
+</div>

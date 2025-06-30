@@ -1,0 +1,131 @@
+{{ define "main" }}
+<div class="homepage">
+  <!-- Hero Section -->
+  {{ partial "components/hero-section.html" . }}
+  
+  <!-- Services Section -->
+  <section class="services-section py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h2 class="section-title">Our Services</h2>
+          <p class="section-subtitle">Comprehensive healthcare solutions for you and your family</p>
+        </div>
+      </div>
+      <div class="row">
+        {{ range first 6 (where .Site.RegularPages "Section" "services") }}
+        <div class="col-lg-4 col-md-6 mb-4">
+          {{ partial "components/service-card.html" . }}
+        </div>
+        {{ end }}
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <a href="{{ "/services" | relURL }}" class="btn btn-primary">View All Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- About Section -->
+  <section class="about-section py-5 bg-light">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h2>About Our Practice</h2>
+          <p class="lead">{{ .Site.Params.aboutText | default "We are committed to providing exceptional healthcare services with a personal touch. Our experienced team uses the latest technology and techniques to ensure the best possible outcomes for our patients." }}</p>
+          <a href="{{ "/about" | relURL }}" class="btn btn-outline-primary">Learn More</a>
+        </div>
+        <div class="col-lg-6">
+          <img src="{{ .Site.Params.aboutImage | default "/images/about/dental-office.jpg" | relURL }}" alt="About Us" class="img-fluid rounded">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Team Section -->
+  {{ if .Site.RegularPages }}
+  {{ $teamPages := where .Site.RegularPages "Section" "team" }}
+  {{ if $teamPages }}
+  <section class="team-section py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h2 class="section-title">Meet Our Team</h2>
+          <p class="section-subtitle">Experienced professionals dedicated to your health</p>
+        </div>
+      </div>
+      <div class="row">
+        {{ range first 4 $teamPages }}
+        <div class="col-lg-3 col-md-6 mb-4">
+          {{ partial "components/team-card.html" . }}
+        </div>
+        {{ end }}
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <a href="{{ "/team" | relURL }}" class="btn btn-primary">Meet Our Full Team</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+  {{ end }}
+  
+  <!-- Testimonials Section -->
+  {{ if .Site.RegularPages }}
+  {{ $testimonialPages := where .Site.RegularPages "Section" "testimonials" }}
+  {{ if $testimonialPages }}
+  <section class="testimonials-section py-5 bg-primary text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h2 class="section-title text-white">What Our Patients Say</h2>
+          <p class="section-subtitle text-white">Real stories from real patients</p>
+        </div>
+      </div>
+      <div class="row">
+        {{ range first 3 $testimonialPages }}
+        <div class="col-lg-4 mb-4">
+          {{ partial "components/testimonial-card.html" . }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+  {{ end }}
+  {{ end }}
+  
+  <!-- CTA Section -->
+  {{ partial "components/cta-section.html" . }}
+  
+  <!-- Latest Blog Posts -->
+  {{ if .Site.RegularPages }}
+  {{ $blogPages := where .Site.RegularPages "Section" "blog" }}
+  {{ if $blogPages }}
+  <section class="blog-section py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h2 class="section-title">Latest Health Tips</h2>
+          <p class="section-subtitle">Stay informed with our latest articles and health advice</p>
+        </div>
+      </div>
+      <div class="row">
+        {{ range first 3 $blogPages }}
+        <div class="col-lg-4 mb-4">
+          {{ partial "components/blog-card.html" . }}
+        </div>
+        {{ end }}
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <a href="{{ "/blog" | relURL }}" class="btn btn-primary">Read More Articles</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+  {{ end }}
+</div>
+{{ end }}

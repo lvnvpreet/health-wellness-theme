@@ -1,0 +1,46 @@
+<div class="testimonial-card">
+  <div class="card h-100">
+    <div class="card-body">
+      {{ if .Params.rating }}
+      <div class="rating mb-3">
+        {{ range seq .Params.rating }}
+        <i class="fas fa-star text-warning"></i>
+        {{ end }}
+        {{ range seq (sub 5 .Params.rating) }}
+        <i class="far fa-star text-warning"></i>
+        {{ end }}
+      </div>
+      {{ end }}
+      
+      <blockquote class="blockquote">
+        <p class="testimonial-content">{{ .Content | truncate 200 }}</p>
+      </blockquote>
+      
+      <div class="testimonial-author mt-3">
+        <div class="d-flex align-items-center">
+          {{ if .Params.image }}
+          <img src="{{ .Params.image | relURL }}" alt="{{ .Params.patient | default .Title }}" class="testimonial-avatar rounded-circle me-3">
+          {{ else }}
+          <div class="testimonial-avatar-placeholder rounded-circle me-3">
+            <i class="fas fa-user"></i>
+          </div>
+          {{ end }}
+          
+          <div>
+            <div class="patient-name fw-bold">{{ .Params.patient | default .Title }}</div>
+            {{ if .Params.service }}
+            <div class="service-name text-muted small">{{ .Params.service }}</div>
+            {{ end }}
+            {{ if .Date }}
+            <div class="testimonial-date text-muted small">{{ .Date.Format "January 2006" }}</div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card-footer bg-transparent">
+      <a href="{{ .Permalink }}" class="btn btn-outline-primary btn-sm">Read Full Review</a>
+    </div>
+  </div>
+</div>

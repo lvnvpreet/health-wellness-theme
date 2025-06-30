@@ -1,0 +1,49 @@
+<ul class="navbar-nav me-auto">
+  {{ $currentPage := . }}
+  
+  <li class="nav-item">
+    <a class="nav-link{{ if .IsHome }} active{{ end }}" href="{{ .Site.BaseURL }}">Home</a>
+  </li>
+  
+  <li class="nav-item">
+    <a class="nav-link{{ if eq .Section "about" }} active{{ end }}" href="{{ "/about" | relURL }}">About</a>
+  </li>
+  
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle{{ if eq .Section "services" }} active{{ end }}" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Services
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+      <li><a class="dropdown-item" href="{{ "/services" | relURL }}">All Services</a></li>
+      <li><hr class="dropdown-divider"></li>
+      {{ range first 6 (where .Site.RegularPages "Section" "services") }}
+      <li><a class="dropdown-item" href="{{ .Permalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  </li>
+  
+  <li class="nav-item">
+    <a class="nav-link{{ if eq .Section "team" }} active{{ end }}" href="{{ "/team" | relURL }}">Our Team</a>
+  </li>
+  
+  <li class="nav-item">
+    <a class="nav-link{{ if eq .Section "testimonials" }} active{{ end }}" href="{{ "/testimonials" | relURL }}">Testimonials</a>
+  </li>
+  
+  {{ if .Site.RegularPages }}
+  {{ $offers := where .Site.RegularPages "Section" "offers" }}
+  {{ if $offers }}
+  <li class="nav-item">
+    <a class="nav-link{{ if eq .Section "offers" }} active{{ end }}" href="{{ "/offers" | relURL }}">Offers</a>
+  </li>
+  {{ end }}
+  {{ end }}
+  
+  <li class="nav-item">
+    <a class="nav-link{{ if eq .Section "blog" }} active{{ end }}" href="{{ "/blog" | relURL }}">Blog</a>
+  </li>
+  
+  <li class="nav-item">
+    <a class="nav-link{{ if eq .Section "contact" }} active{{ end }}" href="{{ "/contact" | relURL }}">Contact</a>
+  </li>
+</ul>

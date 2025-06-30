@@ -1,0 +1,49 @@
+{{ $name := .Get "name" }}
+{{ $position := .Get "position" }}
+{{ $image := .Get "image" }}
+{{ $description := .Get "description" }}
+{{ $credentials := .Get "credentials" }}
+{{ $experience := .Get "experience" }}
+{{ $link := .Get "link" }}
+
+<div class="team-member-shortcode">
+  <div class="card h-100">
+    <div class="team-photo">
+      {{ if $image }}
+      <img src="{{ $image | relURL }}" alt="{{ $name }}" class="card-img-top">
+      {{ else }}
+      <div class="no-photo">
+        <i class="fas fa-user-md"></i>
+      </div>
+      {{ end }}
+    </div>
+    
+    <div class="card-body text-center">
+      <h5 class="card-title">{{ $name }}</h5>
+      
+      {{ if $position }}
+      <p class="team-position text-primary">{{ $position }}</p>
+      {{ end }}
+      
+      {{ if $credentials }}
+      <p class="team-credentials text-muted">{{ $credentials }}</p>
+      {{ end }}
+      
+      {{ if $description }}
+      <p class="card-text">{{ $description }}</p>
+      {{ end }}
+      
+      {{ if $experience }}
+      <div class="experience mb-2">
+        <small class="text-muted">{{ $experience }}</small>
+      </div>
+      {{ end }}
+    </div>
+    
+    {{ if $link }}
+    <div class="card-footer bg-transparent text-center">
+      <a href="{{ $link | relURL }}" class="btn btn-outline-primary">View Profile</a>
+    </div>
+    {{ end }}
+  </div>
+</div>
