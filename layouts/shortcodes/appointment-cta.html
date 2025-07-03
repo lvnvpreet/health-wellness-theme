@@ -1,6 +1,6 @@
-{{ $text := .Get "text" | default "Ready to Schedule Your Appointment?" }}
-{{ $button_text := .Get "button_text" | default "Book Now" }}
-{{ $link := .Get "link" | default "/contact" }}
+{{ $text := .Params.cta_text | default "Ready to Schedule Your Appointment?" }}
+{{ $button_text := .Params.cta_button | default "Book Now" }}
+{{ $link := .Params.cta_link | default "/contact" }}
 
 <div class="appointment-cta-shortcode text-center p-4 bg-primary text-white rounded">
   <h4 class="mb-3">{{ $text }}</h4>
