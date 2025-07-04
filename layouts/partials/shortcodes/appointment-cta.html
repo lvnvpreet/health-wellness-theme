@@ -1,0 +1,11 @@
+{{ $text := .Params.cta_text | default "Ready to Schedule Your Appointment?" }}
+{{ $button_text := .Params.cta_button | default "Book Now" }}
+{{ $link := .Params.cta_link | default "/contact" }}
+
+<div class="appointment-cta-shortcode text-center p-4 bg-primary text-white rounded">
+  <h4 class="mb-3">{{ $text }}</h4>
+  <a href="{{ $link | relURL }}" class="btn btn-light btn-lg">
+    <i class="fas fa-calendar-alt me-2"></i>
+    {{ $button_text }}
+  </a>
+</div>
