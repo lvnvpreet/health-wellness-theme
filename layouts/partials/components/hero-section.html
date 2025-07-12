@@ -13,30 +13,29 @@
   <div class="hero-content">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8">
-          <h1 class="hero-title text-white">
-            {{ .Site.Params.hero_title | default "Your Health is Our Priority" }}
-          </h1>
-          
-          <p class="hero-subtitle text-white">
-            {{ .Site.Params.hero_subtitle | default "Providing exceptional healthcare services with compassion, expertise, and state-of-the-art technology for you and your family." }}
-          </p>
-          
-          <div class="hero-actions">
-            <a href="{{ "/contact" | relURL }}" class="btn btn-primary btn-lg me-3">Book Appointment</a>
-            <a href="{{ "/services" | relURL }}" class="btn btn-outline-light btn-lg">Our Services</a>
-          </div>
-          
-          {{ if .Site.Params.hero_features }}
-          <div class="hero-features mt-4">
-            {{ range .Site.Params.hero_features }}
-            <div class="feature-item">
-              <i class="{{ .icon }} text-primary"></i>
-              <span class="text-white">{{ .text }}</span>
+        <div class="col-lg-10 mx-auto">
+          <div class="hero-box text-center p-5 shadow-lg bg-white bg-opacity-75 rounded-4">
+            <h1 class="hero-title text-primary mb-3">
+              {{ .Site.Params.hero_title | default "Your Health is Our Priority" }}
+            </h1>
+            <p class="hero-subtitle text-dark mb-4">
+              {{ .Site.Params.hero_subtitle | default "Providing exceptional healthcare services with compassion, expertise, and state-of-the-art technology for you and your family." }}
+            </p>
+            <div class="hero-actions mb-4">
+              <a href="{{ "/contact" | relURL }}" class="btn btn-primary btn-lg me-3">Book Appointment</a>
+              <a href="{{ "/services" | relURL }}" class="btn btn-outline-primary btn-lg">Our Services</a>
+            </div>
+            {{ if .Site.Params.hero_features }}
+            <div class="hero-features mt-4 justify-content-center">
+              {{ range .Site.Params.hero_features }}
+              <div class="feature-item">
+                <i class="{{ .icon }} text-primary"></i>
+                <span class="text-dark">{{ .text }}</span>
+              </div>
+              {{ end }}
             </div>
             {{ end }}
           </div>
-          {{ end }}
         </div>
       </div>
     </div>
