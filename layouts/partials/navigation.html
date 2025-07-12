@@ -23,23 +23,6 @@
   </li>
   
   <li class="nav-item">
-    <a class="nav-link{{ if eq .Section "team" }} active{{ end }}" href="{{ "/team" | relURL }}">Our Team</a>
-  </li>
-  
-  <li class="nav-item">
-    <a class="nav-link{{ if eq .Section "testimonials" }} active{{ end }}" href="{{ "/testimonials" | relURL }}">Testimonials</a>
-  </li>
-  
-  {{ if .Site.RegularPages }}
-  {{ $offers := where .Site.RegularPages "Section" "offers" }}
-  {{ if $offers }}
-  <li class="nav-item">
-    <a class="nav-link{{ if eq .Section "offers" }} active{{ end }}" href="{{ "/offers" | relURL }}">Offers</a>
-  </li>
-  {{ end }}
-  {{ end }}
-  
-  <li class="nav-item">
     <a class="nav-link{{ if eq .Section "blog" }} active{{ end }}" href="{{ "/blog" | relURL }}">Blog</a>
   </li>
   

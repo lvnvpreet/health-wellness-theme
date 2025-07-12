@@ -1,4 +1,4 @@
-<div class="offer-card">
+<div class="offer-card {{ if .Params.image }}has-image{{ else }}no-image{{ end }}">
   <div class="card h-100 offer-card-inner">
     {{ if .Params.image }}
     <div class="card-img-top position-relative">
@@ -9,6 +9,12 @@
       </div>
       {{ end }}
     </div>
+    {{ else }}
+      {{ if .Params.discount }}
+      <div class="offer-badge">
+        {{ .Params.discount }} OFF
+      </div>
+      {{ end }}
     {{ end }}
     
     <div class="card-body">

@@ -1,0 +1,277 @@
+/* Flexible Theme Styles - Adaptive Design Based on Content */
+
+/* ===== GLOBAL ADAPTIVE UTILITIES ===== */
+
+/* Content-aware spacing */
+.has-image {
+  --content-padding: 1.5rem;
+  --content-spacing: 2rem;
+}
+
+.no-image {
+  --content-padding: 2rem;
+  --content-spacing: 2.5rem;
+}
+
+/* ===== ADVANCED HERO ADAPTATIONS ===== */
+
+/* Hero section with patterns for no-image state */
+.hero-section.no-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 1px, transparent 1px),
+    radial-gradient(circle at 40% 20%, rgba(255,255,255,0.1) 1px, transparent 1px),
+    radial-gradient(circle at 90% 80%, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 50px 50px, 80px 80px, 120px 120px;
+  animation: float 20s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(10px, -10px) rotate(1deg); }
+  66% { transform: translate(-5px, 5px) rotate(-1deg); }
+}
+
+.hero-section.no-image .hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== ADVANCED CARD ADAPTATIONS ===== */
+
+/* Service cards - enhanced no-image state */
+.service-card.no-image .card-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(45deg, transparent, rgba(0, 123, 255, 0.05));
+  border-radius: 0 var(--border-radius) 0 100%;
+  pointer-events: none;
+}
+
+/* Team cards - enhanced animations */
+.team-card.has-image .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.15);
+}
+
+.team-card.no-image .card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 1rem 2rem rgba(0, 123, 255, 0.15);
+}
+
+/* Blog cards - enhanced typography for no-image */
+.blog-card.no-image .card-title a {
+  background: linear-gradient(135deg, var(--primary-color), #0056b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.blog-card.no-image .card:hover .card-title a {
+  background: linear-gradient(135deg, #0056b3, var(--primary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== RESPONSIVE ADAPTATIONS ===== */
+
+/* Mobile-specific adaptations */
+@media (max-width: 768px) {
+  .hero-section.no-image {
+    min-height: 400px;
+    padding: 2rem 0;
+  }
+  
+  .service-card.no-image .service-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .service-card.no-image .service-icon i {
+    font-size: 1.5rem;
+  }
+  
+  .team-card.no-image .no-photo {
+    height: 150px;
+    font-size: 2.5rem;
+  }
+  
+  .team-card.has-image .team-photo img {
+    height: 200px;
+  }
+  
+  .blog-card.no-image .card-body {
+    padding: 1.5rem;
+  }
+  
+  .testimonial-card.no-image .testimonial-avatar-placeholder {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+  }
+  
+  .offer-card.no-image .card-body::before {
+    font-size: 2rem;
+  }
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .service-card.no-image .service-icon {
+    background: var(--dark-color);
+    border: 2px solid var(--primary-color);
+  }
+  
+  .team-card.no-image .no-photo {
+    background: var(--dark-color);
+    border: 2px solid var(--primary-color);
+  }
+  
+  .hero-section.no-image {
+    background: var(--dark-color);
+    color: white;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .hero-section.no-image::before {
+    animation: none;
+  }
+  
+  .team-card.no-image .no-photo::before {
+    animation: none;
+  }
+  
+  .service-card .card,
+  .team-card .card,
+  .blog-card .card,
+  .testimonial-card .card,
+  .offer-card .card {
+    transition: none;
+  }
+  
+  .service-card .card:hover,
+  .team-card .card:hover,
+  .blog-card .card:hover {
+    transform: none;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  .hero-section.no-image {
+    background: white !important;
+    color: black !important;
+    min-height: auto;
+  }
+  
+  .service-card.no-image .service-icon,
+  .team-card.no-image .no-photo,
+  .testimonial-card.no-image .testimonial-avatar-placeholder {
+    background: white !important;
+    border: 1px solid black !important;
+    color: black !important;
+  }
+  
+  .offer-card.no-image .card {
+    background: white !important;
+    border: 1px solid black !important;
+    color: black !important;
+  }
+}
+
+/* ===== DARK MODE SUPPORT ===== */
+
+@media (prefers-color-scheme: dark) {
+  .hero-section.no-image {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  }
+  
+  .service-card.no-image .card-body,
+  .team-card.no-image .card-body,
+  .blog-card.no-image .card-body {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    color: white;
+  }
+  
+  .testimonial-card.no-image .card {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    color: white;
+  }
+  
+  .blog-card.no-image {
+    border-left-color: var(--primary-color);
+  }
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+/* GPU acceleration for smooth animations */
+.service-card .card,
+.team-card .card,
+.blog-card .card,
+.testimonial-card .card,
+.offer-card .card {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Lazy loading image placeholder */
+.image-placeholder {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 2s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Content-aware utilities */
+.adaptive-padding {
+  padding: var(--content-padding);
+}
+
+.adaptive-spacing {
+  margin-bottom: var(--content-spacing);
+}
+
+/* Image fallback utilities */
+.img-fallback {
+  background: linear-gradient(45deg, var(--light-color), #f8f9fa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-color);
+  font-size: 2rem;
+  min-height: 200px;
+}
+
+.img-fallback.small {
+  min-height: 100px;
+  font-size: 1.5rem;
+}
+
+.img-fallback.large {
+  min-height: 300px;
+  font-size: 3rem;
+}

@@ -1,4 +1,4 @@
-<div class="service-card">
+<div class="service-card {{ if .Params.image }}has-image{{ else }}no-image{{ end }}">
   <div class="card h-100">
     {{ if .Params.image }}
     <div class="card-img-top">

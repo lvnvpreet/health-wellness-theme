@@ -1,4 +1,5 @@
-<section class="hero-section">
+<section class="hero-section {{ if or .Site.Params.hero_image (fileExists "static/images/hero/dental-office-hero.jpg") }}has-image{{ else }}no-image{{ end }}">
+  {{ if or .Site.Params.hero_image (fileExists "static/images/hero/dental-office-hero.jpg") }}
   <div class="hero-bg">
     {{ if .Site.Params.hero_image }}
     <img src="{{ .Site.Params.hero_image | relURL }}" alt="Hero Background" class="hero-background">
@@ -7,6 +8,7 @@
     {{ end }}
     <div class="hero-overlay"></div>
   </div>
+  {{ end }}
   
   <div class="hero-content">
     <div class="container">

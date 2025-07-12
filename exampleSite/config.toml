@@ -1,0 +1,109 @@
+# Flexible Health & Wellness Theme Configuration
+# This configuration demonstrates how to make the theme adapt to content with or without images
+
+baseURL = "https://yoursite.com"
+languageCode = "en-us"
+title = "Your Health & Wellness Practice"
+theme = "health-wellness-theme"
+
+[params]
+  # Theme Flexibility Settings
+  # The theme automatically adapts based on whether these images exist or not
+  
+  # Hero Section - Theme adapts automatically
+  hero_title = "Your Health is Our Priority"
+  hero_subtitle = "Providing exceptional healthcare services with compassion, expertise, and state-of-the-art technology."
+  hero_image = "/images/hero/your-hero-image.jpg"  # Optional - theme adapts if missing
+  
+  # Contact Information
+  phone = "+1 (555) 123-4567"
+  email = "info@yourhealthpractice.com"
+  address = "123 Health Street, Medical City, MC 12345"
+  
+  # Social Media
+  facebook = "https://facebook.com/yourhealthpractice"
+  twitter = "https://twitter.com/yourhealthpractice"
+  instagram = "https://instagram.com/yourhealthpractice"
+  linkedin = "https://linkedin.com/company/yourhealthpractice"
+  
+  # Business Hours
+  [params.business_hours]
+    monday = "9:00 AM - 6:00 PM"
+    tuesday = "9:00 AM - 6:00 PM"
+    wednesday = "9:00 AM - 6:00 PM"
+    thursday = "9:00 AM - 6:00 PM"
+    friday = "9:00 AM - 5:00 PM"
+    saturday = "9:00 AM - 2:00 PM"
+    sunday = "Closed"
+  
+  # Hero Features (optional)
+  [[params.hero_features]]
+    icon = "fas fa-clock"
+    text = "24/7 Emergency Care"
+  
+  [[params.hero_features]]
+    icon = "fas fa-user-md"
+    text = "Expert Medical Team"
+  
+  [[params.hero_features]]
+    icon = "fas fa-heart"
+    text = "Compassionate Care"
+
+# Content Configuration Examples
+# The theme automatically adapts to content with or without images
+
+# Example Menu Configuration
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+  
+  [[menu.main]]
+    name = "Services"
+    url = "/services/"
+    weight = 3
+  
+  [[menu.main]]
+    name = "Team"
+    url = "/team/"
+    weight = 4
+  
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 5
+  
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 6
+
+# Markup Configuration for Content
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  
+  [markup.highlight]
+    style = "github"
+    lineNos = true
+    lineNumbersInTable = false
+    tabWidth = 4
+
+# Output formats
+[outputFormats]
+  [outputFormats.RSS]
+    mediatype = "application/rss"
+    baseName = "feed"
+
+# Taxonomies
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  service = "services"

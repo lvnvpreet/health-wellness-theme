@@ -1,4 +1,4 @@
-<div class="team-card">
+<div class="team-card {{ if .Params.image }}has-image{{ else }}no-image{{ end }}">
   <div class="card h-100">
     <div class="team-photo">
       {{ if .Params.image }}

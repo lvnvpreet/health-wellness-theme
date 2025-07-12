@@ -1,4 +1,4 @@
-<div class="testimonial-card">
+<div class="testimonial-card {{ if .Params.image }}has-image{{ else }}no-image{{ end }}">
   <div class="card h-100">
     <div class="card-body">
       {{ if .Params.rating }}
@@ -22,7 +22,8 @@
           <img src="{{ .Params.image | relURL }}" alt="{{ .Params.patient | default .Title }}" class="testimonial-avatar rounded-circle me-3">
           {{ else }}
           <div class="testimonial-avatar-placeholder rounded-circle me-3">
-            <i class="fas fa-user"></i>
+            {{ $firstLetter := substr (.Params.patient | default .Title) 0 1 | upper }}
+            {{ $firstLetter }}
           </div>
           {{ end }}
           

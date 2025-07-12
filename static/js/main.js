@@ -222,6 +222,30 @@
             }
         });
 
+        // Enhance dropdown functionality
+        $('.dropdown-toggle').on('click', function(e) {
+            e.preventDefault();
+            const $dropdown = $(this).next('.dropdown-menu');
+            
+            // Close other dropdowns
+            $('.dropdown-menu').not($dropdown).removeClass('show');
+            
+            // Toggle current dropdown
+            $dropdown.toggleClass('show');
+        });
+
+        // Close dropdown when clicking outside
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.dropdown').length) {
+                $('.dropdown-menu').removeClass('show');
+            }
+        });
+
+        // Prevent dropdown from closing when clicking inside
+        $('.dropdown-menu').on('click', function(e) {
+            e.stopPropagation();
+        });
+
         // Highlight current page in navigation
         const currentPath = window.location.pathname;
         $('.navbar-nav .nav-link').each(function() {

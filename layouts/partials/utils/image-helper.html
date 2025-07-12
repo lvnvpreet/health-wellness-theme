@@ -1,0 +1,18 @@
+{{/*
+Image utility helper - returns CSS classes and attributes based on image availability
+Usage: {{ partial "utils/image-helper.html" (dict "image" .Params.image "context" .) }}
+*/}}
+
+{{ $image := .image }}
+{{ $context := .context }}
+{{ $hasImage := false }}
+
+{{/* Check if image parameter exists and is not empty */}}
+{{ if $image }}
+  {{ if not (eq $image "") }}
+    {{ $hasImage = true }}
+  {{ end }}
+{{ end }}
+
+{{/* Return appropriate CSS class */}}
+{{ if $hasImage }}has-image{{ else }}no-image{{ end }}

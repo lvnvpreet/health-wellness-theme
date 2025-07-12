@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "health-wellness-theme",
+			"path": "../../.."
+		},
+		{
+			"name": "archetypes",
+			"path": "D:/projects/hugo-bulder/themes/health-wellness-theme/archetypes"
+		}
+	],
+	"settings": {}
+}
