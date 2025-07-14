@@ -3,6 +3,12 @@
 (function($) {
     'use strict';
 
+    // Check if jQuery is loaded
+    if (typeof $ === 'undefined' || typeof jQuery === 'undefined') {
+        console.error('jQuery is required for this theme to work properly');
+        return;
+    }
+
     // Global variables
     const $window = $(window);
     const $document = $(document);
@@ -601,100 +607,100 @@
         }
     };
 
-})(jQuery);
+    // Add CSS for animations
+    const mainThemeStyles = document.createElement('style');
+    mainThemeStyles.textContent = `
+        /* Navigation transitions */
+        .navbar {
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-scrolled {
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-hidden {
+            transform: translateY(-100%);
+        }
+        
+        /* AOS-like animations */
+        [data-aos] {
+            opacity: 0;
+            transition-property: opacity, transform;
+            transition-duration: 1s;
+        }
+        
+        .aos-animate.aos-fade-up {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        [data-aos="fade-up"] {
+            transform: translateY(30px);
+        }
+        
+        .aos-animate.aos-fade-down {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        [data-aos="fade-down"] {
+            transform: translateY(-30px);
+        }
+        
+        .aos-animate.aos-fade-left {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        [data-aos="fade-left"] {
+            transform: translateX(30px);
+        }
+        
+        .aos-animate.aos-fade-right {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        [data-aos="fade-right"] {
+            transform: translateX(-30px);
+        }
+        
+        .aos-animate.aos-zoom-in {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        [data-aos="zoom-in"] {
+            transform: scale(0.9);
+        }
+        
+        .aos-animate.aos-flip-left {
+            opacity: 1;
+            transform: rotateY(0);
+        }
+        
+        [data-aos="flip-left"] {
+            transform: rotateY(-90deg);
+        }
+        
+        /* Loading states */
+        img:not(.loaded) {
+            filter: blur(5px);
+            transition: filter 0.3s;
+        }
+        
+        img.loaded {
+            filter: blur(0);
+        }
+        
+        /* Mobile menu */
+        body.mobile-menu-open {
+            overflow: hidden;
+        }
+    `;
+    document.head.appendChild(mainThemeStyles);
 
-// Add CSS for animations
-const style = document.createElement('style');
-style.textContent = `
-    /* Navigation transitions */
-    .navbar {
-        transition: all 0.3s ease;
-    }
-    
-    .navbar-scrolled {
-        padding-top: 0.5rem !important;
-        padding-bottom: 0.5rem !important;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .navbar-hidden {
-        transform: translateY(-100%);
-    }
-    
-    /* AOS-like animations */
-    [data-aos] {
-        opacity: 0;
-        transition-property: opacity, transform;
-        transition-duration: 1s;
-    }
-    
-    .aos-animate.aos-fade-up {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    [data-aos="fade-up"] {
-        transform: translateY(30px);
-    }
-    
-    .aos-animate.aos-fade-down {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    [data-aos="fade-down"] {
-        transform: translateY(-30px);
-    }
-    
-    .aos-animate.aos-fade-left {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    
-    [data-aos="fade-left"] {
-        transform: translateX(30px);
-    }
-    
-    .aos-animate.aos-fade-right {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    
-    [data-aos="fade-right"] {
-        transform: translateX(-30px);
-    }
-    
-    .aos-animate.aos-zoom-in {
-        opacity: 1;
-        transform: scale(1);
-    }
-    
-    [data-aos="zoom-in"] {
-        transform: scale(0.9);
-    }
-    
-    .aos-animate.aos-flip-left {
-        opacity: 1;
-        transform: rotateY(0);
-    }
-    
-    [data-aos="flip-left"] {
-        transform: rotateY(-90deg);
-    }
-    
-    /* Loading states */
-    img:not(.loaded) {
-        filter: blur(5px);
-        transition: filter 0.3s;
-    }
-    
-    img.loaded {
-        filter: blur(0);
-    }
-    
-    /* Mobile menu */
-    body.mobile-menu-open {
-        overflow: hidden;
-    }
-`;
-document.head.appendChild(style);
+})(jQuery);
