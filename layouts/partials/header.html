@@ -1,30 +1,147 @@
 <header class="site-header">
-  <!-- Main Header -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <div class="contact-info d-flex align-items-center">
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <a href="{{ "/contact#map" | relURL }}">How to Find Us</a>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-comment-dots"></i>
+              <a href="{{ "/contact#feedback" | relURL }}">Give Us Feedback</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 text-center">
+          {{ if .Site.Params.emergency_phone }}
+          <div class="emergency-contact">
+            <i class="fas fa-phone-alt"></i>
+            <strong>Emergency:</strong>
+            <a href="tel:{{ .Site.Params.emergency_phone }}">{{ .Site.Params.emergency_phone }}</a>
+          </div>
+          {{ end }}
+        </div>
+        <div class="col-md-4 text-md-end">
+          {{ if .Site.Params.email }}
+          <div class="contact-item d-inline-flex">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Main Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
       <!-- Logo -->
       <a class="navbar-brand" href="{{ .Site.BaseURL }}">
         {{ if .Site.Params.logo }}
-        <img src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Params.name }}" height="50">
+        <img src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }}" height="50">
         {{ else }}
-        <span class="fw-bold text-primary fs-3">{{ .Site.Params.name }}</span>
+        <i class="fas fa-heartbeat me-2"></i>
+        <span>{{ .Site.Title }}</span>
         {{ end }}
       </a>
       
       <!-- Mobile Toggle -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       
-      <!-- Navigation -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        {{ partial "navigation.html" . }}
+      <!-- Navigation Links -->
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav mx-auto">
+          {{ $currentPage := . }}
+          <li class="nav-item">
+            <a class="nav-link{{ if .IsHome }} active{{ end }}" href="{{ .Site.BaseURL }}">
+              <i class="fas fa-home me-1"></i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{{ if eq .Section "about" }} active{{ end }}" href="{{ "/about" | relURL }}">
+              <i class="fas fa-info-circle me-1"></i> About
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle{{ if eq .Section "services" }} active{{ end }}" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-stethoscope me-1"></i> Services
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+              <li><a class="dropdown-item" href="{{ "/services" | relURL }}">All Services</a></li>
+              <li><hr class="dropdown-divider"></li>
+              {{ range first 6 (where .Site.RegularPages "Section" "services") }}
+              <li>
+                <a class="dropdown-item" href="{{ .Permalink }}">
+                  {{ if .Params.icon }}<i class="{{ .Params.icon }} me-2"></i>{{ end }}
+                  {{ .Title }}
+                </a>
+              </li>
+              {{ end }}
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{{ if eq .Section "contact" }} active{{ end }}" href="{{ "/contact" | relURL }}">
+              <i class="fas fa-envelope me-1"></i> Contact
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{{ if eq .Section "blog" }} active{{ end }}" href="{{ "/blog" | relURL }}">
+              <i class="fas fa-newspaper me-1"></i> Blog
+            </a>
+          </li>
+        </ul>
         
-        <!-- CTA Button -->
-        <div class="navbar-nav ms-auto">
-          <a href="{{ "/contact" | relURL }}" class="btn btn-primary">Book Appointment</a>
-        </div>
+        <!-- Search Bar -->
+        <form class="d-flex search-form" action="{{ "/search" | relURL }}" method="get">
+          <div class="input-group">
+            <input class="form-control" type="search" placeholder="Search..." name="q" aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </nav>
+  
+  <!-- Contact Bar -->
+  <div class="contact-bar">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          {{ if .Site.Params.phone }}
+          <div class="contact-info">
+            <i class="fas fa-phone-alt"></i>
+            <strong>Call Us:</strong>
+            <a href="tel:{{ .Site.Params.phone }}">{{ .Site.Params.phone }}</a>
+          </div>
+          {{ end }}
+        </div>
+        <div class="col-md-4 text-center">
+          {{ if .Site.Params.business_hours }}
+          <div class="contact-info">
+            <i class="fas fa-clock"></i>
+            <strong>Opening Hours:</strong>
+            <span>Mon-Fri: {{ .Site.Params.business_hours.monday | default "9:00 AM - 6:00 PM" }} | Sat: {{ .Site.Params.business_hours.saturday | default "9:00 AM - 2:00 PM" }}</span>
+          </div>
+          {{ end }}
+        </div>
+        <div class="col-md-4 text-md-end">
+          {{ if .Site.Params.address }}
+          <div class="contact-info">
+            <i class="fas fa-map-marker-alt"></i>
+            <strong>Address:</strong>
+            <span>{{ .Site.Params.address }}</span>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
 </header>

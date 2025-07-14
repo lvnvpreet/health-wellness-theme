@@ -1,38 +1,132 @@
 <div class="service-card {{ if .Params.image }}has-image{{ else }}no-image{{ end }}">
-  <div class="card h-100">
+  <div class="card h-100 shadow-sm hover-lift">
     {{ if .Params.image }}
-    <div class="card-img-top">
+    <div class="card-img-top position-relative overflow-hidden">
       <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="img-fluid">
+      <div class="card-img-overlay">
+        <span class="service-category badge bg-primary">{{ .Params.category | default "Healthcare" }}</span>
+      </div>
     </div>
     {{ end }}
     
-    <div class="card-body">
+    <div class="card-body text-center">
       {{ if .Params.icon }}
       <div class="service-icon mb-3">
-        <i class="{{ .Params.icon }} text-primary"></i>
+        <i class="{{ .Params.icon }}"></i>
       </div>
       {{ end }}
       
       <h5 class="card-title">{{ .Title }}</h5>
-      <p class="card-text">{{ .Summary | default .Params.description | truncate 120 }}</p>
+      <p class="card-text text-muted">{{ .Summary | default .Params.description | truncate 120 }}</p>
       
-      {{ if .Params.price }}
-      <div class="service-price mb-2">
-        <span class="price-label">Starting from:</span>
-        <span class="price">{{ .Params.price }}</span>
+      <div class="service-details mb-3">
+        {{ if .Params.price }}
+        <div class="service-price">
+          <span class="price-label text-muted small">Starting from</span>
+          <span class="price text-primary h4 d-block">{{ .Params.price }}</span>
+        </div>
+        {{ end }}
+        
+        {{ if .Params.duration }}
+        <div class="service-duration text-muted small mt-2">
+          <i class="fas fa-clock me-1"></i>
+          <span>{{ .Params.duration }}</span>
+        </div>
+        {{ end }}
       </div>
-      {{ end }}
       
-      {{ if .Params.duration }}
-      <div class="service-duration mb-2">
-        <i class="fas fa-clock text-muted"></i>
-        <span>{{ .Params.duration }}</span>
-      </div>
+      {{ if .Params.features }}
+      <ul class="service-features list-unstyled text-start small mb-3">
+        {{ range first 3 .Params.features }}
+        <li class="mb-1">
+          <i class="fas fa-check text-success me-2"></i>
+          {{ . }}
+        </li>
+        {{ end }}
+      </ul>
       {{ end }}
     </div>
     
-    <div class="card-footer bg-transparent">
-      <a href="{{ .Permalink }}" class="btn btn-primary w-100">Learn More</a>
+    <div class="card-footer bg-transparent border-0">
+      <a href="{{ .Permalink }}" class="btn btn-primary w-100">
+        Learn More <i class="fas fa-arrow-right ms-2"></i>
+      </a>
     </div>
   </div>
 </div>
+
+<style>
+/* Service Card Enhancements */
+.service-card .hover-lift {
+  transition: all var(--transition-base);
+}
+
+.service-card .hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl) !important;
+}
+
+.service-card .card-img-overlay {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
+  padding: var(--spacing-md);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.service-card .service-category {
+  font-size: 0.75rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.service-card.no-image .service-icon {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card.no-image .service-icon::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+  animation: service-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes service-shimmer {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+}
+
+.service-card.no-image .service-icon i {
+  font-size: 2rem;
+  color: var(--white);
+  position: relative;
+  z-index: 1;
+}
+
+.service-card .service-price {
+  padding: var(--spacing-md) 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.service-card .service-features li {
+  padding-left: var(--spacing-sm);
+}
+
+.service-card .card-footer {
+  padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+}
+</style>

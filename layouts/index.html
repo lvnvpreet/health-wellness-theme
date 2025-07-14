@@ -7,21 +7,23 @@
   <section class="services-section py-5">
     <div class="container">
       <div class="row">
-        <div class="col-12 text-center mb-5">
+        <div class="col-12 text-center mb-5" data-aos="fade-up">
           <h2 class="section-title">Our Services</h2>
-          <p class="section-subtitle">Comprehensive healthcare solutions for you and your family</p>
+          <p class="section-subtitle">Comprehensive healthcare solutions tailored to your needs</p>
         </div>
       </div>
-      <div class="row">
+      <div class="row services-grid">
         {{ range first 6 (where .Site.RegularPages "Section" "services") }}
-        <div class="col-lg-4 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ mul 100 .Ordinal }}">
           {{ partial "components/service-card.html" . }}
         </div>
         {{ end }}
       </div>
       <div class="row">
-        <div class="col-12 text-center">
-          <a href="{{ "/services" | relURL }}" class="btn btn-primary">View All Services</a>
+        <div class="col-12 text-center" data-aos="fade-up">
+          <a href="{{ "/services" | relURL }}" class="btn btn-primary btn-lg">
+            View All Services <i class="fas fa-arrow-right ms-2"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -31,40 +33,130 @@
   <section class="about-section py-5 bg-light">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-lg-6">
-          <h2>About Our Practice</h2>
-          <p class="lead">{{ .Site.Params.aboutText | default "We are committed to providing exceptional healthcare services with a personal touch. Our experienced team uses the latest technology and techniques to ensure the best possible outcomes for our patients." }}</p>
-          <a href="{{ "/about" | relURL }}" class="btn btn-outline-primary">Learn More</a>
+        <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+          <div class="about-image-wrapper">
+            {{ if .Site.Params.aboutImage }}
+            <img src="{{ .Site.Params.aboutImage | relURL }}" alt="About Us" class="img-fluid rounded shadow">
+            {{ else }}
+            <div class="about-image-placeholder rounded shadow">
+              <i class="fas fa-hospital"></i>
+              <div class="floating-elements">
+                <div class="element element-1"><i class="fas fa-heartbeat"></i></div>
+                <div class="element element-2"><i class="fas fa-stethoscope"></i></div>
+                <div class="element element-3"><i class="fas fa-user-md"></i></div>
+              </div>
+            </div>
+            {{ end }}
+          </div>
         </div>
-        <div class="col-lg-6">
-          <img src="{{ .Site.Params.aboutImage | default "/images/about/dental-office.jpg" | relURL }}" alt="About Us" class="img-fluid rounded">
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="about-content">
+            <h2 class="section-title text-start">About Our Practice</h2>
+            <p class="lead mb-4">{{ .Site.Params.aboutText | default "We are committed to providing exceptional healthcare services with a personal touch. Our experienced team uses the latest technology and techniques to ensure the best possible outcomes for our patients." }}</p>
+            <div class="about-features">
+              <div class="feature-item mb-3">
+                <i class="fas fa-check-circle text-primary me-2"></i>
+                <span>State-of-the-art medical equipment</span>
+              </div>
+              <div class="feature-item mb-3">
+                <i class="fas fa-check-circle text-primary me-2"></i>
+                <span>Experienced healthcare professionals</span>
+              </div>
+              <div class="feature-item mb-3">
+                <i class="fas fa-check-circle text-primary me-2"></i>
+                <span>Personalized treatment plans</span>
+              </div>
+              <div class="feature-item mb-4">
+                <i class="fas fa-check-circle text-primary me-2"></i>
+                <span>Comfortable and caring environment</span>
+              </div>
+            </div>
+            <a href="{{ "/about" | relURL }}" class="btn btn-primary">
+              Learn More About Us <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
   
+  <!-- Why Choose Us Section -->
+  <section class="why-choose-section py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5" data-aos="fade-up">
+          <h2 class="section-title">Why Choose Us</h2>
+          <p class="section-subtitle">What makes us different from other healthcare providers</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="feature-box text-center">
+            <div class="feature-icon mx-auto mb-3">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <h4>Expert Team</h4>
+            <p class="text-muted">Board-certified physicians with years of experience in their specialties</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="feature-box text-center">
+            <div class="feature-icon mx-auto mb-3">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h4>Convenient Hours</h4>
+            <p class="text-muted">Flexible scheduling including evenings and weekends for your convenience</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="feature-box text-center">
+            <div class="feature-icon mx-auto mb-3">
+              <i class="fas fa-hospital"></i>
+            </div>
+            <h4>Modern Facility</h4>
+            <p class="text-muted">State-of-the-art equipment and comfortable environment for all patients</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="400">
+          <div class="feature-box text-center">
+            <div class="feature-icon mx-auto mb-3">
+              <i class="fas fa-heart"></i>
+            </div>
+            <h4>Patient-Centered</h4>
+            <p class="text-muted">Personalized care plans tailored to each patient's unique needs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Stats Section -->
+  {{ partial "components/stats-section.html" . }}
+  
   <!-- Team Section -->
   {{ if .Site.RegularPages }}
   {{ $teamPages := where .Site.RegularPages "Section" "team" }}
   {{ if $teamPages }}
-  <section class="team-section py-5">
+  <section class="team-section py-5 bg-light">
     <div class="container">
       <div class="row">
-        <div class="col-12 text-center mb-5">
+        <div class="col-12 text-center mb-5" data-aos="fade-up">
           <h2 class="section-title">Meet Our Team</h2>
           <p class="section-subtitle">Experienced professionals dedicated to your health</p>
         </div>
       </div>
       <div class="row">
         {{ range first 4 $teamPages }}
-        <div class="col-lg-3 col-md-6 mb-4">
+        <div class="col-lg-3 col-md-6 mb-4" data-aos="flip-left" data-aos-delay="{{ mul 100 .Ordinal }}">
           {{ partial "components/team-card.html" . }}
         </div>
         {{ end }}
       </div>
       <div class="row">
-        <div class="col-12 text-center">
-          <a href="{{ "/team" | relURL }}" class="btn btn-primary">Meet Our Full Team</a>
+        <div class="col-12 text-center" data-aos="fade-up">
+          <a href="{{ "/team" | relURL }}" class="btn btn-outline-primary">
+            Meet Our Full Team <i class="fas fa-arrow-right ms-2"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -76,18 +168,66 @@
   {{ if .Site.RegularPages }}
   {{ $testimonialPages := where .Site.RegularPages "Section" "testimonials" }}
   {{ if $testimonialPages }}
-  <section class="testimonials-section py-5 bg-primary text-white">
+  <section class="testimonials-section py-5">
     <div class="container">
       <div class="row">
-        <div class="col-12 text-center mb-5">
-          <h2 class="section-title text-white">What Our Patients Say</h2>
-          <p class="section-subtitle text-white">Real stories from real patients</p>
+        <div class="col-12 text-center mb-5" data-aos="fade-up">
+          <h2 class="section-title">What Our Patients Say</h2>
+          <p class="section-subtitle">Real stories from real patients</p>
         </div>
       </div>
       <div class="row">
         {{ range first 3 $testimonialPages }}
-        <div class="col-lg-4 mb-4">
+        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="{{ mul 100 .Ordinal }}">
           {{ partial "components/testimonial-card.html" . }}
+        </div>
+        {{ end }}
+      </div>
+      <div class="row">
+        <div class="col-12 text-center" data-aos="fade-up">
+          <a href="{{ "/testimonials" | relURL }}" class="btn btn-outline-primary">
+            Read More Reviews <i class="fas fa-arrow-right ms-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+  {{ end }}
+  
+  <!-- FAQ Section -->
+  <section class="faq-section py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5" data-aos="fade-up">
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle">Find answers to common questions about our services</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 mx-auto" data-aos="fade-up">
+          {{ partial "components/faq-accordion.html" . }}
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Special Offers Section -->
+  {{ if .Site.RegularPages }}
+  {{ $offerPages := where .Site.RegularPages "Section" "offers" }}
+  {{ if $offerPages }}
+  <section class="offers-section py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5" data-aos="fade-up">
+          <h2 class="section-title">Special Offers</h2>
+          <p class="section-subtitle">Take advantage of our current promotions</p>
+        </div>
+      </div>
+      <div class="row">
+        {{ range first 3 $offerPages }}
+        <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="{{ mul 100 .Ordinal }}">
+          {{ partial "components/offer-card.html" . }}
         </div>
         {{ end }}
       </div>
@@ -106,26 +246,164 @@
   <section class="blog-section py-5">
     <div class="container">
       <div class="row">
-        <div class="col-12 text-center mb-5">
+        <div class="col-12 text-center mb-5" data-aos="fade-up">
           <h2 class="section-title">Latest Health Tips</h2>
           <p class="section-subtitle">Stay informed with our latest articles and health advice</p>
         </div>
       </div>
-      <div class="row">
+      <div class="row blog-grid">
         {{ range first 3 $blogPages }}
-        <div class="col-lg-4 mb-4">
+        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="{{ mul 100 .Ordinal }}">
           {{ partial "components/blog-card.html" . }}
         </div>
         {{ end }}
       </div>
       <div class="row">
-        <div class="col-12 text-center">
-          <a href="{{ "/blog" | relURL }}" class="btn btn-primary">Read More Articles</a>
+        <div class="col-12 text-center" data-aos="fade-up">
+          <a href="{{ "/blog" | relURL }}" class="btn btn-primary">
+            Read More Articles <i class="fas fa-arrow-right ms-2"></i>
+          </a>
         </div>
       </div>
     </div>
   </section>
   {{ end }}
   {{ end }}
+  
+  <!-- Appointment Scheduling -->
+  <section class="appointment-section py-5 bg-light">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+          <h2 class="section-title text-start">Schedule Your Appointment</h2>
+          <p class="lead mb-4">Book your appointment online or give us a call. We're here to help you achieve optimal health.</p>
+          <div class="appointment-info">
+            <div class="info-item mb-3">
+              <i class="fas fa-phone-alt text-primary me-3"></i>
+              <span>Call us at <strong>{{ .Site.Params.phone }}</strong></span>
+            </div>
+            <div class="info-item mb-3">
+              <i class="fas fa-envelope text-primary me-3"></i>
+              <span>Email us at <strong>{{ .Site.Params.email }}</strong></span>
+            </div>
+            <div class="info-item mb-3">
+              <i class="fas fa-clock text-primary me-3"></i>
+              <span>Open Monday - Saturday</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="appointment-form-wrapper">
+            {{ partial "forms/appointment-form.html" . }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
+
+<style>
+/* Homepage Specific Styles */
+.about-image-wrapper {
+  position: relative;
+}
+
+.about-image-placeholder {
+  height: 400px;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-image-placeholder > i {
+  font-size: 6rem;
+  color: rgba(255, 255, 255, 0.2);
+  position: absolute;
+}
+
+.floating-elements {
+  position: absolute;
+  inset: 0;
+}
+
+.floating-elements .element {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 2rem;
+  animation: float-random 20s ease-in-out infinite;
+}
+
+.element-1 { top: 20%; left: 20%; animation-delay: 0s; }
+.element-2 { top: 60%; right: 20%; animation-delay: 5s; }
+.element-3 { bottom: 20%; left: 40%; animation-delay: 10s; }
+
+@keyframes float-random {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+.about-features .feature-item {
+  display: flex;
+  align-items: center;
+  font-weight: var(--font-weight-medium);
+}
+
+.feature-box {
+  padding: var(--spacing-xl);
+  height: 100%;
+  transition: all var(--transition-base);
+}
+
+.feature-box:hover {
+  transform: translateY(-10px);
+}
+
+.feature-box .feature-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 2rem;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+  transition: all var(--transition-base);
+}
+
+.feature-box:hover .feature-icon {
+  transform: rotate(360deg);
+}
+
+.appointment-form-wrapper {
+  background: var(--white);
+  padding: var(--spacing-2xl);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-xl);
+}
+
+/* AOS Animation Customization */
+[data-aos] {
+  transition-duration: 1000ms;
+}
+
+@media (max-width: 768px) {
+  .about-image-placeholder {
+    height: 300px;
+  }
+  
+  .feature-box {
+    padding: var(--spacing-lg);
+  }
+  
+  .appointment-form-wrapper {
+    padding: var(--spacing-lg);
+  }
+}
+</style>
 {{ end }}

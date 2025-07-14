@@ -1,97 +1,355 @@
-/* Flexible Theme Styles - Adaptive Design Based on Content */
+/* Flexible Theme Styles - Enhanced Adaptive Design */
 
-/* ===== GLOBAL ADAPTIVE UTILITIES ===== */
-
-/* Content-aware spacing */
+/* ===== CONTENT-AWARE SPACING SYSTEM ===== */
 .has-image {
-  --content-padding: 1.5rem;
-  --content-spacing: 2rem;
+  --adaptive-padding: var(--spacing-lg);
+  --adaptive-spacing: var(--spacing-xl);
+  --adaptive-radius: var(--border-radius-lg);
 }
 
 .no-image {
-  --content-padding: 2rem;
-  --content-spacing: 2.5rem;
+  --adaptive-padding: var(--spacing-xl);
+  --adaptive-spacing: var(--spacing-2xl);
+  --adaptive-radius: var(--border-radius-xl);
 }
 
-/* ===== ADVANCED HERO ADAPTATIONS ===== */
+/* ===== ENHANCED HERO ADAPTATIONS ===== */
 
-/* Hero section with patterns for no-image state */
+/* Hero without image - Medical pattern background */
+.hero-section.no-image {
+  position: relative;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+}
+
 .hero-section.no-image::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-image: 
-    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 1px, transparent 1px),
-    radial-gradient(circle at 40% 20%, rgba(255,255,255,0.1) 1px, transparent 1px),
-    radial-gradient(circle at 90% 80%, rgba(255,255,255,0.1) 1px, transparent 1px);
-  background-size: 50px 50px, 80px 80px, 120px 120px;
-  animation: float 20s ease-in-out infinite;
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(255,255,255,0.08) 0%, transparent 40%);
+  background-size: 600px 600px, 800px 800px, 400px 400px;
+  animation: medical-float 25s ease-in-out infinite;
   z-index: 0;
 }
 
-@keyframes float {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(10px, -10px) rotate(1deg); }
-  66% { transform: translate(-5px, 5px) rotate(-1deg); }
+.hero-section.no-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10 L30 50 M10 30 L50 30' stroke='rgba(255,255,255,0.05)' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+  z-index: 0;
 }
 
-.hero-section.no-image .hero-content {
+@keyframes medical-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-20px, -20px) scale(1.05); }
+  50% { transform: translate(20px, -10px) scale(0.95); }
+  75% { transform: translate(-10px, 10px) scale(1.02); }
+}
+
+/* ===== ENHANCED CARD ADAPTATIONS ===== */
+
+/* Service Cards - Medical theme for no-image */
+.service-card.no-image .card {
+  background: linear-gradient(135deg, var(--white) 0%, var(--light) 100%);
+  border: 2px solid transparent;
+  background-clip: padding-box;
   position: relative;
+}
+
+.service-card.no-image .card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+  border-radius: var(--adaptive-radius);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.service-card.no-image .card:hover::before {
+  opacity: 1;
+}
+
+.service-card.no-image .service-icon {
+  position: relative;
+  animation: icon-pulse 3s ease-in-out infinite;
+}
+
+@keyframes icon-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.service-card.no-image .card-body {
+  padding: var(--adaptive-padding);
+  text-align: center;
+}
+
+/* Team Cards - Professional medical styling */
+.team-card.no-image .no-photo {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.team-card.no-image .no-photo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
   z-index: 1;
 }
 
-/* ===== ADVANCED CARD ADAPTATIONS ===== */
+.team-card.no-image .no-photo i {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
 
-/* Service cards - enhanced no-image state */
-.service-card.no-image .card-body::before {
+.team-card.no-image .card-body {
+  background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
+  padding: var(--adaptive-padding);
+}
+
+/* Blog Cards - Content-focused design */
+.blog-card.no-image .card {
+  border-left: 5px solid transparent;
+  background: linear-gradient(135deg, var(--white) 0%, var(--light) 100%);
+  background-clip: padding-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-card.no-image .card::before {
   content: '';
   position: absolute;
+  left: 0;
   top: 0;
-  right: 0;
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(45deg, transparent, rgba(0, 123, 255, 0.05));
-  border-radius: 0 var(--border-radius) 0 100%;
-  pointer-events: none;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  transition: width var(--transition-base);
 }
 
-/* Team cards - enhanced animations */
-.team-card.has-image .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.15);
+.blog-card.no-image .card:hover::before {
+  width: 100%;
+  opacity: 0.05;
 }
 
-.team-card.no-image .card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 1rem 2rem rgba(0, 123, 255, 0.15);
-}
-
-/* Blog cards - enhanced typography for no-image */
 .blog-card.no-image .card-title a {
-  background: linear-gradient(135deg, var(--primary-color), #0056b3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
+  position: relative;
+  z-index: 1;
+  transition: all var(--transition-base);
 }
 
 .blog-card.no-image .card:hover .card-title a {
-  background: linear-gradient(135deg, #0056b3, var(--primary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary-dark);
 }
 
-/* ===== RESPONSIVE ADAPTATIONS ===== */
+/* Testimonial Cards - Elegant design */
+.testimonial-card.no-image .card {
+  background: linear-gradient(135deg, var(--light) 0%, rgba(16, 185, 129, 0.05) 100%);
+  border: 2px solid var(--primary-light);
+  position: relative;
+}
 
-/* Mobile-specific adaptations */
+.testimonial-card.no-image .testimonial-avatar-placeholder {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card.no-image .testimonial-avatar-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { opacity: 0.5; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+/* Offer Cards - Promotional emphasis */
+.offer-card.no-image .card {
+  background: linear-gradient(135deg, var(--warning-color) 0%, #f59e0b 100%);
+  color: var(--white);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.offer-card.no-image .card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255,255,255,0.05) 10px,
+    rgba(255,255,255,0.05) 20px
+  );
+  animation: stripe-move 20s linear infinite;
+}
+
+@keyframes stripe-move {
+  from { transform: translate(0, 0); }
+  to { transform: translate(50px, 50px); }
+}
+
+.offer-card.no-image .card-body {
+  position: relative;
+  z-index: 1;
+  padding: var(--adaptive-padding);
+}
+
+.offer-card.no-image .card-title,
+.offer-card.no-image .card-text {
+  color: var(--white) !important;
+}
+
+.offer-card.no-image .offer-pricing {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  margin: var(--spacing-md) 0;
+}
+
+/* ===== ADAPTIVE TYPOGRAPHY ===== */
+
+/* Dynamic font sizing for no-image cards */
+.no-image .card-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: var(--font-weight-bold);
+}
+
+.no-image .card-text {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.7;
+}
+
+/* ===== ENHANCED ANIMATIONS ===== */
+
+/* Smooth entrance animations */
+.card {
+  animation: card-enter 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger animation for grid items */
+.services-grid .card:nth-child(1) { animation-delay: 0.1s; }
+.services-grid .card:nth-child(2) { animation-delay: 0.2s; }
+.services-grid .card:nth-child(3) { animation-delay: 0.3s; }
+.services-grid .card:nth-child(4) { animation-delay: 0.4s; }
+.services-grid .card:nth-child(5) { animation-delay: 0.5s; }
+.services-grid .card:nth-child(6) { animation-delay: 0.6s; }
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+
+/* Focus styles for better keyboard navigation */
+.card:focus-within {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Skip animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .hero-section.no-image::before,
+  .team-card.no-image .no-photo::before {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .no-image .card {
+    border: 2px solid var(--dark);
+  }
+  
+  .service-card.no-image .service-icon,
+  .team-card.no-image .no-photo {
+    border: 2px solid var(--dark);
+  }
+}
+
+/* ===== DARK MODE ADAPTATIONS ===== */
+
+@media (prefers-color-scheme: dark) {
+  .has-image {
+    --adaptive-padding: var(--spacing-xl);
+  }
+  
+  .no-image .card {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--black) 100%);
+    color: var(--light);
+  }
+  
+  .service-card.no-image .card,
+  .team-card.no-image .card-body,
+  .blog-card.no-image .card {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  }
+  
+  .testimonial-card.no-image .card {
+    background: linear-gradient(135deg, #1e293b 0%, rgba(16, 185, 129, 0.1) 100%);
+    border-color: var(--primary-dark);
+  }
+  
+  .blog-card.no-image .card::before {
+    background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+  }
+}
+
+/* ===== MOBILE OPTIMIZATIONS ===== */
+
 @media (max-width: 768px) {
+  .has-image,
+  .no-image {
+    --adaptive-padding: var(--spacing-md);
+    --adaptive-spacing: var(--spacing-lg);
+  }
+  
   .hero-section.no-image {
-    min-height: 400px;
-    padding: 2rem 0;
+    min-height: 450px;
+  }
+  
+  .hero-section.no-image::before {
+    background-size: 400px 400px, 600px 600px, 300px 300px;
   }
   
   .service-card.no-image .service-icon {
@@ -104,174 +362,84 @@
   }
   
   .team-card.no-image .no-photo {
-    height: 150px;
-    font-size: 2.5rem;
-  }
-  
-  .team-card.has-image .team-photo img {
-    height: 200px;
-  }
-  
-  .blog-card.no-image .card-body {
-    padding: 1.5rem;
+    height: 180px;
+    font-size: 3rem;
   }
   
   .testimonial-card.no-image .testimonial-avatar-placeholder {
     width: 50px;
     height: 50px;
-    font-size: 1rem;
-  }
-  
-  .offer-card.no-image .card-body::before {
-    font-size: 2rem;
+    font-size: 1.125rem;
   }
 }
 
-/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .service-card.no-image .service-icon {
-    background: var(--dark-color);
-    border: 2px solid var(--primary-color);
+@media (max-width: 576px) {
+  .hero-section.no-image::after {
+    background-size: 40px 40px;
   }
   
-  .team-card.no-image .no-photo {
-    background: var(--dark-color);
-    border: 2px solid var(--primary-color);
-  }
-  
-  .hero-section.no-image {
-    background: var(--dark-color);
-    color: white;
-  }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  .hero-section.no-image::before {
+  .card {
     animation: none;
   }
   
-  .team-card.no-image .no-photo::before {
-    animation: none;
+  .offer-card.no-image .card-body {
+    padding: var(--spacing-md);
   }
-  
-  .service-card .card,
-  .team-card .card,
-  .blog-card .card,
-  .testimonial-card .card,
-  .offer-card .card {
-    transition: none;
-  }
-  
-  .service-card .card:hover,
-  .team-card .card:hover,
-  .blog-card .card:hover {
-    transform: none;
-  }
-}
-
-/* ===== PRINT STYLES ===== */
-
-@media print {
-  .hero-section.no-image {
-    background: white !important;
-    color: black !important;
-    min-height: auto;
-  }
-  
-  .service-card.no-image .service-icon,
-  .team-card.no-image .no-photo,
-  .testimonial-card.no-image .testimonial-avatar-placeholder {
-    background: white !important;
-    border: 1px solid black !important;
-    color: black !important;
-  }
-  
-  .offer-card.no-image .card {
-    background: white !important;
-    border: 1px solid black !important;
-    color: black !important;
-  }
-}
-
-/* ===== DARK MODE SUPPORT ===== */
-
-@media (prefers-color-scheme: dark) {
-  .hero-section.no-image {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  }
-  
-  .service-card.no-image .card-body,
-  .team-card.no-image .card-body,
-  .blog-card.no-image .card-body {
-    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
-    color: white;
-  }
-  
-  .testimonial-card.no-image .card {
-    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
-    color: white;
-  }
-  
-  .blog-card.no-image {
-    border-left-color: var(--primary-color);
-  }
-}
-
-/* ===== PERFORMANCE OPTIMIZATIONS ===== */
-
-/* GPU acceleration for smooth animations */
-.service-card .card,
-.team-card .card,
-.blog-card .card,
-.testimonial-card .card,
-.offer-card .card {
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
-/* Lazy loading image placeholder */
-.image-placeholder {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: loading 2s infinite;
-}
-
-@keyframes loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
 }
 
 /* ===== UTILITY CLASSES ===== */
 
-/* Content-aware utilities */
-.adaptive-padding {
-  padding: var(--content-padding);
-}
-
-.adaptive-spacing {
-  margin-bottom: var(--content-spacing);
-}
-
-/* Image fallback utilities */
+/* Adaptive image placeholders */
 .img-fallback {
-  background: linear-gradient(45deg, var(--light-color), #f8f9fa);
+  background: linear-gradient(135deg, var(--light) 0%, var(--medium-gray) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--secondary-color);
-  font-size: 2rem;
-  min-height: 200px;
+  position: relative;
+  overflow: hidden;
 }
 
-.img-fallback.small {
-  min-height: 100px;
-  font-size: 1.5rem;
+.img-fallback::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(0,0,0,0.05)' stroke-width='1'%3E%3Cpath d='M20 0 L20 40 M0 20 L40 20'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 40px 40px;
 }
 
-.img-fallback.large {
-  min-height: 300px;
-  font-size: 3rem;
+.img-fallback i {
+  font-size: 2.5rem;
+  opacity: 0.3;
+  position: relative;
+  z-index: 1;
+}
+
+/* Skeleton loading states */
+.skeleton {
+  background: linear-gradient(90deg, var(--light) 25%, var(--medium-gray) 50%, var(--light) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Enhanced focus indicators */
+.focusable:focus {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

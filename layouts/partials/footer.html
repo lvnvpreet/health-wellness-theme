@@ -1,35 +1,74 @@
-<footer class="site-footer bg-dark text-white py-5">
+<footer class="site-footer">
   <div class="container">
     <div class="row">
-      <!-- About Section -->
+      <!-- Company Info -->
       <div class="col-lg-4 mb-4">
         <div class="footer-section">
-          <h5>{{ .Site.Title }}</h5>
-          <p>{{ .Site.Params.description | default "Professional healthcare services with a personal touch. We are committed to providing exceptional care for you and your family." }}</p>
+          <div class="footer-brand mb-3">
+            {{ if .Site.Params.logo }}
+            <img src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }}" height="40" class="mb-3">
+            {{ else }}
+            <h5>
+              <i class="fas fa-heartbeat me-2"></i>
+              {{ .Site.Title }}
+            </h5>
+            {{ end }}
+          </div>
+          <p class="footer-description">{{ .Site.Params.description | default "Professional healthcare services with a personal touch. We are committed to providing exceptional care for you and your family." }}</p>
           
           <!-- Social Links -->
           <div class="social-links">
-            {{ if .Site.Params.social.facebook }}
-            <a href="{{ .Site.Params.social.facebook }}" class="text-white me-3">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            {{ end }}
-            {{ if .Site.Params.social.twitter }}
-            <a href="{{ .Site.Params.social.twitter }}" class="text-white me-3">
-              <i class="fab fa-twitter"></i>
-            </a>
-            {{ end }}
-            {{ if .Site.Params.social.instagram }}
-            <a href="{{ .Site.Params.social.instagram }}" class="text-white me-3">
-              <i class="fab fa-instagram"></i>
-            </a>
-            {{ end }}
-            {{ if .Site.Params.social.linkedin }}
-            <a href="{{ .Site.Params.social.linkedin }}" class="text-white">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
+            {{ if .Site.Params.social }}
+              {{ if .Site.Params.social.facebook }}
+              <a href="{{ .Site.Params.social.facebook }}" target="_blank" rel="noopener" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              {{ end }}
+              {{ if .Site.Params.social.twitter }}
+              <a href="{{ .Site.Params.social.twitter }}" target="_blank" rel="noopener" title="Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              {{ end }}
+              {{ if .Site.Params.social.instagram }}
+              <a href="{{ .Site.Params.social.instagram }}" target="_blank" rel="noopener" title="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              {{ end }}
+              {{ if .Site.Params.social.linkedin }}
+              <a href="{{ .Site.Params.social.linkedin }}" target="_blank" rel="noopener" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              {{ end }}
+              {{ if .Site.Params.social.youtube }}
+              <a href="{{ .Site.Params.social.youtube }}" target="_blank" rel="noopener" title="YouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+              {{ end }}
             {{ end }}
           </div>
+        </div>
+      </div>
+      
+      <!-- Services -->
+      <div class="col-lg-2 col-md-6 mb-4">
+        <div class="footer-section">
+          <h5>Our Services</h5>
+          <ul class="footer-links">
+            {{ range first 5 (where .Site.RegularPages "Section" "services") }}
+            <li>
+              <a href="{{ .Permalink }}">
+                <i class="fas fa-chevron-right me-1"></i>
+                {{ .Title }}
+              </a>
+            </li>
+            {{ end }}
+            <li>
+              <a href="{{ "/services" | relURL }}">
+                <i class="fas fa-chevron-right me-1"></i>
+                View All Services
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
       
@@ -38,85 +77,147 @@
         <div class="footer-section">
           <h5>Quick Links</h5>
           <ul class="footer-links">
-            <li><a href="{{ "/" | relURL }}">Home</a></li>
-            <li><a href="{{ "/about" | relURL }}">About</a></li>
-            <li><a href="{{ "/services" | relURL }}">Services</a></li>
-            <li><a href="{{ "/team" | relURL }}">Our Team</a></li>
-            <li><a href="{{ "/contact" | relURL }}">Contact</a></li>
+            <li>
+              <a href="{{ "/" | relURL }}">
+                <i class="fas fa-chevron-right me-1"></i>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="{{ "/about" | relURL }}">
+                <i class="fas fa-chevron-right me-1"></i>
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="{{ "/team" | relURL }}">
+                <i class="fas fa-chevron-right me-1"></i>
+                Our Team
+              </a>
+            </li>
+            <li>
+              <a href="{{ "/blog" | relURL }}">
+                <i class="fas fa-chevron-right me-1"></i>
+                Health Blog
+              </a>
+            </li>
+            <li>
+              <a href="{{ "/contact" | relURL }}">
+                <i class="fas fa-chevron-right me-1"></i>
+                Contact Us
+              </a>
+            </li>
+            <li>
+              <a href="{{ "/appointments" | relURL }}">
+                <i class="fas fa-chevron-right me-1"></i>
+                Book Appointment
+              </a>
+            </li>
           </ul>
         </div>
       </div>
       
-      <!-- Services -->
-      <div class="col-lg-2 col-md-6 mb-4">
-        <div class="footer-section">
-          <h5>Services</h5>
-          <ul class="footer-links">
-            {{ range first 5 (where .Site.RegularPages "Section" "services") }}
-            <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
-            {{ end }}
-          </ul>
-        </div>
-      </div>
-      
-      <!-- Contact Info -->
+      <!-- Contact & Newsletter -->
       <div class="col-lg-4 mb-4">
         <div class="footer-section">
-          <h5>Contact Information</h5>
-          {{ if .Site.Params.address }}
-          <div class="contact-item mb-2">
-            <i class="fas fa-map-marker-alt me-2"></i>
-            <span>{{ .Site.Params.address }}</span>
-          </div>
-          {{ end }}
+          <h5>Contact & Updates</h5>
           
-          {{ if .Site.Params.phone }}
-          <div class="contact-item mb-2">
-            <i class="fas fa-phone me-2"></i>
-            <a href="tel:{{ .Site.Params.phone }}" class="text-white">{{ .Site.Params.phone }}</a>
+          <!-- Contact Info -->
+          <div class="footer-contact mb-4">
+            {{ if .Site.Params.address }}
+            <div class="contact-item mb-2">
+              <i class="fas fa-map-marker-alt me-2"></i>
+              <span>{{ .Site.Params.address }}</span>
+            </div>
+            {{ end }}
+            
+            {{ if .Site.Params.phone }}
+            <div class="contact-item mb-2">
+              <i class="fas fa-phone me-2"></i>
+              <a href="tel:{{ .Site.Params.phone }}">{{ .Site.Params.phone }}</a>
+            </div>
+            {{ end }}
+            
+            {{ if .Site.Params.email }}
+            <div class="contact-item mb-3">
+              <i class="fas fa-envelope me-2"></i>
+              <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
+            </div>
+            {{ end }}
           </div>
-          {{ end }}
           
-          {{ if .Site.Params.email }}
-          <div class="contact-item mb-2">
-            <i class="fas fa-envelope me-2"></i>
-            <a href="mailto:{{ .Site.Params.email }}" class="text-white">{{ .Site.Params.email }}</a>
+          <!-- Newsletter -->
+          <div class="newsletter-signup">
+            <h6 class="mb-3">Subscribe to Our Newsletter</h6>
+            <p class="small mb-3">Get health tips and updates delivered to your inbox.</p>
+            <form class="newsletter-form" method="POST" action="#" netlify>
+              <div class="input-group">
+                <input type="email" class="form-control" placeholder="Your email address" name="email" required>
+                <button class="btn btn-primary" type="submit">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+              <div class="form-text mt-2">We respect your privacy. Unsubscribe anytime.</div>
+            </form>
           </div>
-          {{ end }}
-          
-          {{ if .Site.Params.emergency_phone }}
-          <div class="contact-item emergency">
-            <i class="fas fa-phone-square-alt me-2 text-danger"></i>
-            <span>Emergency: </span>
-            <a href="tel:{{ .Site.Params.emergency_phone }}" class="text-white fw-bold">{{ .Site.Params.emergency_phone }}</a>
-          </div>
-          {{ end }}
         </div>
       </div>
     </div>
     
     <!-- Bottom Bar -->
-    <div class="row border-top pt-4 mt-4">
-      <div class="col-md-6">
-        <p class="mb-0">
-          &copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved.
-        </p>
-      </div>
-      <div class="col-md-6 text-md-end">
-        <ul class="footer-legal">
-          <li><a href="{{ "/privacy" | relURL }}">Privacy Policy</a></li>
-          <li><a href="{{ "/terms" | relURL }}">Terms of Service</a></li>
-          <li><a href="{{ "/accessibility" | relURL }}">Accessibility</a></li>
-        </ul>
+    <div class="footer-bottom">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="mb-0">
+            &copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved.
+          </p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <ul class="footer-legal">
+            <li><a href="{{ "/privacy" | relURL }}">Privacy Policy</a></li>
+            <li><a href="{{ "/terms" | relURL }}">Terms of Service</a></li>
+            <li><a href="{{ "/accessibility" | relURL }}">Accessibility</a></li>
+            <li><a href="{{ "/sitemap" | relURL }}">Sitemap</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </footer>
 
 <!-- Back to Top Button -->
-<button id="back-to-top" class="btn btn-primary rounded-circle" title="Back to Top">
+<button id="back-to-top" class="btn btn-primary rounded-circle" title="Back to Top" aria-label="Back to Top">
   <i class="fas fa-chevron-up"></i>
 </button>
 
+<!-- Emergency Contact Float (Optional) -->
+{{ if .Site.Params.emergency_phone }}
+<div class="emergency-float d-none d-lg-block">
+  <a href="tel:{{ .Site.Params.emergency_phone }}" class="btn btn-danger rounded-pill">
+    <i class="fas fa-phone-alt me-2"></i>
+    Emergency: {{ .Site.Params.emergency_phone }}
+  </a>
+</div>
+{{ end }}
+
 <!-- JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ "js/vendor/jquery.min.js" | relURL }}"></script>
+<script src="{{ "js/main.js" | relURL }}"></script>
+<script src="{{ "js/flexible-theme.js" | relURL }}"></script>
+
+{{ if .Site.Params.googleAnalytics }}
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ .Site.Params.googleAnalytics }}');
+</script>
+{{ end }}
+
+<!-- Custom Footer Scripts -->
+{{ if .Site.Params.customFooterScripts }}
+{{ .Site.Params.customFooterScripts | safeHTML }}
+{{ end }}
