@@ -13,9 +13,9 @@
         </div>
       </div>
       <div class="row services-grid">
-        {{ range first 6 (where .Site.RegularPages "Section" "services") }}
-        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ mul 100 .Ordinal }}">
-          {{ partial "components/service-card.html" . }}
+        {{ range $index, $service := first 6 (where .Site.RegularPages "Section" "services") }}
+        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ mul 100 $index }}">
+          {{ partial "components/service-card.html" $service }}
         </div>
         {{ end }}
       </div>
@@ -146,9 +146,9 @@
         </div>
       </div>
       <div class="row">
-        {{ range first 4 $teamPages }}
-        <div class="col-lg-3 col-md-6 mb-4" data-aos="flip-left" data-aos-delay="{{ mul 100 .Ordinal }}">
-          {{ partial "components/team-card.html" . }}
+        {{ range $index, $member := first 4 $teamPages }}
+        <div class="col-lg-3 col-md-6 mb-4" data-aos="flip-left" data-aos-delay="{{ mul 100 $index }}">
+          {{ partial "components/team-card.html" $member }}
         </div>
         {{ end }}
       </div>
@@ -177,9 +177,9 @@
         </div>
       </div>
       <div class="row">
-        {{ range first 3 $testimonialPages }}
-        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="{{ mul 100 .Ordinal }}">
-          {{ partial "components/testimonial-card.html" . }}
+        {{ range $index, $testimonial := first 3 $testimonialPages }}
+        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="{{ mul 100 $index }}">
+          {{ partial "components/testimonial-card.html" $testimonial }}
         </div>
         {{ end }}
       </div>
@@ -225,9 +225,9 @@
         </div>
       </div>
       <div class="row">
-        {{ range first 3 $offerPages }}
-        <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="{{ mul 100 .Ordinal }}">
-          {{ partial "components/offer-card.html" . }}
+        {{ range $index, $offer := first 3 $offerPages }}
+        <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="{{ mul 100 $index }}">
+          {{ partial "components/offer-card.html" $offer }}
         </div>
         {{ end }}
       </div>
@@ -252,9 +252,9 @@
         </div>
       </div>
       <div class="row blog-grid">
-        {{ range first 3 $blogPages }}
-        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="{{ mul 100 .Ordinal }}">
-          {{ partial "components/blog-card.html" . }}
+        {{ range $index, $post := first 3 $blogPages }}
+        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="{{ mul 100 $index }}">
+          {{ partial "components/blog-card.html" $post }}
         </div>
         {{ end }}
       </div>
