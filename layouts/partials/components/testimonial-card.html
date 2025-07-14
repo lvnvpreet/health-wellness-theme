@@ -1,47 +1,238 @@
 <div class="testimonial-card {{ if .Params.image }}has-image{{ else }}no-image{{ end }}">
-  <div class="card h-100">
-    <div class="card-body">
+  <div class="card h-100 shadow-sm testimonial-card-inner">
+    <div class="card-body position-relative">
+      <!-- Quote Icon -->
+      <div class="quote-icon">
+        <i class="fas fa-quote-left"></i>
+      </div>
+      
+      <!-- Rating -->
       {{ if .Params.rating }}
       <div class="rating mb-3">
-        {{ range seq .Params.rating }}
+        {{ range seq (int .Params.rating) }}
         <i class="fas fa-star text-warning"></i>
         {{ end }}
-        {{ range seq (sub 5 .Params.rating) }}
+        {{ $remaining := sub 5 (int .Params.rating) }}
+        {{ range seq $remaining }}
         <i class="far fa-star text-warning"></i>
         {{ end }}
       </div>
       {{ end }}
       
-      <blockquote class="blockquote">
-        <p class="testimonial-content">{{ .Content | truncate 200 }}</p>
+      <!-- Testimonial Content -->
+      <blockquote class="testimonial-content mb-4">
+        <p class="mb-0">{{ .Content | truncate 200 | plainify }}</p>
       </blockquote>
       
-      <div class="testimonial-author mt-3">
-        <div class="d-flex align-items-center">
-          {{ if .Params.image }}
-          <img src="{{ .Params.image | relURL }}" alt="{{ .Params.patient | default .Title }}" class="testimonial-avatar rounded-circle me-3">
-          {{ else }}
-          <div class="testimonial-avatar-placeholder rounded-circle me-3">
-            {{ $firstLetter := substr (.Params.patient | default .Title) 0 1 | upper }}
-            {{ $firstLetter }}
+      <!-- Author Info -->
+      <div class="testimonial-author d-flex align-items-center">
+        {{ if .Params.image }}
+        <img src="{{ .Params.image | relURL }}" alt="{{ .Params.patient | default .Title }}" class="testimonial-avatar rounded-circle me-3">
+        {{ else }}
+        <div class="testimonial-avatar-placeholder rounded-circle me-3">
+          {{ $firstLetter := substr (.Params.patient | default .Title) 0 1 | upper }}
+          <span>{{ $firstLetter }}</span>
+        </div>
+        {{ end }}
+        
+        <div class="author-info">
+          <div class="patient-name fw-bold">{{ .Params.patient | default .Title }}</div>
+          {{ if or .Params.service .Params.location }}
+          <div class="patient-details text-muted small">
+            {{ if .Params.service }}
+            <span class="service-name">{{ .Params.service }}</span>
+            {{ end }}
+            {{ if and .Params.service .Params.location }}
+            <span class="mx-1">•</span>
+            {{ end }}
+            {{ if .Params.location }}
+            <span class="location">{{ .Params.location }}</span>
+            {{ end }}
           </div>
           {{ end }}
-          
-          <div>
-            <div class="patient-name fw-bold">{{ .Params.patient | default .Title }}</div>
-            {{ if .Params.service }}
-            <div class="service-name text-muted small">{{ .Params.service }}</div>
-            {{ end }}
-            {{ if .Date }}
-            <div class="testimonial-date text-muted small">{{ .Date.Format "January 2006" }}</div>
-            {{ end }}
+          {{ if .Date }}
+          <div class="testimonial-date text-muted small">
+            <i class="fas fa-calendar-check me-1"></i>
+            {{ .Date.Format "January 2006" }}
           </div>
+          {{ end }}
         </div>
       </div>
     </div>
     
-    <div class="card-footer bg-transparent">
-      <a href="{{ .Permalink }}" class="btn btn-outline-primary btn-sm">Read Full Review</a>
+    {{ if .Params.treatment }}
+    <div class="card-footer bg-light border-0">
+      <div class="treatment-info text-center">
+        <small class="text-muted">Treatment:</small>
+        <span class="badge bg-primary ms-2">{{ .Params.treatment }}</span>
+      </div>
     </div>
+    {{ end }}
   </div>
 </div>
+
+<style>
+/* Testimonial Card Enhancements */
+.testimonial-card-inner {
+  background: var(--white);
+  border: 2px solid var(--light);
+  transition: all var(--transition-base);
+  overflow: visible;
+}
+
+.testimonial-card-inner:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl) !important;
+  border-color: var(--primary-light);
+}
+
+.testimonial-card .quote-icon {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.testimonial-card .card-body {
+  padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-xl);
+}
+
+.testimonial-card .rating {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.testimonial-card .rating i {
+  font-size: 1rem;
+  transition: transform var(--transition-fast);
+}
+
+.testimonial-card:hover .rating i {
+  transform: scale(1.1);
+}
+
+.testimonial-card .rating i:nth-child(1) { transition-delay: 0s; }
+.testimonial-card .rating i:nth-child(2) { transition-delay: 0.05s; }
+.testimonial-card .rating i:nth-child(3) { transition-delay: 0.1s; }
+.testimonial-card .rating i:nth-child(4) { transition-delay: 0.15s; }
+.testimonial-card .rating i:nth-child(5) { transition-delay: 0.2s; }
+
+.testimonial-card .testimonial-content {
+  font-style: italic;
+  color: var(--dark-gray);
+  line-height: 1.6;
+  position: relative;
+  padding-left: var(--spacing-md);
+  border-left: 3px solid var(--primary-light);
+}
+
+/* Avatar Styles */
+.testimonial-card .testimonial-avatar {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: 3px solid var(--primary-light);
+  transition: all var(--transition-fast);
+}
+
+.testimonial-card:hover .testimonial-avatar {
+  transform: scale(1.1);
+  border-color: var(--primary-color);
+}
+
+.testimonial-card .testimonial-avatar-placeholder {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.testimonial-card .testimonial-avatar-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+  animation: avatar-glow 3s ease-in-out infinite;
+}
+
+@keyframes avatar-glow {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+.testimonial-card .author-info {
+  flex: 1;
+}
+
+.testimonial-card .patient-name {
+  color: var(--dark);
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.testimonial-card .patient-details {
+  margin-bottom: var(--spacing-xs);
+}
+
+.testimonial-card .treatment-info {
+  padding: var(--spacing-sm);
+}
+
+/* Special styling for featured testimonials */
+.testimonial-card.featured .testimonial-card-inner {
+  border-color: var(--primary-color);
+  position: relative;
+}
+
+.testimonial-card.featured .testimonial-card-inner::before {
+  content: 'Featured';
+  position: absolute;
+  top: 10px;
+  right: -30px;
+  background: var(--primary-color);
+  color: var(--white);
+  padding: var(--spacing-xs) var(--spacing-xl);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  transform: rotate(45deg);
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .testimonial-card .card-body {
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg);
+  }
+  
+  .testimonial-card .testimonial-content {
+    font-size: 0.9rem;
+  }
+  
+  .testimonial-card .testimonial-avatar,
+  .testimonial-card .testimonial-avatar-placeholder {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .testimonial-card .testimonial-avatar-placeholder {
+    font-size: 1.25rem;
+  }
+}
+</style>

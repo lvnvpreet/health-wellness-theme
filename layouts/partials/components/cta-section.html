@@ -1,20 +1,251 @@
-<section class="cta-section bg-primary text-white py-5">
-  <div class="container">
+<section class="cta-section">
+  <div class="cta-background">
+    <div class="cta-pattern"></div>
+  </div>
+  <div class="container position-relative">
     <div class="row align-items-center">
       <div class="col-lg-8">
-        <h2 class="cta-title">
-          {{ .Site.Params.cta_title | default "Ready to Take Care of Your Health?" }}
-        </h2>
-        <p class="cta-subtitle mb-0">
-          {{ .Site.Params.cta_subtitle | default "Schedule your appointment today and take the first step towards better health." }}
-        </p>
+        <div class="cta-content">
+          <h2 class="cta-title">
+            {{ .Site.Params.cta_title | default "Ready to Take the First Step Towards Better Health?" }}
+          </h2>
+          <p class="cta-subtitle mb-0">
+            {{ .Site.Params.cta_subtitle | default "Schedule your appointment today and experience compassionate, professional healthcare. Our team is here to help you achieve your wellness goals." }}
+          </p>
+          <div class="cta-features mt-4">
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Same-day appointments available</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Insurance accepted</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>New patients welcome</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-lg-4 text-lg-end">
-        <a href="{{ "/contact" | relURL }}" class="btn btn-light btn-lg">
-          <i class="fas fa-calendar-alt me-2"></i>
-          Book Appointment
-        </a>
+      <div class="col-lg-4 text-lg-end text-center mt-4 mt-lg-0">
+        <div class="cta-actions">
+          <a href="{{ "/contact" | relURL }}" class="btn btn-light btn-lg mb-3 d-block d-sm-inline-block">
+            <i class="fas fa-calendar-alt me-2"></i>
+            Book Appointment
+          </a>
+          <div class="cta-phone mt-3">
+            <small class="d-block text-white-50 mb-2">Or call us directly</small>
+            <a href="tel:{{ .Site.Params.phone }}" class="phone-number">
+              <i class="fas fa-phone-alt me-2"></i>
+              {{ .Site.Params.phone }}
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+/* CTA Section Styles */
+.cta-section {
+  position: relative;
+  padding: var(--spacing-3xl) 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+}
+
+.cta-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.cta-pattern {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(255,255,255,0.08) 0%, transparent 50%);
+  background-size: 50% 50%;
+  animation: cta-float 30s ease-in-out infinite;
+}
+
+@keyframes cta-float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-10px, -10px) rotate(1deg); }
+  66% { transform: translate(10px, -5px) rotate(-1deg); }
+}
+
+.cta-content {
+  position: relative;
+  z-index: 2;
+}
+
+.cta-title {
+  color: var(--white);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.2;
+}
+
+.cta-subtitle {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.cta-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+}
+
+.cta-features .feature-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+}
+
+.cta-features .feature-item i {
+  color: var(--white);
+  font-size: 1.125rem;
+}
+
+.cta-actions {
+  position: relative;
+  z-index: 2;
+}
+
+.cta-actions .btn-light {
+  background: var(--white);
+  color: var(--primary-color);
+  border: none;
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-base);
+}
+
+.cta-actions .btn-light:hover {
+  background: var(--light);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.cta-phone {
+  text-align: center;
+}
+
+.phone-number {
+  display: inline-block;
+  color: var(--white);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.phone-number::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--white);
+  transform: scaleX(0);
+  transition: transform var(--transition-fast);
+}
+
+.phone-number:hover {
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.phone-number:hover::after {
+  transform: scaleX(1);
+}
+
+/* Alternative CTA Design */
+.cta-section.alt-design {
+  background: var(--white);
+  position: relative;
+}
+
+.cta-section.alt-design::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-color) 100%);
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.cta-section.alt-design .cta-title,
+.cta-section.alt-design .cta-subtitle {
+  color: var(--dark);
+}
+
+.cta-section.alt-design .cta-features .feature-item {
+  color: var(--dark-gray);
+}
+
+.cta-section.alt-design .cta-features .feature-item i {
+  color: var(--primary-color);
+}
+
+.cta-section.alt-design .cta-actions .btn {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.cta-section.alt-design .phone-number {
+  color: var(--primary-dark);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .cta-section {
+    padding: var(--spacing-2xl) 0;
+  }
+  
+  .cta-features {
+    justify-content: center;
+    gap: var(--spacing-md);
+  }
+  
+  .cta-features .feature-item {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .cta-title {
+    font-size: 1.75rem;
+    text-align: center;
+  }
+  
+  .cta-subtitle {
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  .cta-features {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .phone-number {
+    font-size: 1.25rem;
+  }
+}</style>

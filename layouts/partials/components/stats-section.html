@@ -1,14 +1,14 @@
 {{ if .Site.Params.stats }}
-<section class="stats-section py-5 bg-light">
+<section class="stats-section py-5">
   <div class="container">
     <div class="row text-center">
       {{ range .Site.Params.stats }}
       <div class="col-lg-3 col-md-6 mb-4">
-        <div class="stat-item">
+        <div class="stat-item" data-aos="zoom-in">
           <div class="stat-icon">
-            <i class="{{ .icon }} text-primary"></i>
+            <i class="{{ .icon }}"></i>
           </div>
-          <div class="stat-number">{{ .number }}</div>
+          <div class="stat-number" data-count="{{ .number }}">0</div>
           <div class="stat-label">{{ .label }}</div>
         </div>
       </div>
@@ -17,49 +17,271 @@
   </div>
 </section>
 {{ else }}
-<section class="stats-section py-5 bg-light">
-  <div class="container">
+<section class="stats-section py-5">
+  <div class="stats-background"></div>
+  <div class="container position-relative">
     <div class="row text-center">
       <div class="col-lg-3 col-md-6 mb-4">
-        <div class="stat-item">
+        <div class="stat-item" data-aos="zoom-in" data-aos-delay="100">
           <div class="stat-icon">
-            <i class="fas fa-users text-primary"></i>
+            <i class="fas fa-users"></i>
           </div>
-          <div class="stat-number">5000+</div>
+          <div class="stat-number" data-count="5000">0</div>
+          <div class="stat-suffix">+</div>
           <div class="stat-label">Happy Patients</div>
+          <div class="stat-description">Trusted by thousands of families</div>
         </div>
       </div>
       
       <div class="col-lg-3 col-md-6 mb-4">
-        <div class="stat-item">
+        <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
           <div class="stat-icon">
-            <i class="fas fa-calendar-check text-primary"></i>
+            <i class="fas fa-user-md"></i>
           </div>
-          <div class="stat-number">15+</div>
-          <div class="stat-label">Years of Experience</div>
+          <div class="stat-number" data-count="25">0</div>
+          <div class="stat-suffix">+</div>
+          <div class="stat-label">Expert Doctors</div>
+          <div class="stat-description">Board-certified specialists</div>
         </div>
       </div>
       
       <div class="col-lg-3 col-md-6 mb-4">
-        <div class="stat-item">
+        <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
           <div class="stat-icon">
-            <i class="fas fa-award text-primary"></i>
+            <i class="fas fa-calendar-check"></i>
           </div>
-          <div class="stat-number">25+</div>
-          <div class="stat-label">Awards Won</div>
+          <div class="stat-number" data-count="15">0</div>
+          <div class="stat-suffix">+</div>
+          <div class="stat-label">Years of Service</div>
+          <div class="stat-description">Serving our community since 2009</div>
         </div>
       </div>
       
       <div class="col-lg-3 col-md-6 mb-4">
-        <div class="stat-item">
+        <div class="stat-item" data-aos="zoom-in" data-aos-delay="400">
           <div class="stat-icon">
-            <i class="fas fa-star text-primary"></i>
+            <i class="fas fa-star"></i>
           </div>
-          <div class="stat-number">4.9</div>
+          <div class="stat-number" data-count="49" data-decimal="true">0</div>
+          <div class="stat-suffix">/5</div>
           <div class="stat-label">Average Rating</div>
+          <div class="stat-description">Based on patient reviews</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 {{ end }}
+
+<style>
+/* Stats Section Styles */
+.stats-section {
+  position: relative;
+  background: linear-gradient(135deg, var(--light) 0%, rgba(16, 185, 129, 0.05) 100%);
+  overflow: hidden;
+}
+
+.stats-background {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
+  background-size: 600px 600px;
+  animation: stats-float 25s ease-in-out infinite;
+}
+
+@keyframes stats-float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-20px, -20px); }
+}
+
+.stat-item {
+  padding: var(--spacing-xl);
+  text-align: center;
+  position: relative;
+  transition: all var(--transition-base);
+}
+
+.stat-item:hover {
+  transform: translateY(-10px);
+}
+
+.stat-icon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto var(--spacing-lg);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: morph 8s ease-in-out infinite;
+  box-shadow: 0 15px 35px rgba(16, 185, 129, 0.3);
+}
+
+@keyframes morph {
+  0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+  25% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+  50% { border-radius: 30% 70% 70% 30% / 70% 30% 30% 70%; }
+  75% { border-radius: 70% 30% 30% 70% / 30% 70% 70% 30%; }
+}
+
+.stat-icon i {
+  font-size: 2.5rem;
+  color: var(--white);
+  position: relative;
+  z-index: 1;
+}
+
+.stat-item:hover .stat-icon {
+  animation-play-state: paused;
+  transform: scale(1.1);
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-color);
+  line-height: 1;
+  display: inline-block;
+  margin-bottom: var(--spacing-sm);
+}
+
+.stat-suffix {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary-dark);
+  margin-left: 0.25rem;
+}
+
+.stat-label {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--dark);
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat-description {
+  font-size: 0.875rem;
+  color: var(--secondary-color);
+  margin-top: var(--spacing-xs);
+}
+
+/* Animated Counter Effect */
+.stat-number.counting {
+  animation: count-pulse 0.5s ease-out;
+}
+
+@keyframes count-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Alternative Stat Design */
+.stats-section.alt-design {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.stats-section.alt-design .stat-icon {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.stats-section.alt-design .stat-icon i {
+  color: var(--white);
+}
+
+.stats-section.alt-design .stat-number,
+.stats-section.alt-design .stat-suffix {
+  color: var(--white);
+}
+
+.stats-section.alt-design .stat-label {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.stats-section.alt-design .stat-description {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stat-item {
+    padding: var(--spacing-lg);
+  }
+  
+  .stat-icon {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .stat-icon i {
+    font-size: 2rem;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+  }
+  
+  .stat-suffix {
+    font-size: 1.25rem;
+  }
+  
+  .stat-label {
+    font-size: 1.1rem;
+  }
+}
+</style>
+
+<script>
+// Counter Animation Script
+document.addEventListener('DOMContentLoaded', function() {
+  const counters = document.querySelectorAll('.stat-number');
+  const speed = 200; // Animation speed
+  
+  const animateCounter = (counter) => {
+    const target = parseInt(counter.getAttribute('data-count'));
+    const isDecimal = counter.getAttribute('data-decimal') === 'true';
+    const count = +counter.innerText;
+    const increment = target / speed;
+    
+    if (count < target) {
+      counter.innerText = Math.ceil(count + increment);
+      setTimeout(() => animateCounter(counter), 10);
+    } else {
+      if (isDecimal) {
+        counter.innerText = (target / 10).toFixed(1);
+      } else {
+        counter.innerText = target;
+      }
+      counter.classList.add('counting');
+    }
+  };
+  
+  // Intersection Observer for triggering animation
+  const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counter = entry.target;
+        animateCounter(counter);
+        observer.unobserve(counter);
+      }
+    });
+  }, observerOptions);
+  
+  counters.forEach(counter => {
+    observer.observe(counter);
+  });
+});
+</script>

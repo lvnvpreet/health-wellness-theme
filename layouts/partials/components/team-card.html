@@ -1,45 +1,199 @@
 <div class="team-card {{ if .Params.image }}has-image{{ else }}no-image{{ end }}">
-  <div class="card h-100">
-    <div class="team-photo">
+  <div class="card h-100 shadow-sm hover-lift">
+    <div class="team-photo position-relative">
       {{ if .Params.image }}
       <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="card-img-top">
+      <div class="team-overlay">
+        <div class="social-links">
+          {{ if .Params.linkedin }}
+          <a href="{{ .Params.linkedin }}" target="_blank" rel="noopener" class="social-link">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          {{ end }}
+          {{ if .Params.email }}
+          <a href="mailto:{{ .Params.email }}" class="social-link">
+            <i class="fas fa-envelope"></i>
+          </a>
+          {{ end }}
+          {{ if .Params.phone }}
+          <a href="tel:{{ .Params.phone }}" class="social-link">
+            <i class="fas fa-phone"></i>
+          </a>
+          {{ end }}
+        </div>
+      </div>
       {{ else }}
       <div class="no-photo">
+        {{ $initials := "" }}
+        {{ $nameParts := split .Title " " }}
+        {{ range $index, $part := $nameParts }}
+          {{ if lt $index 2 }}
+            {{ $initials = printf "%s%s" $initials (substr $part 0 1 | upper) }}
+          {{ end }}
+        {{ end }}
+        <div class="initials">{{ $initials }}</div>
         <i class="fas fa-user-md"></i>
       </div>
       {{ end }}
     </div>
     
     <div class="card-body text-center">
-      <h5 class="card-title">{{ .Title }}</h5>
+      <h5 class="card-title mb-1">{{ .Title }}</h5>
       
       {{ if .Params.position }}
-      <p class="team-position text-primary">{{ .Params.position }}</p>
+      <p class="team-position text-primary mb-2">{{ .Params.position }}</p>
       {{ end }}
       
       {{ if .Params.credentials }}
-      <p class="team-credentials text-muted">{{ .Params.credentials }}</p>
+      <p class="team-credentials text-muted small mb-3">{{ .Params.credentials }}</p>
       {{ end }}
       
       {{ if .Params.specialties }}
       <div class="team-specialties mb-3">
         {{ range first 3 .Params.specialties }}
-        <span class="badge bg-light text-dark">{{ . }}</span>
+        <span class="badge bg-light text-dark me-1 mb-1">{{ . }}</span>
         {{ end }}
       </div>
       {{ end }}
       
-      <p class="card-text">{{ .Summary | truncate 100 }}</p>
+      <p class="card-text small text-muted">{{ .Summary | truncate 100 }}</p>
       
       {{ if .Params.experience_years }}
-      <div class="experience mb-2">
-        <small class="text-muted">{{ .Params.experience_years }} years experience</small>
+      <div class="experience-badge">
+        <i class="fas fa-award text-primary me-1"></i>
+        <small class="text-muted">{{ .Params.experience_years }}+ years experience</small>
       </div>
       {{ end }}
     </div>
     
-    <div class="card-footer bg-transparent text-center">
-      <a href="{{ .Permalink }}" class="btn btn-outline-primary">View Profile</a>
+    <div class="card-footer bg-transparent border-0">
+      <a href="{{ .Permalink }}" class="btn btn-outline-primary w-100">
+        View Full Profile <i class="fas fa-arrow-right ms-2"></i>
+      </a>
     </div>
   </div>
 </div>
+
+<style>
+/* Team Card Enhancements */
+.team-card .hover-lift {
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.team-card .hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl) !important;
+}
+
+.team-card .team-photo {
+  position: relative;
+  overflow: hidden;
+  height: 280px;
+}
+
+.team-card.has-image .card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all var(--transition-slow);
+}
+
+.team-card.has-image:hover .card-img-top {
+  transform: scale(1.1);
+}
+
+.team-card .team-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.team-card:hover .team-overlay {
+  opacity: 1;
+}
+
+.team-card .social-links {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.team-card .social-link {
+  width: 40px;
+  height: 40px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  transition: all var(--transition-fast);
+  transform: translateY(20px);
+}
+
+.team-card:hover .social-link {
+  transform: translateY(0);
+}
+
+.team-card .social-link:nth-child(1) { transition-delay: 0s; }
+.team-card .social-link:nth-child(2) { transition-delay: 0.1s; }
+.team-card .social-link:nth-child(3) { transition-delay: 0.2s; }
+
+.team-card .social-link:hover {
+  background: var(--primary-color);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+.team-card.no-image .no-photo {
+  height: 280px;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-card.no-image .no-photo .initials {
+  position: absolute;
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  opacity: 0.3;
+  letter-spacing: 0.1em;
+}
+
+.team-card.no-image .no-photo i {
+  position: relative;
+  z-index: 1;
+}
+
+.team-card.no-image .no-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 50%);
+  animation: team-float 20s ease-in-out infinite;
+}
+
+@keyframes team-float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(10px, -10px); }
+}
+
+.team-card .experience-badge {
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+  margin-top: var(--spacing-md);
+}
+</style>

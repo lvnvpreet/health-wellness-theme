@@ -1,47 +1,190 @@
 <div class="blog-card {{ if .Params.image }}has-image{{ else }}no-image{{ end }}">
-  <div class="card h-100">
+  <div class="card h-100 shadow-sm hover-lift">
     {{ if .Params.image }}
-    <div class="card-img-top">
+    <div class="card-img-top position-relative overflow-hidden">
       <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="img-fluid">
+      <div class="blog-category-badge">
+        {{ if .Params.category }}
+        <span class="badge bg-primary">{{ .Params.category }}</span>
+        {{ else }}
+        <span class="badge bg-primary">Health Tips</span>
+        {{ end }}
+      </div>
+    </div>
+    {{ else }}
+    <div class="blog-card-header">
+      <div class="blog-icon">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      {{ if .Params.category }}
+      <span class="badge bg-primary">{{ .Params.category }}</span>
+      {{ end }}
     </div>
     {{ end }}
     
     <div class="card-body">
-      <div class="blog-meta mb-2">
-        <small class="text-muted">
-          <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
-            {{ .Date.Format "January 2, 2006" }}
-          </time>
-          {{ if .Params.author }}
-          <span class="author ms-2">by {{ .Params.author }}</span>
-          {{ end }}
-        </small>
+      <div class="blog-meta mb-2 d-flex align-items-center text-muted small">
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" class="d-flex align-items-center">
+          <i class="fas fa-calendar-alt me-1"></i>
+          {{ .Date.Format "January 2, 2006" }}
+        </time>
+        {{ if .Params.author }}
+        <span class="author ms-3 d-flex align-items-center">
+          <i class="fas fa-user me-1"></i>
+          {{ .Params.author }}
+        </span>
+        {{ end }}
       </div>
       
       <h5 class="card-title">
-        <a href="{{ .Permalink }}" class="text-decoration-none">{{ .Title }}</a>
+        <a href="{{ .Permalink }}" class="text-decoration-none text-dark">{{ .Title }}</a>
       </h5>
       
-      <p class="card-text">{{ .Summary | truncate 150 }}</p>
+      <p class="card-text text-muted">{{ .Summary | truncate 150 }}</p>
       
-      {{ if .Params.tags }}
-      <div class="blog-tags mb-2">
-        {{ range first 3 .Params.tags }}
-        <span class="badge bg-light text-dark">{{ . }}</span>
+      <div class="blog-footer d-flex justify-content-between align-items-center">
+        {{ if .Params.tags }}
+        <div class="blog-tags">
+          {{ range first 2 .Params.tags }}
+          <span class="badge bg-light text-secondary me-1">#{{ . }}</span>
+          {{ end }}
+        </div>
         {{ end }}
-      </div>
-      {{ end }}
-      
-      <div class="reading-time">
-        <small class="text-muted">
-          <i class="fas fa-clock"></i>
+        
+        <div class="reading-time text-muted small">
+          <i class="fas fa-clock me-1"></i>
           {{ .ReadingTime }} min read
-        </small>
+        </div>
       </div>
     </div>
     
-    <div class="card-footer bg-transparent">
-      <a href="{{ .Permalink }}" class="btn btn-outline-primary">Read More</a>
+    <div class="card-footer bg-transparent border-0">
+      <a href="{{ .Permalink }}" class="btn btn-link text-primary p-0 text-decoration-none">
+        Read Article <i class="fas fa-arrow-right ms-2"></i>
+      </a>
     </div>
   </div>
 </div>
+
+<style>
+/* Blog Card Enhancements */
+.blog-card .hover-lift {
+  transition: all var(--transition-base);
+}
+
+.blog-card .hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl) !important;
+}
+
+.blog-card .card-img-top {
+  height: 200px;
+  position: relative;
+}
+
+.blog-card .card-img-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.blog-card:hover .card-img-top img {
+  transform: scale(1.05);
+}
+
+.blog-card .blog-category-badge {
+  position: absolute;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  z-index: 2;
+}
+
+.blog-card.no-image .blog-card-header {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-card.no-image .blog-card-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 0% 100%, rgba(255,255,255,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 100% 0%, rgba(255,255,255,0.08) 0%, transparent 50%);
+}
+
+.blog-card.no-image .blog-icon {
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 1;
+}
+
+.blog-card.no-image .blog-card-header .badge {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  z-index: 2;
+}
+
+.blog-card .card-title a {
+  transition: color var(--transition-fast);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.4;
+}
+
+.blog-card .card-title a:hover {
+  color: var(--primary-color) !important;
+}
+
+.blog-card .blog-meta {
+  font-size: 0.8rem;
+  gap: var(--spacing-md);
+}
+
+.blog-card .blog-tags .badge {
+  font-weight: var(--font-weight-normal);
+  font-size: 0.75rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.blog-card .card-footer {
+  padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+}
+
+.blog-card .card-footer a {
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+}
+
+.blog-card .card-footer a:hover {
+  padding-left: var(--spacing-sm);
+}
+
+/* Blog card grid specific */
+.blog-grid .blog-card {
+  height: 100%;
+}
+
+.blog-grid .blog-card .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-grid .blog-card .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-grid .blog-card .card-text {
+  flex: 1;
+}
+</style>

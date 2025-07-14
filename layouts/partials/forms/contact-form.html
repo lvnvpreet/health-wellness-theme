@@ -1,46 +1,250 @@
-<form class="contact-form" method="POST" action="#" netlify>
+<form class="contact-form needs-validation" method="POST" action="#" netlify novalidate>
   <div class="row">
     <div class="col-md-6 mb-3">
-      <label for="contact-name" class="form-label">Full Name *</label>
-      <input type="text" class="form-control" id="contact-name" name="name" required>
+      <div class="form-group">
+        <label for="contact-name" class="form-label">Full Name <span class="text-danger">*</span></label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+          <input type="text" class="form-control" id="contact-name" name="name" placeholder="John Doe" required>
+          <div class="invalid-feedback">
+            Please enter your full name.
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-6 mb-3">
-      <label for="contact-email" class="form-label">Email Address *</label>
-      <input type="email" class="form-control" id="contact-email" name="email" required>
+      <div class="form-group">
+        <label for="contact-email" class="form-label">Email Address <span class="text-danger">*</span></label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+          <input type="email" class="form-control" id="contact-email" name="email" placeholder="john@example.com" required>
+          <div class="invalid-feedback">
+            Please enter a valid email address.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   
   <div class="row">
     <div class="col-md-6 mb-3">
-      <label for="contact-phone" class="form-label">Phone Number</label>
-      <input type="tel" class="form-control" id="contact-phone" name="phone">
+      <div class="form-group">
+        <label for="contact-phone" class="form-label">Phone Number</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-phone"></i></span>
+          <input type="tel" class="form-control" id="contact-phone" name="phone" placeholder="+1 (555) 123-4567">
+          <div class="invalid-feedback">
+            Please enter a valid phone number.
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-6 mb-3">
-      <label for="contact-subject" class="form-label">Subject *</label>
-      <select class="form-select" id="contact-subject" name="subject" required>
-        <option value="">Select a subject</option>
-        <option value="General Inquiry">General Inquiry</option>
-        <option value="Appointment Request">Appointment Request</option>
-        <option value="Insurance Question">Insurance Question</option>
-        <option value="Emergency">Emergency</option>
-        <option value="Billing Question">Billing Question</option>
-        <option value="Feedback">Feedback</option>
-        <option value="Other">Other</option>
-      </select>
+      <div class="form-group">
+        <label for="contact-subject" class="form-label">Subject <span class="text-danger">*</span></label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-comment-alt"></i></span>
+          <select class="form-select" id="contact-subject" name="subject" required>
+            <option value="">Choose a subject...</option>
+            <option value="General Inquiry">General Inquiry</option>
+            <option value="Appointment Request">Appointment Request</option>
+            <option value="Insurance Question">Insurance Question</option>
+            <option value="Billing Question">Billing Question</option>
+            <option value="Medical Question">Medical Question</option>
+            <option value="Emergency">Emergency</option>
+            <option value="Feedback">Feedback</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="invalid-feedback">
+            Please select a subject.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   
   <div class="mb-3">
-    <label for="contact-message" class="form-label">Message *</label>
-    <textarea class="form-control" id="contact-message" name="message" rows="5" placeholder="Please describe how we can help you..." required></textarea>
+    <div class="form-group">
+      <label for="contact-message" class="form-label">Message <span class="text-danger">*</span></label>
+      <div class="input-group">
+        <span class="input-group-text align-self-start mt-1"><i class="fas fa-pencil-alt"></i></span>
+        <textarea class="form-control" id="contact-message" name="message" rows="5" placeholder="Please describe how we can help you..." required minlength="10"></textarea>
+        <div class="invalid-feedback">
+          Please enter a message (minimum 10 characters).
+        </div>
+      </div>
+      <div class="form-text">Please provide as much detail as possible to help us assist you better.</div>
+    </div>
   </div>
   
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="contact-consent" name="consent" required>
-    <label class="form-check-label" for="contact-consent">
-      I consent to being contacted regarding my inquiry *
-    </label>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label for="contact-preferred-contact" class="form-label">Preferred Contact Method</label>
+        <div class="preferred-contact-options">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="preferred_contact" id="prefer-email" value="email" checked>
+            <label class="form-check-label" for="prefer-email">
+              <i class="fas fa-envelope me-1"></i> Email
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="preferred_contact" id="prefer-phone" value="phone">
+            <label class="form-check-label" for="prefer-phone">
+              <i class="fas fa-phone me-1"></i> Phone
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label for="contact-urgency" class="form-label">Urgency Level</label>
+        <select class="form-select" id="contact-urgency" name="urgency">
+          <option value="normal">Normal Response (2-3 days)</option>
+          <option value="urgent">Urgent (Within 24 hours)</option>
+          <option value="emergency">Emergency (Immediate)</option>
+        </select>
+      </div>
+    </div>
   </div>
   
-  <button type="submit" class="btn btn-primary">Send Message</button>
+  <div class="mb-4">
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="contact-consent" name="consent" required>
+      <label class="form-check-label" for="contact-consent">
+        I consent to being contacted regarding my inquiry and understand that my information will be handled according to the <a href="{{ "/privacy" | relURL }}" target="_blank">privacy policy</a>. <span class="text-danger">*</span>
+      </label>
+      <div class="invalid-feedback">
+        You must agree to the terms before submitting.
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary btn-lg me-3">
+      <i class="fas fa-paper-plane me-2"></i>
+      Send Message
+    </button>
+    <button type="reset" class="btn btn-outline-secondary">
+      <i class="fas fa-redo me-2"></i>
+      Reset Form
+    </button>
+  </div>
+  
+  <!-- Success/Error Messages -->
+  <div class="form-messages mt-4">
+    <div class="alert alert-success d-none" role="alert">
+      <i class="fas fa-check-circle me-2"></i>
+      <strong>Success!</strong> Your message has been sent successfully. We'll get back to you soon.
+    </div>
+    <div class="alert alert-danger d-none" role="alert">
+      <i class="fas fa-exclamation-circle me-2"></i>
+      <strong>Error!</strong> There was a problem sending your message. Please try again or contact us directly.
+    </div>
+  </div>
 </form>
+
+<style>
+/* Contact Form Styles */
+.contact-form .form-label {
+  font-weight: var(--font-weight-medium);
+  color: var(--dark);
+  margin-bottom: var(--spacing-sm);
+}
+
+.contact-form .input-group-text {
+  background-color: var(--light);
+  border-color: var(--border-color);
+  color: var(--primary-color);
+  min-width: 45px;
+  justify-content: center;
+}
+
+.contact-form .form-control:focus,
+.contact-form .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(16, 185, 129, 0.1);
+}
+
+.contact-form .form-control:focus + .input-group-text,
+.contact-form .form-select:focus + .input-group-text {
+  border-color: var(--primary-color);
+  background-color: var(--primary-light);
+  color: var(--white);
+}
+
+.preferred-contact-options {
+  padding: var(--spacing-sm);
+  background-color: var(--light);
+  border-radius: var(--border-radius-md);
+}
+
+.form-actions {
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+/* Validation Styles */
+.was-validated .form-control:valid,
+.form-control.is-valid {
+  border-color: var(--success-color);
+  padding-right: calc(1.5em + 0.75rem);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2322c55e' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+  border-color: var(--danger-color);
+  padding-right: calc(1.5em + 0.75rem);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23ef4444'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23ef4444' stroke='none'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+/* Loading State */
+.contact-form.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.contact-form.loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.contact-form.loading .btn-primary {
+  position: relative;
+  color: transparent;
+}
+
+.contact-form.loading .btn-primary::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>

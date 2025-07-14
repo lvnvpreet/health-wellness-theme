@@ -1,18 +1,288 @@
 <div class="faq-accordion">
-  <div class="accordion" id="faqAccordion">
+  {{ if .Site.Data.faq }}
+  <div class="accordion accordion-flush" id="faqAccordion">
     {{ range $index, $faq := .Site.Data.faq }}
-    <div class="accordion-item">
+    <div class="accordion-item" data-aos="fade-up" data-aos-delay="{{ mul 50 $index }}">
       <h3 class="accordion-header" id="heading{{ $index }}">
         <button class="accordion-button{{ if ne $index 0 }} collapsed{{ end }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="{{ if eq $index 0 }}true{{ else }}false{{ end }}" aria-controls="collapse{{ $index }}">
-          {{ $faq.question }}
+          <span class="faq-number">{{ add $index 1 }}</span>
+          <span class="faq-question">{{ $faq.question }}</span>
         </button>
       </h3>
       <div id="collapse{{ $index }}" class="accordion-collapse collapse{{ if eq $index 0 }} show{{ end }}" aria-labelledby="heading{{ $index }}" data-bs-parent="#faqAccordion">
         <div class="accordion-body">
-          {{ $faq.answer | markdownify }}
+          <div class="faq-answer">
+            {{ $faq.answer | markdownify }}
+          </div>
+          {{ if $faq.additional_info }}
+          <div class="faq-additional-info">
+            <i class="fas fa-info-circle me-2"></i>
+            {{ $faq.additional_info }}
+          </div>
+          {{ end }}
         </div>
       </div>
     </div>
     {{ end }}
   </div>
+  {{ else }}
+  <!-- Default FAQ items if no data file exists -->
+  <div class="accordion accordion-flush" id="faqAccordion">
+    <div class="accordion-item" data-aos="fade-up">
+      <h3 class="accordion-header" id="heading0">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse0" aria-expanded="true" aria-controls="collapse0">
+          <span class="faq-number">1</span>
+          <span class="faq-question">What insurance plans do you accept?</span>
+        </button>
+      </h3>
+      <div id="collapse0" class="accordion-collapse collapse show" aria-labelledby="heading0" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          <div class="faq-answer">
+            <p>We accept most major insurance plans including PPO, HMO, Medicare, and Medicaid. Our staff will be happy to verify your coverage and explain your benefits. We also offer flexible payment plans for those without insurance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="accordion-item" data-aos="fade-up" data-aos-delay="50">
+      <h3 class="accordion-header" id="heading1">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+          <span class="faq-number">2</span>
+          <span class="faq-question">How do I schedule an appointment?</span>
+        </button>
+      </h3>
+      <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          <div class="faq-answer">
+            <p>You can schedule an appointment by calling our office during business hours, using our online appointment form, or through our patient portal. For urgent matters, please call directly for same-day availability.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+      <h3 class="accordion-header" id="heading2">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+          <span class="faq-number">3</span>
+          <span class="faq-question">What should I bring to my first appointment?</span>
+        </button>
+      </h3>
+      <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          <div class="faq-answer">
+            <p>Please bring the following items to your first appointment:</p>
+            <ul>
+              <li>Valid photo ID</li>
+              <li>Insurance card(s)</li>
+              <li>List of current medications</li>
+              <li>Previous medical records (if applicable)</li>
+              <li>Completed new patient forms</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="accordion-item" data-aos="fade-up" data-aos-delay="150">
+      <h3 class="accordion-header" id="heading3">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+          <span class="faq-number">4</span>
+          <span class="faq-question">Do you offer emergency services?</span>
+        </button>
+      </h3>
+      <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          <div class="faq-answer">
+            <p>Yes, we offer emergency services for our patients. During regular hours, we reserve time for urgent cases. After hours, our on-call service can guide you to appropriate care or schedule you for the next available emergency slot.</p>
+          </div>
+          <div class="faq-additional-info">
+            <i class="fas fa-info-circle me-2"></i>
+            For life-threatening emergencies, always call 911 or go to your nearest emergency room.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+      <h3 class="accordion-header" id="heading4">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+          <span class="faq-number">5</span>
+          <span class="faq-question">What is your cancellation policy?</span>
+        </button>
+      </h3>
+      <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          <div class="faq-answer">
+            <p>We require 24-hour notice for appointment cancellations or rescheduling. This allows us to offer that time slot to another patient in need. Late cancellations or no-shows may be subject to a fee.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ end }}
+  
+  <div class="faq-footer text-center mt-5">
+    <p class="mb-3">Still have questions?</p>
+    <a href="{{ "/contact" | relURL }}" class="btn btn-primary">
+      <i class="fas fa-envelope me-2"></i>
+      Contact Us
+    </a>
+  </div>
 </div>
+
+<style>
+/* FAQ Accordion Styles */
+.faq-accordion .accordion {
+  --bs-accordion-border-color: var(--border-color);
+  --bs-accordion-bg: transparent;
+  --bs-accordion-btn-bg: transparent;
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(16, 185, 129, 0.1);
+}
+
+.faq-accordion .accordion-item {
+  background: var(--white);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-lg) !important;
+  margin-bottom: var(--spacing-md);
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.faq-accordion .accordion-item:hover {
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+.faq-accordion .accordion-button {
+  padding: var(--spacing-lg) var(--spacing-xl);
+  font-weight: var(--font-weight-medium);
+  color: var(--dark);
+  background: var(--white);
+  border: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.faq-accordion .accordion-button:not(.collapsed) {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+  color: var(--primary-dark);
+}
+
+.faq-accordion .accordion-button::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2310b981'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: all var(--transition-base);
+}
+
+.faq-accordion .accordion-button:not(.collapsed)::after {
+  transform: rotate(-180deg);
+}
+
+.faq-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: var(--white);
+  border-radius: 50%;
+  font-weight: var(--font-weight-semibold);
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.accordion-button:not(.collapsed) .faq-number {
+  animation: number-pulse 0.5s ease-out;
+}
+
+@keyframes number-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.faq-question {
+  flex: 1;
+  text-align: left;
+  font-size: 1.125rem;
+}
+
+.faq-accordion .accordion-body {
+  padding: 0 var(--spacing-xl) var(--spacing-xl) calc(40px + var(--spacing-lg) + var(--spacing-xl));
+}
+
+.faq-answer {
+  color: var(--dark-gray);
+  line-height: 1.7;
+}
+
+.faq-answer ul {
+  margin-top: var(--spacing-sm);
+  padding-left: var(--spacing-lg);
+}
+
+.faq-answer ul li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.faq-additional-info {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--light);
+  border-radius: var(--border-radius-md);
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  border-left: 3px solid var(--primary-color);
+}
+
+.faq-footer {
+  padding-top: var(--spacing-xl);
+}
+
+.faq-footer p {
+  color: var(--secondary-color);
+  font-size: 1.125rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .faq-accordion .accordion-button {
+    padding: var(--spacing-md) var(--spacing-lg);
+    gap: var(--spacing-md);
+  }
+  
+  .faq-number {
+    width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+  }
+  
+  .faq-question {
+    font-size: 1rem;
+  }
+  
+  .faq-accordion .accordion-body {
+    padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .faq-accordion .accordion-button::after {
+    display: none;
+  }
+  
+  .faq-accordion .accordion-collapse {
+    display: block !important;
+  }
+  
+  .faq-accordion .accordion-item {
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
+  }
+}
+</style>
