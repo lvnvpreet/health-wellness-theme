@@ -273,26 +273,34 @@
   <!-- Appointment Scheduling -->
   <section class="appointment-section py-5 bg-light">
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-          <h2 class="section-title text-start">Schedule Your Appointment</h2>
+      <!-- Header Section -->
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <h2 class="section-title">Schedule Your Appointment</h2>
           <p class="lead mb-4">Book your appointment online or give us a call. We're here to help you achieve optimal health.</p>
-          <div class="appointment-info">
-            <div class="info-item mb-3">
-              <i class="fas fa-phone-alt text-primary me-3"></i>
-              <span>Call us at <strong>{{ .Site.Params.phone }}</strong></span>
+          <div class="appointment-info-row d-flex flex-wrap justify-content-center gap-4 mb-4">
+            <div class="info-item text-center">
+              <i class="fas fa-phone-alt text-primary d-block mb-2" style="font-size: 1.5rem;"></i>
+              <span class="d-block">Call us at</span>
+              <strong>{{ .Site.Params.phone }}</strong>
             </div>
-            <div class="info-item mb-3">
-              <i class="fas fa-envelope text-primary me-3"></i>
-              <span>Email us at <strong>{{ .Site.Params.email }}</strong></span>
+            <div class="info-item text-center">
+              <i class="fas fa-envelope text-primary d-block mb-2" style="font-size: 1.5rem;"></i>
+              <span class="d-block">Email us at</span>
+              <strong>{{ .Site.Params.email }}</strong>
             </div>
-            <div class="info-item mb-3">
-              <i class="fas fa-clock text-primary me-3"></i>
-              <span>Open Monday - Saturday</span>
+            <div class="info-item text-center">
+              <i class="fas fa-clock text-primary d-block mb-2" style="font-size: 1.5rem;"></i>
+              <span class="d-block">Open</span>
+              <strong>Monday - Saturday</strong>
             </div>
           </div>
         </div>
-        <div class="col-lg-6" data-aos="fade-left">
+      </div>
+      
+      <!-- Form Section -->
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-6" data-aos="fade-up" data-aos-delay="200">
           <div class="appointment-form-wrapper">
             {{ partial "forms/appointment-form.html" . }}
           </div>
@@ -387,6 +395,71 @@
   box-shadow: var(--shadow-xl);
 }
 
+/* Appointment Section Info Styles */
+.appointment-info-row .info-item {
+  padding: var(--spacing-md);
+  background: var(--white);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-base);
+  min-width: 150px;
+}
+
+.appointment-info-row .info-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(16, 185, 129, 0.2);
+}
+
+.appointment-info-row .info-item i {
+  transition: all var(--transition-base);
+}
+
+.appointment-info-row .info-item:hover i {
+  transform: scale(1.1);
+}
+
+/* Improved form spacing for vertical layout */
+.appointment-form .form-section {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  background: var(--light);
+  margin-bottom: var(--spacing-lg);
+}
+
+.appointment-form .section-title {
+  color: var(--primary-color);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--primary-light);
+}
+
+.appointment-form .form-control,
+.appointment-form .form-select {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-fast);
+  font-size: 1rem;
+}
+
+.appointment-form .form-control:focus,
+.appointment-form .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(16, 185, 129, 0.1);
+}
+
+.appointment-form .form-label {
+  font-weight: var(--font-weight-medium);
+  color: var(--dark-gray);
+  margin-bottom: var(--spacing-xs);
+}
+
+.appointment-form .text-danger {
+  color: var(--danger-color) !important;
+}
+
 /* AOS Animation Customization */
 [data-aos] {
   transition-duration: 1000ms;
@@ -403,6 +476,20 @@
   
   .appointment-form-wrapper {
     padding: var(--spacing-lg);
+  }
+  
+  .appointment-info-row {
+    flex-direction: column !important;
+    gap: var(--spacing-md) !important;
+  }
+  
+  .appointment-info-row .info-item {
+    min-width: unset;
+    width: 100%;
+  }
+  
+  .appointment-form .form-section {
+    padding: var(--spacing-md);
   }
 }
 </style>
