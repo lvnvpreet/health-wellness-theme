@@ -467,7 +467,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  color: var(--white);
+  color: #343a40;
   font-weight: var(--font-weight-medium);
 }
 
