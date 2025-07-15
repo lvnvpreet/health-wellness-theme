@@ -433,6 +433,7 @@ a:hover {
   position: relative;
   z-index: 2;
   padding: var(--spacing-2xl) 0;
+  margin: auto;
 }
 
 .hero-title {
@@ -741,11 +742,26 @@ a:hover {
 /* Blog card without image */
 .blog-card.no-image .card {
   border-left: 4px solid var(--primary-color);
-  background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
+  background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%) !important;
+  color: var(--dark) !important;
 }
 
 .blog-card.no-image .card-body {
   padding: var(--spacing-xl);
+}
+
+/* Ensure all text is visible in blog cards */
+.blog-card .card-title a {
+  color: var(--dark) !important;
+}
+
+.blog-card .card-text {
+  color: var(--dark-gray) !important;
+}
+
+.blog-card .blog-meta,
+.blog-card .blog-meta * {
+  color: var(--secondary-color) !important;
 }
 
 .blog-meta {

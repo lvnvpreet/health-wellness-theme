@@ -323,6 +323,16 @@
   .team-card.no-image .card-body,
   .blog-card.no-image .card {
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: var(--light);
+  }
+  
+  .blog-card.no-image .card-title a,
+  .blog-card.no-image .card-text {
+    color: var(--light) !important;
+  }
+  
+  .blog-card.no-image .blog-meta {
+    color: rgba(255, 255, 255, 0.7) !important;
   }
   
   .testimonial-card.no-image .card {

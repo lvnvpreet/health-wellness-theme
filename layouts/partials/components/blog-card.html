@@ -167,6 +167,54 @@
   padding-left: var(--spacing-sm);
 }
 
+/* Ensure text visibility on all backgrounds */
+.blog-card .card-title a {
+  color: var(--dark) !important;
+}
+
+.blog-card .card-text {
+  color: var(--dark-gray) !important;
+}
+
+.blog-card .blog-meta {
+  color: var(--secondary-color) !important;
+}
+
+/* Dark background cards text fix */
+.blog-card.no-image .card {
+  background: var(--white) !important;
+  border: 1px solid var(--border-color);
+}
+
+/* Ensure read button is visible */
+.blog-card .card-footer a {
+  color: var(--primary-color) !important;
+  font-weight: var(--font-weight-medium);
+}
+
+.blog-card .card-footer a:hover {
+  color: var(--primary-dark) !important;
+  text-decoration: none !important;
+}
+
+/* Override any dark mode styling that might be applied */
+@media (prefers-color-scheme: dark) {
+  .blog-card.no-image .card {
+    background: var(--white) !important;
+    color: var(--dark) !important;
+  }
+  
+  .blog-card.no-image .card-title a,
+  .blog-card.no-image .card-text,
+  .blog-card.no-image .blog-meta {
+    color: var(--dark) !important;
+  }
+  
+  .blog-card .card-footer a {
+    color: var(--primary-color) !important;
+  }
+}
+
 /* Blog card grid specific */
 .blog-grid .blog-card {
   height: 100%;

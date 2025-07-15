@@ -2,45 +2,41 @@
   <h4 class="form-title mb-3">Quick Appointment Request</h4>
   
   <!-- Essential Information Only -->
-  <div class="row">
-    <div class="col-12 mb-2">
-      <label for="appointment-name" class="form-label">Full Name <span class="text-danger">*</span></label>
-      <input type="text" class="form-control form-control-sm" id="appointment-name" name="full_name" placeholder="John Doe" required>
-      <div class="invalid-feedback">Name is required.</div>
-    </div>
+  <div class="mb-3">
+    <label for="appointment-name" class="form-label">Full Name <span class="text-danger">*</span></label>
+    <input type="text" class="form-control form-control-sm" id="appointment-name" name="full_name" placeholder="John Doe" required>
+    <div class="invalid-feedback">Name is required.</div>
   </div>
   
-  <div class="row">
-    <div class="col-md-6 mb-2">
-      <label for="appointment-phone" class="form-label">Phone <span class="text-danger">*</span></label>
-      <input type="tel" class="form-control form-control-sm" id="appointment-phone" name="phone" placeholder="(555) 123-4567" required>
-      <div class="invalid-feedback">Phone is required.</div>
-    </div>
-    <div class="col-md-6 mb-2">
-      <label for="appointment-email" class="form-label">Email <span class="text-danger">*</span></label>
-      <input type="email" class="form-control form-control-sm" id="appointment-email" name="email" placeholder="john@email.com" required>
-      <div class="invalid-feedback">Valid email is required.</div>
-    </div>
+  <div class="mb-3">
+    <label for="appointment-phone" class="form-label">Phone <span class="text-danger">*</span></label>
+    <input type="tel" class="form-control form-control-sm" id="appointment-phone" name="phone" placeholder="(555) 123-4567" required>
+    <div class="invalid-feedback">Phone is required.</div>
   </div>
   
-  <div class="row">
-    <div class="col-md-6 mb-2">
-      <label for="appointment-service" class="form-label">Service <span class="text-danger">*</span></label>
-      <select class="form-select form-select-sm" id="appointment-service" name="service" required>
-        <option value="">Select service...</option>
-        <option value="General Consultation">General Consultation</option>
-        <option value="Dental Cleaning">Dental Cleaning</option>
-        <option value="Health Screening">Health Screening</option>
-        <option value="Follow-up">Follow-up Visit</option>
-        <option value="Emergency">Emergency Care</option>
-      </select>
-      <div class="invalid-feedback">Please select a service.</div>
-    </div>
-    <div class="col-md-6 mb-2">
-      <label for="appointment-date" class="form-label">Preferred Date <span class="text-danger">*</span></label>
-      <input type="date" class="form-control form-control-sm" id="appointment-date" name="preferred_date" min="{{ now.Format "2006-01-02" }}" required>
-      <div class="invalid-feedback">Date is required.</div>
-    </div>
+  <div class="mb-3">
+    <label for="appointment-email" class="form-label">Email <span class="text-danger">*</span></label>
+    <input type="email" class="form-control form-control-sm" id="appointment-email" name="email" placeholder="john@email.com" required>
+    <div class="invalid-feedback">Valid email is required.</div>
+  </div>
+  
+  <div class="mb-3">
+    <label for="appointment-service" class="form-label">Service <span class="text-danger">*</span></label>
+    <select class="form-select form-select-sm" id="appointment-service" name="service" required>
+      <option value="">Select service...</option>
+      <option value="General Consultation">General Consultation</option>
+      <option value="Dental Cleaning">Dental Cleaning</option>
+      <option value="Health Screening">Health Screening</option>
+      <option value="Follow-up">Follow-up Visit</option>
+      <option value="Emergency">Emergency Care</option>
+    </select>
+    <div class="invalid-feedback">Please select a service.</div>
+  </div>
+  
+  <div class="mb-3">
+    <label for="appointment-date" class="form-label">Preferred Date <span class="text-danger">*</span></label>
+    <input type="date" class="form-control form-control-sm" id="appointment-date" name="preferred_date" min="{{ now.Format "2006-01-02" }}" required>
+    <div class="invalid-feedback">Date is required.</div>
   </div>
   
   <div class="mb-3">
