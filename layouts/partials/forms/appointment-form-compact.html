@@ -1,0 +1,65 @@
+<form class="appointment-form needs-validation compact-form" method="POST" action="#" netlify novalidate>
+  <h4 class="form-title mb-3">Quick Appointment Request</h4>
+  
+  <!-- Essential Information Only -->
+  <div class="row">
+    <div class="col-12 mb-2">
+      <label for="appointment-name" class="form-label">Full Name <span class="text-danger">*</span></label>
+      <input type="text" class="form-control form-control-sm" id="appointment-name" name="full_name" placeholder="John Doe" required>
+      <div class="invalid-feedback">Name is required.</div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label for="appointment-phone" class="form-label">Phone <span class="text-danger">*</span></label>
+      <input type="tel" class="form-control form-control-sm" id="appointment-phone" name="phone" placeholder="(555) 123-4567" required>
+      <div class="invalid-feedback">Phone is required.</div>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label for="appointment-email" class="form-label">Email <span class="text-danger">*</span></label>
+      <input type="email" class="form-control form-control-sm" id="appointment-email" name="email" placeholder="john@email.com" required>
+      <div class="invalid-feedback">Valid email is required.</div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label for="appointment-service" class="form-label">Service <span class="text-danger">*</span></label>
+      <select class="form-select form-select-sm" id="appointment-service" name="service" required>
+        <option value="">Select service...</option>
+        <option value="General Consultation">General Consultation</option>
+        <option value="Dental Cleaning">Dental Cleaning</option>
+        <option value="Health Screening">Health Screening</option>
+        <option value="Follow-up">Follow-up Visit</option>
+        <option value="Emergency">Emergency Care</option>
+      </select>
+      <div class="invalid-feedback">Please select a service.</div>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label for="appointment-date" class="form-label">Preferred Date <span class="text-danger">*</span></label>
+      <input type="date" class="form-control form-control-sm" id="appointment-date" name="preferred_date" min="{{ now.Format "2006-01-02" }}" required>
+      <div class="invalid-feedback">Date is required.</div>
+    </div>
+  </div>
+  
+  <div class="mb-3">
+    <label for="appointment-message" class="form-label">Message (Optional)</label>
+    <textarea class="form-control form-control-sm" id="appointment-message" name="message" rows="2" placeholder="Brief message or special requests..."></textarea>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="d-grid">
+    <button type="submit" class="btn btn-primary btn-sm">
+      <i class="fas fa-calendar-plus me-2"></i>Request Appointment
+    </button>
+  </div>
+  
+  <!-- Form Footer -->
+  <div class="form-footer mt-2">
+    <small class="text-muted">
+      <i class="fas fa-info-circle me-1"></i>
+      We'll contact you within 24 hours to confirm your appointment.
+    </small>
+  </div>
+</form>

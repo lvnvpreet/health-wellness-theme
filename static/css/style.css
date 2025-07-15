@@ -1363,42 +1363,65 @@ a:hover {
 /* ===== FOOTER ENHANCEMENTS ===== */
 
 /* Footer Newsletter Form */
+.newsletter-signup {
+  background: rgba(255, 255, 255, 0.05);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.newsletter-signup h6 {
+  color: var(--white);
+  font-weight: var(--font-weight-semibold);
+}
+
+.newsletter-signup p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .newsletter-form .input-group {
-  box-shadow: var(--shadow-md);
-  border-radius: var(--border-radius-full);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius-md);
   overflow: hidden;
 }
 
 .newsletter-form .form-control {
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: var(--spacing-sm) var(--spacing-md);
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--white);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--dark);
+  border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
 }
 
 .newsletter-form .form-control::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--secondary-color);
 }
 
 .newsletter-form .form-control:focus {
-  background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: none;
+  background-color: var(--white);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(16, 185, 129, 0.25);
 }
 
 .newsletter-form .btn {
-  border: none;
+  border: 1px solid var(--primary-color);
   padding: var(--spacing-sm) var(--spacing-lg);
   background-color: var(--primary-color);
   color: var(--white);
+  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+  font-weight: var(--font-weight-medium);
 }
 
 .newsletter-form .btn:hover {
   background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-1px);
 }
 
 .newsletter-form .form-text {
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.75rem;
+  text-align: center;
 }
 
 /* Footer Bottom */
@@ -1406,6 +1429,36 @@ a:hover {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: var(--spacing-xl);
   margin-top: var(--spacing-2xl);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.footer-bottom p,
+.footer-legal {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-legal {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.footer-legal li {
+  margin: 0;
+}
+
+.footer-legal a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+  color: var(--primary-light);
+  text-decoration: underline;
 }
 
 /* Emergency Float Button */
@@ -1659,6 +1712,62 @@ a:hover {
 
 .contact-sidebar .emergency-contact {
   background: linear-gradient(135deg, var(--danger-color), #dc2626);
+}
+
+/* Compact Appointment Form Styles */
+.appointment-widget {
+  background: var(--white);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: var(--spacing-lg);
+}
+
+.appointment-widget h4 {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: var(--spacing-sm);
+}
+
+.compact-form .form-label {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--dark-gray);
+  margin-bottom: var(--spacing-xs);
+}
+
+.compact-form .form-control-sm,
+.compact-form .form-select-sm {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.compact-form .mb-2 {
+  margin-bottom: 0.75rem !important;
+}
+
+.compact-form .mb-3 {
+  margin-bottom: 1rem !important;
+}
+
+.compact-form .btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: var(--border-radius-md);
+}
+
+.compact-form .form-footer {
+  text-align: center;
+  border-top: 1px solid var(--light-gray);
+  padding-top: var(--spacing-sm);
+}
+
+.compact-form .form-footer small {
+  font-size: 0.75rem;
+  color: var(--secondary-color);
 }
 
 /* Map container */
