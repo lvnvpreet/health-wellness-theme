@@ -299,8 +299,8 @@
       </div>
       
       <!-- Form Section -->
-      <div class="row justify-content-center">
-        <div class="col-lg-8 col-xl-6" data-aos="fade-up" data-aos-delay="200">
+      <div class="row">
+        <div class="col-12" data-aos="fade-up" data-aos-delay="200">
           <div class="appointment-form-wrapper">
             {{ partial "forms/appointment-form.html" . }}
           </div>
@@ -390,9 +390,11 @@
 
 .appointment-form-wrapper {
   background: var(--white);
-  padding: var(--spacing-2xl);
+  padding: var(--spacing-3xl);
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-xl);
+  max-width: none;
+  margin: 0 auto;
 }
 
 /* Appointment Section Info Styles */
@@ -418,13 +420,19 @@
   transform: scale(1.1);
 }
 
-/* Improved form spacing for vertical layout */
+/* Improved form spacing for maximum width layout */
 .appointment-form .form-section {
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-2xl);
   background: var(--light);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: 0;
+}
+
+/* Enhanced 3-column layout spacing */
+.appointment-form .form-sections-container {
+  gap: var(--spacing-2xl);
+  margin-bottom: var(--spacing-2xl);
 }
 
 .appointment-form .section-title {
@@ -464,6 +472,26 @@
 [data-aos] {
   transition-duration: 1000ms;
 }
+
+/* MAXIMUM WIDTH OPTION: Uncomment below to break out of container */
+/*
+.appointment-section .container {
+  max-width: 100%;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+}
+
+.appointment-form-wrapper {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding-left: var(--spacing-3xl);
+  padding-right: var(--spacing-3xl);
+}
+*/
 
 @media (max-width: 768px) {
   .about-image-placeholder {
