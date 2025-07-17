@@ -35,8 +35,35 @@
 
     // Document ready
     $document.ready(function() {
+        // Prevent auto-scroll on page load
+        preventAutoScroll();
         initializeTheme();
     });
+
+    // Window load - Additional protection
+    $window.on('load', function() {
+        // Ensure we stay at top if no specific scroll target
+        if (window.pageYOffset === 0) {
+            window.scrollTo(0, 0);
+        }
+    });
+
+    // Prevent unwanted auto-scrolling
+    function preventAutoScroll() {
+        // Disable scroll restoration
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        
+        // Force scroll to top on page load
+        window.scrollTo(0, 0);
+        
+        // Remove any hash from URL that might trigger auto-scroll
+        if (window.location.hash && window.location.hash !== '#') {
+            const cleanUrl = window.location.href.split('#')[0];
+            history.replaceState(null, null, cleanUrl);
+        }
+    }
 
     // Initialize all theme components
     function initializeTheme() {
@@ -152,13 +179,22 @@
         
         $backToTop.on('click', function(e) {
             e.preventDefault();
+            
+            // Enable smooth scrolling temporarily
+            $('html').addClass('smooth-scroll-enabled');
+            
             $('html, body').animate({
                 scrollTop: 0
-            }, 800, 'easeInOutExpo');
+            }, 800, 'easeInOutExpo', function() {
+                // Disable smooth scrolling after animation
+                setTimeout(() => {
+                    $('html').removeClass('smooth-scroll-enabled');
+                }, 100);
+            });
         });
     }
 
-    // Smooth scrolling
+    // Smooth scrolling - Only for user clicks
     function initSmoothScrolling() {
         $('a[href*="#"]:not([href="#"])').on('click', function(e) {
             if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
@@ -167,15 +203,24 @@
                 
                 if (target.length) {
                     e.preventDefault();
+                    
+                    // Enable smooth scrolling temporarily
+                    $('html').addClass('smooth-scroll-enabled');
+                    
                     const offset = $('.navbar').outerHeight() || 0;
                     
                     $('html, body').animate({
                         scrollTop: target.offset().top - offset - 20
-                    }, 800, 'easeInOutExpo');
+                    }, 800, 'easeInOutExpo', function() {
+                        // Disable smooth scrolling after animation
+                        setTimeout(() => {
+                            $('html').removeClass('smooth-scroll-enabled');
+                        }, 100);
+                    });
                     
-                    // Update URL
-                    if (history.pushState) {
-                        history.pushState(null, null, this.hash);
+                    // Update URL without triggering scroll
+                    if (history.replaceState) {
+                        history.replaceState(null, null, this.hash);
                     }
                 }
             }

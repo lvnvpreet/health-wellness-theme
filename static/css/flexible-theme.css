@@ -443,13 +443,19 @@
   outline-offset: 2px;
 }
 
-/* Smooth scroll behavior */
+/* Smooth scroll behavior - Disabled by default to prevent auto-scrolling */
 html {
+  scroll-behavior: auto;
+}
+
+/* Only enable smooth scrolling when explicitly triggered */
+html.smooth-scroll-enabled {
   scroll-behavior: smooth;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
+  html,
+  html.smooth-scroll-enabled {
     scroll-behavior: auto;
   }
 }
