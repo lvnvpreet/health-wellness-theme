@@ -8,8 +8,8 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-5" data-aos="fade-up">
-          <h2 class="section-title">Our Services</h2>
-          <p class="section-subtitle">Comprehensive healthcare solutions tailored to your needs</p>
+          <h2 class="section-title">{{ .Params.sections.services.title }}</h2>
+          <p class="section-subtitle">{{ .Params.sections.services.subtitle }}</p>
         </div>
       </div>
       <div class="row services-grid">
@@ -51,25 +51,15 @@
         </div>
         <div class="col-lg-6" data-aos="fade-left">
           <div class="about-content">
-            <h2 class="section-title text-start">About Our Practice</h2>
-            <p class="lead mb-4">{{ .Site.Params.aboutText | default "We are committed to providing exceptional healthcare services with a personal touch. Our experienced team uses the latest technology and techniques to ensure the best possible outcomes for our patients." }}</p>
+            <h2 class="section-title text-start">{{ .Params.sections.about.title }}</h2>
+            <p class="lead mb-4">{{ .Params.sections.about.text }}</p>
             <div class="about-features">
+              {{ range .Params.sections.about.features }}
               <div class="feature-item mb-3">
                 <i class="fas fa-check-circle text-primary me-2"></i>
-                <span>State-of-the-art medical equipment</span>
+                <span>{{ . }}</span>
               </div>
-              <div class="feature-item mb-3">
-                <i class="fas fa-check-circle text-primary me-2"></i>
-                <span>Experienced healthcare professionals</span>
-              </div>
-              <div class="feature-item mb-3">
-                <i class="fas fa-check-circle text-primary me-2"></i>
-                <span>Personalized treatment plans</span>
-              </div>
-              <div class="feature-item mb-4">
-                <i class="fas fa-check-circle text-primary me-2"></i>
-                <span>Comfortable and caring environment</span>
-              </div>
+              {{ end }}
             </div>
             <a href="{{ "/about" | relURL }}" class="btn btn-primary">
               Learn More About Us <i class="fas fa-arrow-right ms-2"></i>
@@ -85,47 +75,22 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-5" data-aos="fade-up">
-          <h2 class="section-title">Why Choose Us</h2>
-          <p class="section-subtitle">What makes us different from other healthcare providers</p>
+          <h2 class="section-title">{{ .Params.sections.why_choose.title }}</h2>
+          <p class="section-subtitle">{{ .Params.sections.why_choose.subtitle }}</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="100">
+        {{ range $index, $feature := .Params.sections.why_choose.features }}
+        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="{{ mul 100 (add $index 1) }}">
           <div class="feature-box text-center">
             <div class="feature-icon mx-auto mb-3">
-              <i class="fas fa-user-md"></i>
+              <i class="{{ $feature.icon }}"></i>
             </div>
-            <h4>Expert Team</h4>
-            <p class="text-muted">Board-certified physicians with years of experience in their specialties</p>
+            <h4>{{ $feature.title }}</h4>
+            <p class="text-muted">{{ $feature.description }}</p>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="200">
-          <div class="feature-box text-center">
-            <div class="feature-icon mx-auto mb-3">
-              <i class="fas fa-clock"></i>
-            </div>
-            <h4>Convenient Hours</h4>
-            <p class="text-muted">Flexible scheduling including evenings and weekends for your convenience</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="300">
-          <div class="feature-box text-center">
-            <div class="feature-icon mx-auto mb-3">
-              <i class="fas fa-hospital"></i>
-            </div>
-            <h4>Modern Facility</h4>
-            <p class="text-muted">State-of-the-art equipment and comfortable environment for all patients</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="400">
-          <div class="feature-box text-center">
-            <div class="feature-icon mx-auto mb-3">
-              <i class="fas fa-heart"></i>
-            </div>
-            <h4>Patient-Centered</h4>
-            <p class="text-muted">Personalized care plans tailored to each patient's unique needs</p>
-          </div>
-        </div>
+        {{ end }}
       </div>
     </div>
   </section>
@@ -141,8 +106,8 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-5" data-aos="fade-up">
-          <h2 class="section-title">Meet Our Team</h2>
-          <p class="section-subtitle">Experienced professionals dedicated to your health</p>
+          <h2 class="section-title">{{ .Params.sections.team.title }}</h2>
+          <p class="section-subtitle">{{ .Params.sections.team.subtitle }}</p>
         </div>
       </div>
       <div class="row">
@@ -172,8 +137,8 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-5" data-aos="fade-up">
-          <h2 class="section-title">What Our Patients Say</h2>
-          <p class="section-subtitle">Real stories from real patients</p>
+          <h2 class="section-title">{{ .Params.sections.testimonials.title }}</h2>
+          <p class="section-subtitle">{{ .Params.sections.testimonials.subtitle }}</p>
         </div>
       </div>
       <div class="row">
@@ -200,8 +165,8 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-5" data-aos="fade-up">
-          <h2 class="section-title">Frequently Asked Questions</h2>
-          <p class="section-subtitle">Find answers to common questions about our services</p>
+          <h2 class="section-title">{{ .Params.sections.faq.title }}</h2>
+          <p class="section-subtitle">{{ .Params.sections.faq.subtitle }}</p>
         </div>
       </div>
       <div class="row">
@@ -220,8 +185,8 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-5" data-aos="fade-up">
-          <h2 class="section-title">Special Offers</h2>
-          <p class="section-subtitle">Take advantage of our current promotions</p>
+          <h2 class="section-title">{{ .Params.sections.offers.title }}</h2>
+          <p class="section-subtitle">{{ .Params.sections.offers.subtitle }}</p>
         </div>
       </div>
       <div class="row">
@@ -247,8 +212,8 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-5" data-aos="fade-up">
-          <h2 class="section-title">Latest Health Tips</h2>
-          <p class="section-subtitle">Stay informed with our latest articles and health advice</p>
+          <h2 class="section-title">{{ .Params.sections.blog.title }}</h2>
+          <p class="section-subtitle">{{ .Params.sections.blog.subtitle }}</p>
         </div>
       </div>
       <div class="row blog-grid">
@@ -276,8 +241,8 @@
       <!-- Header Section -->
       <div class="row justify-content-center mb-5">
         <div class="col-lg-8 text-center" data-aos="fade-up">
-          <h2 class="section-title">Schedule Your Appointment</h2>
-          <p class="lead mb-4">Book your appointment online or give us a call. We're here to help you achieve optimal health.</p>
+          <h2 class="section-title">{{ .Params.sections.appointment.title }}</h2>
+          <p class="lead mb-4">{{ .Params.sections.appointment.subtitle }}</p>
           <div class="appointment-info-row d-flex flex-wrap justify-content-center gap-4 mb-4">
             <div class="info-item text-center">
               <i class="fas fa-phone-alt text-primary d-block mb-2" style="font-size: 1.5rem;"></i>

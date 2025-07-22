@@ -1,0 +1,15 @@
+faqs:
+  - question: "What insurance plans do you accept?"
+    answer: "We accept most major insurance plans including Blue Cross Blue Shield, Aetna, Cigna, and more. Please contact our office to verify your specific coverage."
+    
+  - question: "How do I schedule an appointment?"
+    answer: "You can schedule an appointment by calling our office, using our online booking system, or visiting us in person. We offer same-day appointments for urgent care needs."
+    
+  - question: "What should I bring to my first visit?"
+    answer: "Please bring a valid ID, your insurance card, list of current medications, and any relevant medical records from previous healthcare providers."
+    
+  - question: "Do you offer emergency services?"
+    answer: "Yes, we provide 24/7 emergency care for our patients. For life-threatening emergencies, please call 911 or go to your nearest emergency room."
+    
+  - question: "What are your office hours?"
+    answer: "We are open Monday through Friday 9:00 AM to 6:00 PM, Saturday 9:00 AM to 2:00 PM, and closed on Sundays. Extended hours available by appointment."

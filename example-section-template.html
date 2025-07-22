@@ -1,0 +1,41 @@
+<!-- Alternative approach using section files -->
+<!-- Services Section -->
+{{ $servicesSection := .Site.GetPage "sections/services" }}
+<section class="services-section py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5" data-aos="fade-up">
+        <h2 class="section-title">{{ $servicesSection.Title | default "Our Services" }}</h2>
+        <p class="section-subtitle">{{ $servicesSection.Content | plainify | default "Comprehensive healthcare solutions tailored to your needs" }}</p>
+      </div>
+    </div>
+    <!-- Rest of services section... -->
+  </div>
+</section>
+
+<!-- About Section -->
+{{ $aboutSection := .Site.GetPage "sections/about" }}
+<section class="about-section py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Image column... -->
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="about-content">
+          <h2 class="section-title text-start">{{ $aboutSection.Title | default "About Our Practice" }}</h2>
+          <p class="lead mb-4">{{ $aboutSection.Content | plainify | default "We are committed to providing exceptional healthcare..." }}</p>
+          <div class="about-features">
+            {{ range $aboutSection.Params.features | default (slice "State-of-the-art medical equipment" "Experienced healthcare professionals" "Personalized treatment plans" "Comfortable and caring environment") }}
+            <div class="feature-item mb-3">
+              <i class="fas fa-check-circle text-primary me-2"></i>
+              <span>{{ . }}</span>
+            </div>
+            {{ end }}
+          </div>
+          <a href="{{ "/about" | relURL }}" class="btn btn-primary">
+            Learn More About Us <i class="fas fa-arrow-right ms-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
