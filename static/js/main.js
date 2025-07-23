@@ -83,6 +83,7 @@
         initModals();
         initTooltips();
         initPopovers();
+        initFAQAccordion();
         
         // Page-specific
         initHeroSlider();
@@ -542,6 +543,77 @@
         popoverTriggerList.map(function(popoverTriggerEl) {
             return new bootstrap.Popover(popoverTriggerEl);
         });
+    }
+
+    // FAQ Accordion
+    function initFAQAccordion() {
+        // Handle both Bootstrap native accordions and custom implementations
+        const accordions = document.querySelectorAll('.accordion');
+        
+        accordions.forEach(function(accordion) {
+            const accordionItems = accordion.querySelectorAll('.accordion-item');
+            
+            accordionItems.forEach(function(item) {
+                const button = item.querySelector('.accordion-button');
+                const collapse = item.querySelector('.accordion-collapse');
+                
+                if (button && collapse) {
+                    // Ensure Bootstrap data attributes are properly set
+                    if (!button.hasAttribute('data-bs-toggle')) {
+                        button.setAttribute('data-bs-toggle', 'collapse');
+                    }
+                    
+                    // Add click event handler as fallback
+                    button.addEventListener('click', function(e) {
+                        // Only handle if Bootstrap hasn't already handled it
+                        if (!window.bootstrap || !bootstrap.Collapse) {
+                            e.preventDefault();
+                            
+                            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                            const targetId = this.getAttribute('data-bs-target') || this.getAttribute('href');
+                            const targetElement = document.querySelector(targetId);
+                            
+                            if (targetElement) {
+                                if (isExpanded) {
+                                    // Collapse
+                                    targetElement.classList.remove('show');
+                                    this.classList.add('collapsed');
+                                    this.setAttribute('aria-expanded', 'false');
+                                } else {
+                                    // Expand
+                                    // Close other items in the same accordion first
+                                    const parentAccordion = this.closest('.accordion');
+                                    if (parentAccordion) {
+                                        const otherItems = parentAccordion.querySelectorAll('.accordion-collapse.show');
+                                        otherItems.forEach(function(otherItem) {
+                                            if (otherItem !== targetElement) {
+                                                otherItem.classList.remove('show');
+                                                const otherButton = parentAccordion.querySelector(`[data-bs-target="#${otherItem.id}"], [href="#${otherItem.id}"]`);
+                                                if (otherButton) {
+                                                    otherButton.classList.add('collapsed');
+                                                    otherButton.setAttribute('aria-expanded', 'false');
+                                                }
+                                            }
+                                        });
+                                    }
+                                    
+                                    targetElement.classList.add('show');
+                                    this.classList.remove('collapsed');
+                                    this.setAttribute('aria-expanded', 'true');
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Initialize Bootstrap accordions if available
+        if (window.bootstrap && bootstrap.Collapse) {
+            console.log('Bootstrap accordions initialized');
+        } else {
+            console.log('Using fallback accordion functionality');
+        }
     }
 
     // Accessibility

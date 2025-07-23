@@ -1,7 +1,7 @@
 <div class="faq-accordion">
-  {{ if .Site.Data.faq }}
+  {{ if .Site.Data.faq.faqs }}
   <div class="accordion accordion-flush" id="faqAccordion">
-    {{ range $index, $faq := .Site.Data.faq }}
+    {{ range $index, $faq := .Site.Data.faq.faqs }}
     <div class="accordion-item" data-aos="fade-up" data-aos-delay="{{ mul 50 $index }}">
       <h3 class="accordion-header" id="heading{{ $index }}">
         <button class="accordion-button{{ if ne $index 0 }} collapsed{{ end }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="{{ if eq $index 0 }}true{{ else }}false{{ end }}" aria-controls="collapse{{ $index }}">
