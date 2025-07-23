@@ -8,7 +8,13 @@
     </div>
     <div class="contact-details">
       <strong>Address</strong>
-      <p>{{ .Site.Params.address }}</p>
+      <p>
+        {{ with .Site.Params.address }}
+          {{ .street }}<br>
+          {{ .city }}, {{ .state }} {{ .zipCode }}<br>
+          {{ .country }}
+        {{ end }}
+      </p>
     </div>
   </div>
   {{ end }}

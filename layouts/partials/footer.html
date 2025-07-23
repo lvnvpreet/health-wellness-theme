@@ -127,7 +127,11 @@
             {{ if .Site.Params.address }}
             <div class="contact-item mb-2">
               <i class="fas fa-map-marker-alt me-2"></i>
-              <span>{{ .Site.Params.address }}</span>
+              <span>
+                {{ with .Site.Params.address }}
+                  {{ .street }}, {{ .city }}, {{ .state }} {{ .zipCode }}
+                {{ end }}
+              </span>
             </div>
             {{ end }}
             

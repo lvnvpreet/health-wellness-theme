@@ -1,53 +1,58 @@
 <div class="business-hours">
   <h4>Business Hours</h4>
   <div class="hours-list">
-    {{ if .Site.Params.hours }}
-      {{ if .Site.Params.hours.monday }}
+    {{ $hours := .Site.Params.hours }}
+    {{ if .Params.office_hours }}
+      {{ $hours = .Params.office_hours }}
+    {{ end }}
+
+    {{ if $hours }}
+      {{ if $hours.monday }}
       <div class="hour-item">
         <span class="day">Monday:</span>
-        <span class="time">{{ .Site.Params.hours.monday }}</span>
+        <span class="time">{{ $hours.monday }}</span>
       </div>
       {{ end }}
       
-      {{ if .Site.Params.hours.tuesday }}
+      {{ if $hours.tuesday }}
       <div class="hour-item">
         <span class="day">Tuesday:</span>
-        <span class="time">{{ .Site.Params.hours.tuesday }}</span>
+        <span class="time">{{ $hours.tuesday }}</span>
       </div>
       {{ end }}
       
-      {{ if .Site.Params.hours.wednesday }}
+      {{ if $hours.wednesday }}
       <div class="hour-item">
         <span class="day">Wednesday:</span>
-        <span class="time">{{ .Site.Params.hours.wednesday }}</span>
+        <span class="time">{{ $hours.wednesday }}</span>
       </div>
       {{ end }}
       
-      {{ if .Site.Params.hours.thursday }}
+      {{ if $hours.thursday }}
       <div class="hour-item">
         <span class="day">Thursday:</span>
-        <span class="time">{{ .Site.Params.hours.thursday }}</span>
+        <span class="time">{{ $hours.thursday }}</span>
       </div>
       {{ end }}
       
-      {{ if .Site.Params.hours.friday }}
+      {{ if $hours.friday }}
       <div class="hour-item">
         <span class="day">Friday:</span>
-        <span class="time">{{ .Site.Params.hours.friday }}</span>
+        <span class="time">{{ $hours.friday }}</span>
       </div>
       {{ end }}
       
-      {{ if .Site.Params.hours.saturday }}
+      {{ if $hours.saturday }}
       <div class="hour-item">
         <span class="day">Saturday:</span>
-        <span class="time">{{ .Site.Params.hours.saturday }}</span>
+        <span class="time">{{ $hours.saturday }}</span>
       </div>
       {{ end }}
       
-      {{ if .Site.Params.hours.sunday }}
+      {{ if $hours.sunday }}
       <div class="hour-item">
         <span class="day">Sunday:</span>
-        <span class="time">{{ .Site.Params.hours.sunday }}</span>
+        <span class="time">{{ $hours.sunday }}</span>
       </div>
       {{ end }}
     {{ else }}

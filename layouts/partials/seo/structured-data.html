@@ -13,7 +13,13 @@
   {{ if .Site.Params.address }}
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "{{ .Site.Params.address }}"
+    {{ with .Site.Params.address }}
+    "streetAddress": "{{ .street }}",
+    "addressLocality": "{{ .city }}",
+    "addressRegion": "{{ .state }}",
+    "postalCode": "{{ .zipCode }}",
+    "addressCountry": "{{ .country }}"
+    {{ end }}
   },
   {{ end }}
   {{ if .Site.Params.phone }}
