@@ -83,6 +83,7 @@
         initModals();
         initTooltips();
         initPopovers();
+        initDropdowns();
         initFAQAccordion();
         
         // Page-specific
@@ -134,19 +135,6 @@
         $navLinks.on('click', function() {
             if ($window.width() < theme.breakpoints.lg) {
                 $navbarToggler.click();
-            }
-        });
-        
-        // Dropdown enhancements
-        $('.dropdown').on('mouseenter', function() {
-            if ($window.width() >= theme.breakpoints.lg) {
-                $(this).addClass('show');
-                $(this).find('.dropdown-menu').addClass('show');
-            }
-        }).on('mouseleave', function() {
-            if ($window.width() >= theme.breakpoints.lg) {
-                $(this).removeClass('show');
-                $(this).find('.dropdown-menu').removeClass('show');
             }
         });
         
@@ -543,6 +531,106 @@
         popoverTriggerList.map(function(popoverTriggerEl) {
             return new bootstrap.Popover(popoverTriggerEl);
         });
+    }
+
+    // Dropdowns
+    function initDropdowns() {
+        // Initialize Bootstrap dropdowns
+        if (window.bootstrap && bootstrap.Dropdown) {
+            const dropdownTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="dropdown"]'));
+            dropdownTriggerList.map(function(dropdownTriggerEl) {
+                return new bootstrap.Dropdown(dropdownTriggerEl);
+            });
+            console.log('Bootstrap dropdowns initialized');
+        }
+        
+        // Enhanced dropdown behavior
+        const dropdowns = document.querySelectorAll('.dropdown');
+        
+        dropdowns.forEach(function(dropdown) {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            if (toggle && menu) {
+                // Add hover functionality for desktop
+                if (window.innerWidth >= 992) { // lg breakpoint
+                    dropdown.addEventListener('mouseenter', function() {
+                        if (!toggle.getAttribute('data-bs-toggle')) {
+                            toggle.setAttribute('data-bs-toggle', 'dropdown');
+                        }
+                        
+                        // Show dropdown on hover (desktop only)
+                        if (window.bootstrap && bootstrap.Dropdown) {
+                            const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+                            bsDropdown.show();
+                        } else {
+                            menu.classList.add('show');
+                            toggle.setAttribute('aria-expanded', 'true');
+                        }
+                    });
+                    
+                    dropdown.addEventListener('mouseleave', function() {
+                        // Hide dropdown when mouse leaves
+                        if (window.bootstrap && bootstrap.Dropdown) {
+                            const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+                            bsDropdown.hide();
+                        } else {
+                            menu.classList.remove('show');
+                            toggle.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                }
+                
+                // Click functionality for all devices
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    if (window.bootstrap && bootstrap.Dropdown) {
+                        // Let Bootstrap handle it
+                        const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+                        bsDropdown.toggle();
+                    } else {
+                        // Fallback functionality
+                        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+                        
+                        // Close all other dropdowns first
+                        document.querySelectorAll('.dropdown-menu.show').forEach(function(otherMenu) {
+                            if (otherMenu !== menu) {
+                                otherMenu.classList.remove('show');
+                                const otherToggle = otherMenu.parentElement.querySelector('.dropdown-toggle');
+                                if (otherToggle) {
+                                    otherToggle.setAttribute('aria-expanded', 'false');
+                                }
+                            }
+                        });
+                        
+                        // Toggle current dropdown
+                        if (isExpanded) {
+                            menu.classList.remove('show');
+                            toggle.setAttribute('aria-expanded', 'false');
+                        } else {
+                            menu.classList.add('show');
+                            toggle.setAttribute('aria-expanded', 'true');
+                        }
+                    }
+                });
+            }
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-menu.show').forEach(function(menu) {
+                    menu.classList.remove('show');
+                    const toggle = menu.parentElement.querySelector('.dropdown-toggle');
+                    if (toggle) {
+                        toggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        });
+        
+        console.log('Dropdown enhancement initialized');
     }
 
     // FAQ Accordion

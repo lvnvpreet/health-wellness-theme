@@ -1289,6 +1289,18 @@ a:hover {
 }
 
 /* Dropdown Menu Styling */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  transition: transform 0.3s ease;
+}
+
+.dropdown.show .dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+
 .dropdown-menu {
   border: none;
   box-shadow: var(--shadow-xl);
@@ -1296,6 +1308,17 @@ a:hover {
   padding: var(--spacing-sm) 0;
   margin-top: var(--spacing-sm);
   min-width: 220px;
+  z-index: var(--z-dropdown);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .dropdown-item {
